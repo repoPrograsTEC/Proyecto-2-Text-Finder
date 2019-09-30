@@ -10,17 +10,22 @@ _Algoritmos y Estructuras de Datos I_
 
 
 
-Elaborado con 🛠️
+## Elaborado con 🛠️
 El proyecto se realizó con los siguientes programas:
 
-Intellij - El IDE utilizado para la programación
-JavaFX - La herramienta para elaborar la GUI
+* [Intellij](https://www.jetbrains.com/idea/) - El IDE utilizado para la programación
+* [JavaFX](https://docs.oracle.com/javase/8/javase-clienttechnologies.htm) - La herramienta para elaborar la GUI
 
 
-Wiki 📖
-Puedes encontrar mucho más sobre cómo utilizar este proyecto en la sección Wiki
+## Wiki 📖
+Puedes encontrar mucho más sobre cómo utilizar este proyecto en la sección [Wiki]
 
-Autor ✒️
-Daniel Brenes Gómez --> eldanielh31
-Esteban Madrigal Sandoval --> 04esteban04
+## Autores ✒️
+* **Daniel Brenes Gómez** --> [eldanielh31](https://github.com/eldanielh31)
+* **Esteban Madrigal Sandoval** --> [04esteban04](https://github.com/04esteban04)
 
+
+
+## Wiki 📖
+
+Puedes encontrar mucho más sobre cómo utilizar este proyecto en la sección [Wiki](https://github.com/04esteban04/Proyecto-1-Circuito-Logico/wiki)
