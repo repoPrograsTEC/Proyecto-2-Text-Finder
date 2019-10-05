@@ -25,26 +25,29 @@ public class Eventos {
                                       FileChooser escogerArchivo,
                                       ListaEnlazada lista,
                                       Stage primaryStage) throws FileNotFoundException {
+        try {
+            File file = escogerArchivo.showOpenDialog(primaryStage);
+            System.out.println(" Archivo escogido: " + file);
+            lista.InsertarFinal(file);
+            for (int i = 0; i < lista.getLargo(); i++) {
+                System.out.println(" Nodo: " + lista.Obtener(i));
+                escogerArchivo(lista.Obtener(i), palabrasPosibles);
+            }
+            System.out.println(" ");
+            TextFields.bindAutoCompletion(input, palabrasPosibles);
 
-        File file = escogerArchivo.showOpenDialog(primaryStage);
-        System.out.println(" Archivo escogido: " + file);
-        lista.InsertarFinal(file);
-        for (int i = 0; i < lista.getLargo(); i++){
-            System.out.println(" Nodo: " + lista.Obtener(i));
-            escogerArchivo(lista.Obtener(i), palabrasPosibles);
+            FileInputStream input = new FileInputStream(
+                    "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+            Image image = new Image(input, 80, 60, true, true);
+            ImageView imageView = new ImageView(image);
+
+            Label label = new Label("  " + file.getName().toUpperCase(), imageView);
+            Label labelSeparacion = new Label("  ");
+
+            vbox.getChildren().addAll(label, labelSeparacion);
+        } catch (Exception ex){
+
         }
-        System.out.println(" ");
-        TextFields.bindAutoCompletion(input, palabrasPosibles);
-
-        FileInputStream input = new FileInputStream(
-                "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
-        Image image = new Image(input, 80, 60, true, true);
-        ImageView imageView = new ImageView(image);
-
-        Label label = new Label("  " + file.getName().toUpperCase(), imageView);
-        Label labelSeparacion = new Label ("  ");
-
-        vbox.getChildren().addAll(label, labelSeparacion);
     }
 
     public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista) throws IOException {
@@ -114,7 +117,10 @@ public class Eventos {
             }
         }
         catch(Exception e){
-            e.printStackTrace();
+            alert.setTitle(" Precaución ");
+            alert.setHeaderText(null);
+            alert.setContentText(" No se agregó ningún archivo a la biblioteca ");
+            alert.showAndWait();
         }finally{
             // En el finally cerramos el fichero, para asegurarnos
             // que se cierra tanto si todo va bien como si salta
@@ -139,6 +145,7 @@ public class Eventos {
     }
 
     private static void leerArchivo(ListaEnlazada lista, TextArea area) throws IOException {
+        area.clear();
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(lista.Obtener(0)));
