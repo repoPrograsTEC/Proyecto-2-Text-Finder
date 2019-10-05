@@ -51,7 +51,7 @@ public class Main extends Application {
                     @Override
                     public void handle(final ActionEvent e) {
                         try {
-                            Eventos.indizarArchivo(e, escogerArchivo, lista, primaryStage);
+                            Eventos.agregarEnBiblioteca(e, escogerArchivo, lista, primaryStage);
                         } catch (FileNotFoundException ex) {
                             ex.printStackTrace();
                         }

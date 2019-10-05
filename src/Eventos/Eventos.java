@@ -15,37 +15,48 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.io.*;
 import java.util.Random;
+import java.util.Scanner;
 
 import static AplicacionMain.Main.*;
 
 public class Eventos {
     private static Alert alert = new Alert(Alert.AlertType.WARNING);
+    private static Scanner x;
 
-    public static void indizarArchivo(javafx.event.ActionEvent e,
-                                      FileChooser escogerArchivo,
-                                      ListaEnlazada lista,
-                                      Stage primaryStage) throws FileNotFoundException {
+
+    public static void agregarEnBiblioteca(javafx.event.ActionEvent e,
+                                           FileChooser escogerArchivo,
+                                           ListaEnlazada lista,
+                                           Stage primaryStage) throws FileNotFoundException {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             System.out.println(" Archivo escogido: " + file);
-            lista.InsertarFinal(file);
-            for (int i = 0; i < lista.getLargo(); i++) {
-                System.out.println(" Nodo: " + lista.Obtener(i));
-                escogerArchivo(lista.Obtener(i), palabrasPosibles);
+            boolean vacio;
+            if (vacio = file.length() == 0){
+                alert.setTitle(" Precaución ");
+                alert.setHeaderText(null);
+                alert.setContentText(" El archivo se encuentra vacío y no se agregó a la biblioteca ");
+                alert.showAndWait();
+            } else {
+                lista.InsertarFinal(file);
+                for (int i = 0; i < lista.getLargo(); i++) {
+                    System.out.println(" Nodo: " + lista.Obtener(i));
+                    escogerArchivo(lista.Obtener(i), palabrasPosibles);
+                }
+                System.out.println(" ");
+                TextFields.bindAutoCompletion(input, palabrasPosibles);
+
+                FileInputStream input = new FileInputStream(
+                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+                Image image = new Image(input, 80, 60, true, true);
+                ImageView imageView = new ImageView(image);
+
+                Label label = new Label("  " + file.getName().toUpperCase(), imageView);
+                Label labelSeparacion = new Label("  ");
+
+                vbox.getChildren().addAll(label, labelSeparacion);
             }
-            System.out.println(" ");
-            TextFields.bindAutoCompletion(input, palabrasPosibles);
-
-            FileInputStream input = new FileInputStream(
-                    "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
-            Image image = new Image(input, 80, 60, true, true);
-            ImageView imageView = new ImageView(image);
-
-            Label label = new Label("  " + file.getName().toUpperCase(), imageView);
-            Label labelSeparacion = new Label("  ");
-
-            vbox.getChildren().addAll(label, labelSeparacion);
-        } catch (Exception ex){
+        } catch (Exception ignored){
 
         }
     }
@@ -60,40 +71,12 @@ public class Eventos {
         areaDeTexto.setBorder(new Border(new BorderStroke(
                 Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-        //areaDeTexto.appendText(String.valueOf(lista.Obtener(0).getAbsoluteFile()));
-
-        leerArchivo(lista, areaDeTexto);
-
+        openFile(lista, areaDeTexto);
         root.getChildren().add(areaDeTexto);
     }
 
-    public static void escribir() {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try
-        {
-            fichero = new FileWriter("archivo.txt");
-            pw = new PrintWriter(fichero);
 
-            System.out.println("Escribiendo en el archivo.txt");
-            for (int i = 0; i < 10; i++)
-                pw.println("Linea " + i);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero)
-                    fichero.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
-    public static void escogerArchivo(File archivo, String[] palabrasPosibles){
+    private static void escogerArchivo(File archivo, String[] palabrasPosibles){
         FileReader fr = null;
         BufferedReader br = null;
 
@@ -175,6 +158,55 @@ public class Eventos {
             alert.setContentText("Error al abrir el archivo!");
             alert.showAndWait();
         }
+    }
+
+    public static void escribir() {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("archivo.txt");
+            pw = new PrintWriter(fichero);
+
+            System.out.println("Escribiendo en el archivo.txt");
+            for (int i = 0; i < 10; i++)
+                pw.println("Linea " + i);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero)
+                    fichero.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    private static void openFile(ListaEnlazada lista, TextArea area) throws FileNotFoundException {
+        //try{
+            x = new Scanner(new File(String.valueOf(lista.Obtener(0))));
+            readFile(x, area);
+        /*} catch (Exception e){
+            alert.setTitle(" Error ");
+            alert.setHeaderText(null);
+            alert.setContentText(" Error al abrir el archivo #1 ");
+            alert.showAndWait();
+        }*/
+    }
+
+    private static void readFile(Scanner x, TextArea area){
+        while(x.hasNext()){
+            area.appendText(x.nextLine() + "\n");
+        }
+        closeFile();
+    }
+
+    private static void closeFile(){
+        x.close();
     }
 
 }
