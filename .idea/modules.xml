@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Proyecto 2/Proyecto 2.iml" filepath="$PROJECT_DIR$/Proyecto 2/Proyecto 2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Proyecto-2-Text-Finder.iml" filepath="$PROJECT_DIR$/Proyecto-2-Text-Finder.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Proyecto2.iml" filepath="$PROJECT_DIR$/Proyecto2.iml" />
+>>>>>>> Proyecto #2
     </modules>
   </component>
 </project>
