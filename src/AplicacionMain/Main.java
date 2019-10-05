@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image ;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -65,10 +67,10 @@ public class Main extends Application {
                 });
 
         //Creating an image
-        //Image image = new Image("Imagenes/buscar.jpg");
+        Image image = new Image("Imagenes/buscar.jpg");
 
         //Setting the image view
-        //ImageView imageView = new ImageView(image);
+        ImageView imageView = new ImageView(image);
 
         final Button buscar = new Button();
         buscar.setOnAction(new EventHandler<ActionEvent>() {
