@@ -1,10 +1,14 @@
 package Eventos;
 
 import ListaEnlazada.ListaEnlazada;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
@@ -15,6 +19,8 @@ import java.util.Random;
 import static AplicacionMain.Main.*;
 
 public class Eventos {
+    private static Alert alert = new Alert(Alert.AlertType.WARNING);
+
     public static void indizarArchivo(javafx.event.ActionEvent e,
                                       FileChooser escogerArchivo,
                                       ListaEnlazada lista,
@@ -25,7 +31,7 @@ public class Eventos {
         lista.InsertarFinal(file);
         for (int i = 0; i < lista.getLargo(); i++){
             System.out.println(" Nodo: " + lista.Obtener(i));
-            leer(lista.Obtener(i), palabrasPosibles);
+            escogerArchivo(lista.Obtener(i), palabrasPosibles);
         }
         System.out.println(" ");
         TextFields.bindAutoCompletion(input, palabrasPosibles);
@@ -41,9 +47,23 @@ public class Eventos {
         vbox.getChildren().addAll(label, labelSeparacion);
     }
 
-    public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista){
+    public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista) throws IOException {
+        TextArea areaDeTexto = new TextArea();
+        areaDeTexto.setEditable(false);
+        areaDeTexto.setPrefSize(750d, 500d);
+        areaDeTexto.setLayoutX(200);
+        areaDeTexto.setLayoutY(120);
+        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+        areaDeTexto.setBorder(new Border(new BorderStroke(
+                Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
+        //areaDeTexto.appendText(String.valueOf(lista.Obtener(0).getAbsoluteFile()));
+
+        leerArchivo(lista, areaDeTexto);
+
+        root.getChildren().add(areaDeTexto);
     }
+
     public static void escribir() {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -70,7 +90,7 @@ public class Eventos {
         }
     }
 
-    public static void leer(File archivo, String[] palabrasPosibles){
+    public static void escogerArchivo(File archivo, String[] palabrasPosibles){
         FileReader fr = null;
         BufferedReader br = null;
 
@@ -116,6 +136,38 @@ public class Eventos {
         int g = random.nextInt(255);
         int b = random.nextInt(255);
         return Color.rgb(r, g, b);
+    }
+
+    private static void leerArchivo(ListaEnlazada lista, TextArea area) throws IOException {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(lista.Obtener(0)));
+            if(br.readLine() != null) {
+                String line;
+                while((line = br.readLine()) != null) {
+                    String [] x = line.split(",");
+                    for(String i : x) {
+                        Label h = new Label(i);
+                        h.setFont(new Font("Arial",15));
+                        area.appendText(String.valueOf(h));
+                    }
+                    area.appendText("\n");
+                }
+            }
+            else {
+                alert.setTitle("Warning Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Archivo vacío");
+                alert.showAndWait();
+            }
+        }
+
+        catch (NullPointerException e) {
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Error al abrir el archivo!");
+            alert.showAndWait();
+        }
     }
 
 }

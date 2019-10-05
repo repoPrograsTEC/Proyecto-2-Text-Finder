@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -33,10 +34,10 @@ public class Main extends Application {
     public static TextField input = new TextField();
     ScrollPane scrollpane = new ScrollPane();
     public static VBox vbox = new VBox();
+    public static Pane root = new Pane();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Pane root = new Pane();
 
         final FileChooser escogerArchivo = new FileChooser();
         escogerArchivo.setTitle(" Escoger archivo para agregar a la biblioteca ");
@@ -65,7 +66,11 @@ public class Main extends Application {
         buscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
-                Eventos.mostrarArchivo(e, lista);
+                try {
+                    Eventos.mostrarArchivo(e, lista);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

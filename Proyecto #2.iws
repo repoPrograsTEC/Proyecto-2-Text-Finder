@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Imagenes/buscar2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto #2.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Imagenes/buscar.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570247700542</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Refactor de eventos y metodos extra">
+      <created>1570254613542</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570254613542</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,6 +126,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Proyecto #2" />
     <MESSAGE value="Clase hola" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clase hola" />
+    <MESSAGE value="Refactor de eventos y metodos extra" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor de eventos y metodos extra" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
