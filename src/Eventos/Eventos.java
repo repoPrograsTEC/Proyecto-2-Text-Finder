@@ -141,51 +141,62 @@ public class Eventos {
                                        Stage primaryStage) throws IOException {
 
         if (lista.getLargo() != 0) {
+            primaryStage.setIconified(true);
             Group grupo2 = new Group();
 
-            Scene scene2 = new Scene(grupo2, 600, 300);
-            Stage nuevoStage = new Stage ();
-            nuevoStage.setScene(scene2);
-            Main.buscar.setOnAction(e -> primaryStage.setScene(scene2));
+            Stage stage1 = new Stage();
 
-            //Button 2
-            Button button2 = new Button("This sucks, go back to scene 1");
-            button2.setOnAction(e -> primaryStage.setScene(scene2));
-            //Layout 2
-            BorderPane borderPane = new BorderPane();
-            borderPane.setMargin(button2, new Insets(20d, 20d, 20d, 20d));
-            borderPane.setBottom(button2);
-            //Display scene 1 at first
-            primaryStage.show();
+            Button atras = new Button(" Atrás ");
+            atras.setOnAction(e -> {
+                primaryStage.setIconified(false);
+                stage1.close();
+            });
+
+            int columna = 0;
+            int fila = 0;
+            GridPane gridPane = new GridPane();
+            gridPane.setLayoutX(20);
+            gridPane.setLayoutY(20);
+            gridPane.setHgap(18);
+            gridPane.setMargin(atras, new Insets(20d, 20d, 20d, 20d));
+            gridPane.add(atras, columna, fila);
+            fila++;
+            fila++;
 
             int posX = 30;
             int posY = 40;
+            int cont = 0;
             Pane textos = new Pane();
             textos.setLayoutX(posX);
             textos.setLayoutY(posY);
             for (int i = 0; i < lista.getLargo(); i++) {
                 TextArea areaDeTexto = new TextArea();
                 areaDeTexto.setEditable(false);
-                areaDeTexto.setPrefSize(200d, 100d);
+                areaDeTexto.setPrefSize(500d, 200d);
                 areaDeTexto.setLayoutX(posX);
                 areaDeTexto.setLayoutY(posY);
                 areaDeTexto.setStyle("-fx-background-color: #1d178f;");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
+                abrirArchivo(lista, areaDeTexto, cont);
                 textos.getChildren().add(areaDeTexto);
-                posX += 200;
+                posX += 600;
+                cont++;
             }
 
-            borderPane.setMargin(textos, new Insets(20d, 20d, 20d, 20d));
-            borderPane.setCenter(textos);
+            gridPane.setMargin(textos, new Insets(20d, 20d, 20d, 20d));
+            gridPane.add(textos, columna, fila);
 
-            grupo2.getChildren().add(borderPane);
+            grupo2.getChildren().add(gridPane);
+            Scene scene = new Scene(grupo2, 1300, 450);
+            stage1.setScene(scene);
+            stage1.setTitle(" Ocurrencias encontradas ");
+            stage1.setX(100d);
+            stage1.setY(100d);
+            stage1.show();
+
 
         }
-        /*
-        abrirArchivo(lista, areaDeTexto);
-        */
     }
 
     /**
@@ -195,9 +206,9 @@ public class Eventos {
      * @param area Área de texto en donde se visualiza el texto elegido
      * @throws FileNotFoundException Excepción lanzada en caso de error
      */
-    private static void abrirArchivo(ListaEnlazada lista, TextArea area) throws FileNotFoundException {
+    private static void abrirArchivo(ListaEnlazada lista, TextArea area, int cont) throws FileNotFoundException {
         try{
-            x = new Scanner(new File(String.valueOf(lista.Obtener(0))));
+            x = new Scanner(new File(String.valueOf(lista.Obtener(cont))));
             leerArchivo(x, area);
         } catch (Exception e){
             alert.setTitle(" Error ");
