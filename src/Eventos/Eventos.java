@@ -52,12 +52,6 @@ public class Eventos {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             System.out.println(" Archivo escogido: " + file);
             boolean vacio;
-            if (vacio = file.length() == 0){
-                alert.setTitle(" Precaución ");
-                alert.setHeaderText(null);
-                alert.setContentText(" El archivo se encuentra vacío y no se agregó a la biblioteca ");
-                alert.showAndWait();
-            } else {
                 lista.InsertarFinal(file);
                 for (int i = 0; i < lista.getLargo(); i++) {
                     System.out.println(" Nodo: " + lista.Obtener(i));
@@ -75,8 +69,12 @@ public class Eventos {
                 Label labelSeparacion = new Label("  ");
 
                 vbox.getChildren().addAll(label, labelSeparacion);
-            }
         } catch (Exception ignored){
+
+            alert.setTitle(" Precaución ");
+            alert.setHeaderText(null);
+            alert.setContentText("Error al leer el archivo");
+            alert.showAndWait();
 
         }
     }
@@ -104,8 +102,8 @@ public class Eventos {
             while((linea = br.readLine()) != null) {
                 //System.out.println(linea);
                 String[] palabrasLinea = linea.split(" ");
-                for (int i = 0; i < palabrasLinea.length; i++) {
-                    palabrasPosibles[pos] = palabrasLinea[i];
+                for (String s : palabrasLinea) {
+                    palabrasPosibles[pos] = s;
                     pos++;
                 }
             }
@@ -250,6 +248,7 @@ public class Eventos {
                 while((line = br.readLine()) != null) {
                     String [] x = line.split(",");
                     for(String i : x) {
+                        System.out.println(i);
                         Label h = new Label(i);
                         h.setFont(new Font("Arial",15));
                         area.appendText(String.valueOf(h));
