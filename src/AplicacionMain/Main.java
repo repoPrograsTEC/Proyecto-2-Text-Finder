@@ -1,7 +1,7 @@
 package AplicacionMain;
 
 import Eventos.Eventos;
-import ListaEnlazada.ListaEnlazada;
+import Estructuras.ListaEnlazada;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -156,7 +156,6 @@ public class Main extends Application {
         primaryStage.setScene(escena);
         primaryStage.show();
     }
-
 
     /**
      * Método main que ejecuta la aplicación

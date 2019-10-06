@@ -1,11 +1,7 @@
 package Eventos;
 
-import AplicacionMain.Main;
-import ListaEnlazada.ListaEnlazada;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import Estructuras.ListaEnlazada;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,7 +13,6 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
-
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,7 +31,6 @@ public class Eventos {
      * Variable para almacenar el archivo agregado
      */
     private static Scanner x;
-
     /**
      * Método que agrega un archivo a la biblioteca
      *
@@ -51,7 +45,7 @@ public class Eventos {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             System.out.println(" Archivo escogido: " + file);
-            boolean vacio;
+            if (file!=null) {
                 lista.InsertarFinal(file);
                 for (int i = 0; i < lista.getLargo(); i++) {
                     System.out.println(" Nodo: " + lista.Obtener(i));
@@ -59,9 +53,9 @@ public class Eventos {
                 }
                 System.out.println(" ");
                 TextFields.bindAutoCompletion(input, palabrasPosibles);
-
                 FileInputStream input = new FileInputStream(
-                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+                        //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
+                        "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
                 Image image = new Image(input, 80, 60, true, true);
                 ImageView imageView = new ImageView(image);
 
@@ -69,6 +63,7 @@ public class Eventos {
                 Label labelSeparacion = new Label("  ");
 
                 vbox.getChildren().addAll(label, labelSeparacion);
+            }
         } catch (Exception ignored){
 
             alert.setTitle(" Precaución ");
