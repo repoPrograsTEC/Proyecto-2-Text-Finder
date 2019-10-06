@@ -1,6 +1,7 @@
 package Eventos;
 
 import Estructuras.ListaEnlazada;
+import Objetos.Archivo;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -40,7 +41,7 @@ public class Eventos {
      * @param primaryStage Ventana principal del programa
      * @throws FileNotFoundException Excepción lanzada en caso de error
      */
-    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada lista,
+    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada<File> lista,
                                            Stage primaryStage) throws FileNotFoundException {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
@@ -255,7 +256,7 @@ public class Eventos {
         return Color.rgb(r, g, b);
     }
 
-    private static void leerArchivo(ListaEnlazada lista, TextArea area) throws IOException {
+    private static void leerArchivo(ListaEnlazada<File> lista, TextArea area) throws IOException {
         area.clear();
         BufferedReader br;
         try {
