@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -153,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570339243822</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Mejora en ventana de ocurrencias">
+      <created>1570342994030</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1570342994030</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +188,7 @@
     <MESSAGE value="Ventana Auxiliar" />
     <MESSAGE value="Textos de prueba" />
     <MESSAGE value="Ventana de ocurrencias creada" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ventana de ocurrencias creada" />
+    <MESSAGE value="Mejora en ventana de ocurrencias" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mejora en ventana de ocurrencias" />
   </component>
 </project>

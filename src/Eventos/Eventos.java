@@ -181,10 +181,12 @@ public class Eventos {
                 areaDeTexto.setStyle("-fx-background-color: #1d178f;");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-                abrirArchivo(lista, areaDeTexto, cont);
-                textos.getChildren().addAll(areaDeTexto, new Label ("              "));
-                posX += 600;
-                cont++;
+                if (!input.getText().equals("")){
+                    abrirArchivo(lista, areaDeTexto, cont);
+                    textos.getChildren().addAll(areaDeTexto, new Label ("              "));
+                    posX += 600;
+                    cont++;
+                }
             }
             // Contenedor para archivos con ocurrencias
             scrollPane.setContent(textos);
