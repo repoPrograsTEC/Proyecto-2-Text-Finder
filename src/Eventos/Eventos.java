@@ -19,14 +19,29 @@ import java.util.Scanner;
 
 import static AplicacionMain.Main.*;
 
+/**
+ * Clase eventos en donde se agrupan todos los eventos a realizar en la aplicación
+ */
 public class Eventos {
+    /**
+     * Ventana de tipo alert para mostrar algún mensaje de error en la ejecución
+     */
     private static Alert alert = new Alert(Alert.AlertType.WARNING);
+    /**
+     * Variable para almacenar el archivo agregado
+     */
     private static Scanner x;
 
-
-    public static void agregarEnBiblioteca(javafx.event.ActionEvent e,
-                                           FileChooser escogerArchivo,
-                                           ListaEnlazada lista,
+    /**
+     * Método que agrega un archivo a la biblioteca
+     *
+     * @param e Evento de mouse al hacer clic en botón "Escoger Archivo"
+     * @param escogerArchivo Variable para abrir la ventana para escoger el archivo a agregar
+     * @param lista Lista enlazada en donde se almacenan los archivos
+     * @param primaryStage Ventana principal del programa
+     * @throws FileNotFoundException Excepción lanzada en caso de error
+     */
+    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada lista,
                                            Stage primaryStage) throws FileNotFoundException {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
@@ -41,7 +56,7 @@ public class Eventos {
                 lista.InsertarFinal(file);
                 for (int i = 0; i < lista.getLargo(); i++) {
                     System.out.println(" Nodo: " + lista.Obtener(i));
-                    escogerArchivo(lista.Obtener(i), palabrasPosibles);
+                    busquedaSugerida(lista.Obtener(i), palabrasPosibles);
                 }
                 System.out.println(" ");
                 TextFields.bindAutoCompletion(input, palabrasPosibles);
@@ -61,22 +76,13 @@ public class Eventos {
         }
     }
 
-    public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista) throws IOException {
-        TextArea areaDeTexto = new TextArea();
-        areaDeTexto.setEditable(false);
-        areaDeTexto.setPrefSize(750d, 500d);
-        areaDeTexto.setLayoutX(200);
-        areaDeTexto.setLayoutY(120);
-        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
-        areaDeTexto.setBorder(new Border(new BorderStroke(
-                Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
-        openFile(lista, areaDeTexto);
-        root.getChildren().add(areaDeTexto);
-    }
-
-
-    private static void escogerArchivo(File archivo, String[] palabrasPosibles){
+    /**
+     * Método para agregar las palbaras del archivo a la barra de búsqueda sugerida
+     *
+     * @param archivo Es el archivo del cual se leen las palabras
+     * @param palabrasPosibles Colección de palabras que se muestran como búsqueda sugerida
+     */
+    private static void busquedaSugerida(File archivo, String[] palabrasPosibles){
         FileReader fr = null;
         BufferedReader br = null;
 
@@ -87,7 +93,7 @@ public class Eventos {
             br = new BufferedReader(fr);
 
             // Lectura del fichero
-            System.out.println("Leyendo el contendio del archivo.txt");
+            System.out.println("Leyendo el contenido del archivo");
             String linea;
             int pos = 0;
             while((linea = br.readLine()) != null) {
@@ -102,12 +108,14 @@ public class Eventos {
         catch(Exception e){
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
-            alert.setContentText(" No se agregó ningún archivo a la biblioteca ");
+            alert.setContentText(" No se lograron agregar las palabras a la barra de búsqueda sugerida ");
             alert.showAndWait();
         }finally{
-            // En el finally cerramos el fichero, para asegurarnos
-            // que se cierra tanto si todo va bien como si salta
-            // una excepcion.
+            /*
+             En el finally cerramos el fichero, para asegurarnos
+             que se cierra tanto si todo va bien como si salta
+             una excepcion.
+            */
             try{
                 if( null != fr ){
                     fr.close();
@@ -118,6 +126,69 @@ public class Eventos {
             }
         }
     }
+
+    /**
+     * Método que muestra el archivo en el área de texto de la ventana principal
+     *
+     * @param e Evento de mouse al hacer clic en botón "Búsqueda"
+     * @param lista Lista enlazada donde se almacenan los archivos
+     * @throws IOException Excepción lanzada en caso de error
+     */
+    public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista) throws IOException {
+        TextArea areaDeTexto = new TextArea();
+        areaDeTexto.setEditable(false);
+        areaDeTexto.setPrefSize(750d, 500d);
+        areaDeTexto.setLayoutX(200);
+        areaDeTexto.setLayoutY(120);
+        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+        areaDeTexto.setBorder(new Border(new BorderStroke(
+                Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+        abrirArchivo(lista, areaDeTexto);
+        root.getChildren().add(areaDeTexto);
+    }
+
+    /**
+     * Método que obtiene el archivo seleccionado para luego abrirlo
+     *
+     * @param lista Lista enlazada en donde se almacenan los archivos
+     * @param area Área de texto en donde se visualiza el texto elegido
+     * @throws FileNotFoundException Excepción lanzada en caso de error
+     */
+    private static void abrirArchivo(ListaEnlazada lista, TextArea area) throws FileNotFoundException {
+        try{
+            x = new Scanner(new File(String.valueOf(lista.Obtener(0))));
+            leerArchivo(x, area);
+        } catch (Exception e){
+            alert.setTitle(" Error ");
+            alert.setHeaderText(null);
+            alert.setContentText(" Error al abrir el archivo #1 ");
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Método que lee el contenido del archivo seleccionado
+     *
+     * @param x Archivo seleccionado para agregar a la biblioteca
+     * @param area Área de texto en donde se visualiza el texto elegido
+     */
+    private static void leerArchivo(Scanner x, TextArea area){
+        while(x.hasNext()){
+            area.appendText(x.nextLine() + "\n");
+        }
+        try {
+            x.close();
+        } catch (Exception e3){
+            alert.setTitle(" Precaución ");
+            alert.setHeaderText(null);
+            alert.setContentText(" El archivo no se cerró correctamente ");
+            alert.showAndWait();
+        }
+    }
+
+
+
 
     public static Color colorAleatorio() {
         Random random = new Random();
@@ -185,28 +256,4 @@ public class Eventos {
             }
         }
     }
-
-    private static void openFile(ListaEnlazada lista, TextArea area) throws FileNotFoundException {
-        //try{
-            x = new Scanner(new File(String.valueOf(lista.Obtener(0))));
-            readFile(x, area);
-        /*} catch (Exception e){
-            alert.setTitle(" Error ");
-            alert.setHeaderText(null);
-            alert.setContentText(" Error al abrir el archivo #1 ");
-            alert.showAndWait();
-        }*/
-    }
-
-    private static void readFile(Scanner x, TextArea area){
-        while(x.hasNext()){
-            area.appendText(x.nextLine() + "\n");
-        }
-        closeFile();
-    }
-
-    private static void closeFile(){
-        x.close();
-    }
-
 }

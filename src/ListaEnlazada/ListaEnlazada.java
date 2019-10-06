@@ -3,7 +3,7 @@ package ListaEnlazada;
 import java.io.File;
 
 /**
- * Clase para crear una lista simple enlazada
+ * Clase para crear una lista enlazada simple
  */
 public class ListaEnlazada{
     /**
@@ -11,7 +11,7 @@ public class ListaEnlazada{
      */
     private Nodo cabeza;
     /**
-     * Variable para conocer el tamañoo de la lista
+     * Variable para conocer el tamaño de la lista
      */
     private int largo;
 
@@ -19,7 +19,13 @@ public class ListaEnlazada{
      * Clase Nodo anidada a la clase ListaEnlazada
      */
     private class Nodo{
+        /**
+         * Variable para manejar el puntero next del nodo actual
+         */
         public Nodo siguiente = null;
+        /**
+         * Variable para almacenar el archivo seleccionado
+         */
         public File archivo;
 
         /**
@@ -126,7 +132,7 @@ public class ListaEnlazada{
     }
 
     /**
-     * Método para eliminae el nodo al final de la lista
+     * Método para eliminar el nodo al final de la lista
      */
     public void eliminarUltimo(){
         if(cabeza != null){
@@ -144,7 +150,7 @@ public class ListaEnlazada{
     }
 
     /**
-     * Método para eliminar el nodo en una posicion específica de la lista
+     * Método para eliminar el nodo en una posición específica de la lista
      * @param indice - Posición del nodo a eliminar.
      */
     public void eliminar(int indice){

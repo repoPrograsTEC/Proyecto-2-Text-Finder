@@ -21,24 +21,47 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Clase Main que contiene la interfaz gráfica de la aplicación
+ */
 public class Main extends Application {
-
-    private Desktop desktop = Desktop.getDesktop();
+    /**
+     * Variable para crear la lista que almacena los archivos
+     */
     public ListaEnlazada lista = new ListaEnlazada();
+    /**
+     * Colección para crear la sugerencia de palabras en la barra de búsqueda
+     */
     public static String [] palabrasPosibles = new String[5000];
+    /**
+     * Variable grupo que almacena los componentes a agregar en la ventana principal
+     */
     public Group grupo = new Group();
+    /**
+     * Variable para crear la barra de búsqueda
+     */
     public static TextField input = new TextField();
+    /**
+     * Contenedor para conectores dentro del contenedor Vbox
+     */
     ScrollPane scrollpane = new ScrollPane();
+    /**
+     * Contenedor para los elementos que se agregan al scrollpane
+     */
     public static VBox vbox = new VBox();
+    /**
+     * Contenedor para los elementos que se agregan en el centro de la ventana
+     */
     public static Pane root = new Pane();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        /**
+         * Variable para abrir la ventana para escoger archivo
+         */
         final FileChooser escogerArchivo = new FileChooser();
         escogerArchivo.setTitle(" Escoger archivo para agregar a la biblioteca ");
         escogerArchivo.getExtensionFilters().addAll(
@@ -46,6 +69,9 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("DOCX", "*.docx"),
                 new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
+        /**
+         *  Botón que abre la ventana para escoger el archivo a agregar
+         */
         final Button abrirArchivo = new Button(" Escoger archivo ");
         abrirArchivo.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -58,9 +84,15 @@ public class Main extends Application {
                     }
                 });
 
+        /**
+         * Variable para almacenar la foto para el botón de búsqueda
+         */
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);
 
+        /**
+         * Botón para realizar la búsqueda de coincidencias de palabras
+         */
         final Button buscar = new Button("", imageView);
         buscar.setPrefSize(50d,30d);
         buscar.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,10 +106,6 @@ public class Main extends Application {
             }
         });
 
-
-        /**
-         * Contenedor para conectores dentro del contenedor Vbox
-         */
         scrollpane.setMaxSize(210d, 650d);
         scrollpane.setPrefWidth(210d);
         scrollpane.setPrefHeight(650d);
@@ -113,7 +141,10 @@ public class Main extends Application {
     }
 
 
-
+    /**
+     * Método main que ejecuta la aplicación
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

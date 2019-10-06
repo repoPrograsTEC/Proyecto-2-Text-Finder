@@ -6,6 +6,9 @@
     </profile>
     <version value="1.0" />
   </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop" />
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Proyecto #2.iml" filepath="$PROJECT_DIR$/Proyecto #2.iml" />
