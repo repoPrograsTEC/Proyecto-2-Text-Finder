@@ -11,13 +11,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -56,6 +55,12 @@ public class Main extends Application {
      * Contenedor para los elementos que se agregan en el centro de la ventana
      */
     public static Pane root = new Pane();
+    /**
+     * Botón para buscar coincidencias en la bibilioteca
+     */
+    public static Button buscar;
+
+    public static Scene escena;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -93,13 +98,13 @@ public class Main extends Application {
         /**
          * Botón para realizar la búsqueda de coincidencias de palabras
          */
-        final Button buscar = new Button("", imageView);
+        buscar = new Button("", imageView);
         buscar.setPrefSize(50d,30d);
         buscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
                 try {
-                    Eventos.mostrarArchivo(e, lista);
+                    Eventos.mostrarArchivo(e, lista, primaryStage);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -115,9 +120,19 @@ public class Main extends Application {
         scrollpane.setStyle("-fx-border-color: black");
 
         input.setLayoutX(200);
-        input.setPrefWidth(500);
+        input.setPrefWidth(650);
         input.setPrefHeight(40d);
-        buscar.setLayoutX(750);
+        buscar.setLayoutX(900);
+
+        TextArea areaDeTexto = new TextArea();
+        areaDeTexto.setEditable(false);
+        areaDeTexto.setPrefSize(750d, 500d);
+        areaDeTexto.setLayoutX(200);
+        areaDeTexto.setLayoutY(120);
+        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+        areaDeTexto.setBorder(new Border(new BorderStroke(
+                Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        root.getChildren().add(areaDeTexto);
 
         grupo.getChildren().addAll(input, buscar);
 
@@ -135,8 +150,10 @@ public class Main extends Application {
         borderPane.setStyle("-fx-background-color: white");
         root.getChildren().add(grupo);
 
+        escena = new Scene(borderPane, 1500, 800);
+
         primaryStage.setTitle(" Buscador de texto ");
-        primaryStage.setScene(new Scene(borderPane, 1500, 800));
+        primaryStage.setScene(escena);
         primaryStage.show();
     }
 

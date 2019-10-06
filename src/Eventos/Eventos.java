@@ -1,7 +1,12 @@
 package Eventos;
 
+import AplicacionMain.Main;
 import ListaEnlazada.ListaEnlazada;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -130,22 +135,59 @@ public class Eventos {
     /**
      * Método que muestra el archivo en el área de texto de la ventana principal
      *
-     * @param e Evento de mouse al hacer clic en botón "Búsqueda"
+     * @param event Evento de mouse al hacer clic en botón "Búsqueda"
      * @param lista Lista enlazada donde se almacenan los archivos
      * @throws IOException Excepción lanzada en caso de error
      */
-    public static void mostrarArchivo (javafx.event.ActionEvent e, ListaEnlazada lista) throws IOException {
-        TextArea areaDeTexto = new TextArea();
-        areaDeTexto.setEditable(false);
-        areaDeTexto.setPrefSize(750d, 500d);
-        areaDeTexto.setLayoutX(200);
-        areaDeTexto.setLayoutY(120);
-        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
-        areaDeTexto.setBorder(new Border(new BorderStroke(
-                Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    public static void mostrarArchivo (javafx.event.ActionEvent event, ListaEnlazada lista,
+                                       Stage primaryStage) throws IOException {
 
+        if (lista.getLargo() != 0) {
+            Group grupo2 = new Group();
+
+            Scene scene2 = new Scene(grupo2, 600, 300);
+            Stage nuevoStage = new Stage ();
+            nuevoStage.setScene(scene2);
+            Main.buscar.setOnAction(e -> primaryStage.setScene(scene2));
+
+            //Button 2
+            Button button2 = new Button("This sucks, go back to scene 1");
+            button2.setOnAction(e -> primaryStage.setScene(scene2));
+            //Layout 2
+            BorderPane borderPane = new BorderPane();
+            borderPane.setMargin(button2, new Insets(20d, 20d, 20d, 20d));
+            borderPane.setBottom(button2);
+            //Display scene 1 at first
+            primaryStage.show();
+
+            int posX = 30;
+            int posY = 40;
+            Pane textos = new Pane();
+            textos.setLayoutX(posX);
+            textos.setLayoutY(posY);
+            for (int i = 0; i < lista.getLargo(); i++) {
+                TextArea areaDeTexto = new TextArea();
+                areaDeTexto.setEditable(false);
+                areaDeTexto.setPrefSize(200d, 100d);
+                areaDeTexto.setLayoutX(posX);
+                areaDeTexto.setLayoutY(posY);
+                areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+                areaDeTexto.setBorder(new Border(new BorderStroke(
+                        Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+                textos.getChildren().add(areaDeTexto);
+                posX += 200;
+            }
+
+            borderPane.setMargin(textos, new Insets(20d, 20d, 20d, 20d));
+            borderPane.setCenter(textos);
+
+            grupo2.getChildren().add(borderPane);
+
+        }
+        /*
         abrirArchivo(lista, areaDeTexto);
-        root.getChildren().add(areaDeTexto);
+        */
     }
 
     /**
