@@ -2,13 +2,13 @@ package Eventos;
 
 import AplicacionMain.Main;
 import ListaEnlazada.ListaEnlazada;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -166,36 +166,45 @@ public class Eventos {
             int posX = 30;
             int posY = 40;
             int cont = 0;
-            Pane textos = new Pane();
+            HBox textos = new HBox();
             textos.setLayoutX(posX);
             textos.setLayoutY(posY);
+
+            // Ciclo para agregar los archivos con ocurrencias
+            ScrollPane scrollPane = new ScrollPane();
             for (int i = 0; i < lista.getLargo(); i++) {
                 TextArea areaDeTexto = new TextArea();
                 areaDeTexto.setEditable(false);
-                areaDeTexto.setPrefSize(500d, 200d);
+                areaDeTexto.setPrefSize(500d, 230d);
                 areaDeTexto.setLayoutX(posX);
                 areaDeTexto.setLayoutY(posY);
                 areaDeTexto.setStyle("-fx-background-color: #1d178f;");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 abrirArchivo(lista, areaDeTexto, cont);
-                textos.getChildren().add(areaDeTexto);
+                textos.getChildren().addAll(areaDeTexto, new Label ("              "));
                 posX += 600;
                 cont++;
             }
+            // Contenedor para archivos con ocurrencias
+            scrollPane.setContent(textos);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            scrollPane.setMaxSize(1100d, 250d);
+            scrollPane.setPrefWidth(1100d);
+            scrollPane.setPrefHeight(250d);
+            gridPane.setMargin(scrollPane, new Insets(20d, 20d, 20d, 20d));
+            gridPane.add(scrollPane, columna, fila);
 
-            gridPane.setMargin(textos, new Insets(20d, 20d, 20d, 20d));
-            gridPane.add(textos, columna, fila);
+            Scene scene = new Scene(grupo2, 1300, 450);
 
             grupo2.getChildren().add(gridPane);
-            Scene scene = new Scene(grupo2, 1300, 450);
             stage1.setScene(scene);
             stage1.setTitle(" Ocurrencias encontradas ");
             stage1.setX(100d);
             stage1.setY(100d);
+            stage1.setResizable(false);
             stage1.show();
-
-
         }
     }
 
