@@ -15,6 +15,7 @@ public class Archivo {
     private int Palabras;
     private LocalDateTime Date;
     private File URL;
+    public String Texto;
 
     public Archivo(File URL) {
         this.URL = URL;
@@ -32,6 +33,7 @@ public class Archivo {
             BufferedReader br = new BufferedReader(fr);
             int i, a = 0, inicio = 0;
             while((linea = br.readLine()) != null) {
+                Texto+=linea+"\n";
                 for(i = 0; i < linea.length(); i++){
                     if(i == 0){
                         if(linea.charAt(i) != ' '){
@@ -40,11 +42,11 @@ public class Archivo {
                     }else{
                         if(linea.charAt(i-1) == ' '){
                             if(linea.charAt(i) != ' ') {
-                                ArbolPalabras.insert(linea.substring(inicio,i));
+                                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
                                 inicio = i;
                                 a++;} } }
                 }
-                ArbolPalabras.insert(linea.substring(inicio,i));
+                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
                 inicio = 0;
             }
             ListaArboles.InsertarFinal(ArbolPalabras);
@@ -58,5 +60,14 @@ public class Archivo {
 
     public File getURL() {
         return URL;
+    }
+
+    public BST getArbolPalabras() {
+        return ArbolPalabras;
+    }
+
+    public String limpiar(String s){
+        String a=s.replaceAll("[^a-zA-Z0-9]","");
+        return a;
     }
 }

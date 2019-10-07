@@ -1,7 +1,5 @@
 package Estructuras;
 
-
-
 public class BST {
 
     public static class Nodo {
@@ -23,7 +21,7 @@ public class BST {
     }
 
     public boolean contains (String e){
-        return this.contains (e, root);
+        return this.contains (e.toLowerCase(), root);
     }
     private boolean contains (String e, Nodo current){
         if (current == null) {
@@ -54,7 +52,7 @@ public class BST {
     }
 
     public void insert (String e){
-        root = this.insert  (e, this.root);
+        root = this.insert  (e.toLowerCase(), this.root);
     }
     private Nodo insert (String e, Nodo current){
         if (current == null){
