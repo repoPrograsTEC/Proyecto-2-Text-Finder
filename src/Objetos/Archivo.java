@@ -66,7 +66,7 @@ public class Archivo {
         return ArbolPalabras;
     }
 
-    public String limpiar(String s){
+    public static String limpiar(String s){
         String a=s.replaceAll("[^a-zA-Z0-9]","");
         return a;
     }

@@ -147,7 +147,7 @@ public class Eventos {
     }
 
     private static void abrirArchivo(Archivo x, TextField area,TextArea textArea) {
-        if (x.getArbolPalabras().contains(area.getText())){
+        if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
             textArea.appendText(x.Texto);
         }
     }
