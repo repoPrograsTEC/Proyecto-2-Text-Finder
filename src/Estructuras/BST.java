@@ -1,13 +1,10 @@
 package Estructuras;
 
-
-
 class Nodo {
-    Nodo(int element) {
+    Nodo(String element) {
         this.element = element;
     }
-
-    int element;
+    String element;
     Nodo right;
     Nodo left;
 }
@@ -18,18 +15,19 @@ public class BST {
         return root == null;
     }
 
-    boolean contains (int e){
+    public boolean contains (String e){
         return this.contains (e, root);
     }
-
-    private boolean contains (int e, Nodo current){
-        if (current == null){
+    private boolean contains (String e, Nodo current){
+        if (current == null) {
             return false;
-        } else if (e < current.element){
-            return contains (e, current.left);
-        } else if (e > current.element){
-            return contains (e, current.right);
-        } else{
+        }
+        int cmp = e.compareTo(current.element);
+        if (cmp < 0) {
+            return contains(e,current.left);
+        } else if (cmp > 0) {
+            return contains(e,current.right);
+        } else {
             return true;
         }
     }
@@ -38,7 +36,7 @@ public class BST {
         return this.findMin (this.root);
     }
 
-    public Nodo findMin (Nodo current){
+    private Nodo findMin (Nodo current){
         if (current == null){
             return null;
         } else if (current.left == null){
@@ -47,7 +45,7 @@ public class BST {
             return findMin(current.left);
         }
     }
-
+/*
     public void insert (int e){
         root = this.insert  (e, this.root);
     }
@@ -62,5 +60,6 @@ public class BST {
         }
         return current;
     }
+ */
 
 }

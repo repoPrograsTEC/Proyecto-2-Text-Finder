@@ -41,10 +41,11 @@ public class Eventos {
      * @param primaryStage Ventana principal del programa
      * @throws FileNotFoundException Excepción lanzada en caso de error
      */
-    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada<File> lista,
-                                           Stage primaryStage) throws FileNotFoundException {
+    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada<Archivo> lista, Stage primaryStage){
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
+            lista.InsertarFinal(new Archivo(file));
+            /*
             System.out.println(" Archivo escogido: " + file);
             if (file!=null) {
                 lista.InsertarFinal(file);
@@ -54,6 +55,7 @@ public class Eventos {
                 }
                 System.out.println(" ");
                 TextFields.bindAutoCompletion(input, palabrasPosibles);
+             */
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                         "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
@@ -64,7 +66,7 @@ public class Eventos {
                 Label labelSeparacion = new Label("  ");
 
                 vbox.getChildren().addAll(label, labelSeparacion);
-            }
+            //}
         } catch (Exception ignored){
 
             alert.setTitle(" Precaución ");

@@ -1,14 +1,13 @@
 package Estructuras;
 
-
 /**
  * Clase para crear una lista enlazada simple
  */
-public class ListaEnlazada<G>{
+public class ListaEnlazada<T>{
     /**
      * Variable para referenciar la cabeza de la lista
      */
-    private Nodo<G> cabeza;
+    private Nodo<T> cabeza;
     /**
      * Variable para conocer el tamaño de la lista
      */
@@ -17,21 +16,21 @@ public class ListaEnlazada<G>{
     /**
      * Clase Nodo anidada a la clase ListaEnlazada
      */
-    private class Nodo<G>{
+    private static class Nodo<T>{
         /**
          * Variable para manejar el puntero next del nodo actual
          */
-        public Nodo<G> siguiente = null;
+        public Nodo<T> siguiente = null;
         /**
          * Variable para almacenar el archivo seleccionado
          */
-        public G archivo;
+        public T archivo;
 
         /**
          * Constructor clase Nodo
          * @param archivo - valor del nodo
          */
-        public Nodo(G archivo) {
+        public Nodo(T archivo) {
             this.archivo = archivo;
         }
     }
@@ -40,8 +39,8 @@ public class ListaEnlazada<G>{
      * Método para insertar un nodo al inicio de la lista
      * @param archivo - Nodo a insertar
      */
-    public void InsertarInicio(G archivo){
-        Nodo<G> nodo = new Nodo(archivo);
+    public void InsertarInicio(T archivo){
+        Nodo<T> nodo = new Nodo<T>(archivo);
         nodo.siguiente = cabeza;
         cabeza = nodo;
         largo++;
@@ -51,12 +50,12 @@ public class ListaEnlazada<G>{
      * Método para insertar un nodo al final de la lista
      * @param archivo - Nodo a insertar
      */
-    public void InsertarFinal(G archivo){
-        Nodo<G> nodo = new Nodo(archivo);
+    public void InsertarFinal(T archivo){
+        Nodo<T> nodo = new Nodo<T>(archivo);
         if (cabeza == null){
             InsertarInicio(archivo);
         }else{
-            Nodo<G> puntero = cabeza;
+            Nodo<T> puntero = cabeza;
             while(puntero.siguiente != null){
                 puntero = puntero.siguiente;
             }
@@ -70,12 +69,12 @@ public class ListaEnlazada<G>{
      * @param indice - index de la lista en el que se desea insertar
      * @param archivo - Valor que se insertará
      */
-    public void Insertar(int indice,G archivo){
-        Nodo<G> nodo = new Nodo(archivo);
+    public void Insertar(int indice,T archivo){
+        Nodo<T> nodo = new Nodo<T>(archivo);
         if (cabeza == null || indice == 0){
             this.InsertarInicio(archivo);
         }else{
-            Nodo<G> puntero = cabeza;
+            Nodo<T> puntero = cabeza;
             int contador = 0;
             while(contador < indice && puntero.siguiente != null){
                 puntero = puntero.siguiente;
@@ -92,11 +91,11 @@ public class ListaEnlazada<G>{
      * @param indice - Numero de posicion a obtener
      * @return Archivo en el índice especificado
      */
-    public G Obtener(int indice){
+    public T Obtener(int indice){
         if(cabeza == null){
             return null;
         }else{
-            Nodo<G> puntero = cabeza;
+            Nodo<T> puntero = cabeza;
             int contador = 0;
             while (contador < indice && puntero.siguiente != null){
                 puntero = puntero.siguiente;
@@ -123,7 +122,7 @@ public class ListaEnlazada<G>{
      */
     public void eliminarPrimero(){
         if (cabeza != null) {
-            Nodo<G> primer = cabeza;
+            Nodo<T> primer = cabeza;
             cabeza = cabeza.siguiente;
             primer.siguiente = null;
             largo--;
@@ -138,7 +137,7 @@ public class ListaEnlazada<G>{
             if(cabeza.siguiente == null){
                 cabeza = null;
             }else{
-                Nodo<G> puntero = cabeza;
+                Nodo<T> puntero = cabeza;
                 while (puntero.siguiente.siguiente != null){
                     puntero = puntero.siguiente;
                 }
@@ -157,13 +156,13 @@ public class ListaEnlazada<G>{
             if(indice == 0){
                 this.eliminarPrimero();
             }else if(indice < largo) {
-                Nodo<G> puntero = cabeza;
+                Nodo<T> puntero = cabeza;
                 int contador = 0;
                 while (contador < (indice - 1)) {
                     puntero = puntero.siguiente;
                     contador++;
                 }
-                Nodo<G> temp = puntero.siguiente;
+                Nodo<T> temp = puntero.siguiente;
                 puntero.siguiente = temp.siguiente;
                 temp.siguiente = null;
                 largo--;

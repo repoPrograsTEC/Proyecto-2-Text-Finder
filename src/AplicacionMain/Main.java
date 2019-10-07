@@ -2,6 +2,7 @@ package AplicacionMain;
 
 import Eventos.Eventos;
 import Estructuras.ListaEnlazada;
+import Objetos.Archivo;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,7 +31,7 @@ public class Main extends Application {
     /**
      * Variable para crear la lista que almacena los archivos
      */
-    public ListaEnlazada lista = new ListaEnlazada();
+    public ListaEnlazada<Archivo> lista = new ListaEnlazada();
     /**
      * Colección para crear la sugerencia de palabras en la barra de búsqueda
      */
@@ -81,11 +82,7 @@ public class Main extends Application {
         abrirArchivo.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-                        try {
-                            Eventos.agregarEnBiblioteca(e, escogerArchivo, lista, primaryStage);
-                        } catch (FileNotFoundException ex) {
-                            ex.printStackTrace();
-                        }
+                        Eventos.agregarEnBiblioteca(e, escogerArchivo, lista, primaryStage);
                     }
                 });
 
