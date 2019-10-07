@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -31,7 +30,7 @@ public class Main extends Application {
     /**
      * Variable para crear la lista que almacena los archivos
      */
-    public ListaEnlazada<Archivo> lista = new ListaEnlazada();
+    public ListaEnlazada<Archivo> ListaArchivo = new ListaEnlazada();
     /**
      * Colección para crear la sugerencia de palabras en la barra de búsqueda
      */
@@ -82,7 +81,7 @@ public class Main extends Application {
         abrirArchivo.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-                        Eventos.agregarEnBiblioteca(e, escogerArchivo, lista, primaryStage);
+                        Eventos.agregarEnBiblioteca(e, escogerArchivo, ListaArchivo, primaryStage);
                     }
                 });
 
@@ -101,7 +100,7 @@ public class Main extends Application {
             @Override
             public void handle(final ActionEvent e) {
                 try {
-                    Eventos.mostrarArchivo(e, lista, primaryStage);
+                    Eventos.mostrarArchivo(e, ListaArchivo, primaryStage);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

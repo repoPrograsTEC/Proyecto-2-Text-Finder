@@ -135,8 +135,7 @@ public class Eventos {
      * @param lista Lista enlazada donde se almacenan los archivos
      * @throws IOException Excepción lanzada en caso de error
      */
-    public static void mostrarArchivo (javafx.event.ActionEvent event, ListaEnlazada lista,
-                                       Stage primaryStage) throws IOException {
+    public static void mostrarArchivo (javafx.event.ActionEvent event, ListaEnlazada lista, Stage primaryStage) throws IOException {
 
         if (lista.getLargo() != 0) {
             primaryStage.setIconified(true);
@@ -215,14 +214,14 @@ public class Eventos {
      * @param area Área de texto en donde se visualiza el texto elegido
      * @throws FileNotFoundException Excepción lanzada en caso de error
      */
-    private static void abrirArchivo(ListaEnlazada lista, TextArea area, int cont) throws FileNotFoundException {
+    private static void abrirArchivo(ListaEnlazada<Archivo> lista, TextArea area, int cont) throws FileNotFoundException {
         try{
-            x = new Scanner(new File(String.valueOf(lista.Obtener(cont))));
+            x = new Scanner(new File(String.valueOf(lista.Obtener(cont).getURL())));
             leerArchivo(x, area);
         } catch (Exception e){
             alert.setTitle(" Error ");
             alert.setHeaderText(null);
-            alert.setContentText(" Error al abrir el archivo #1 ");
+            alert.setContentText(" Error al abrir el archivo #1");
             alert.showAndWait();
         }
     }

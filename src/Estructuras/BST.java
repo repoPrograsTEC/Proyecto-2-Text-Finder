@@ -1,15 +1,22 @@
 package Estructuras;
 
-class Nodo {
-    Nodo(String element) {
-        this.element = element;
-    }
-    String element;
-    Nodo right;
-    Nodo left;
-}
+
 
 public class BST {
+
+    public static class Nodo {
+        Nodo(String element) {
+            this.element = element;
+        }
+        String element;
+        Nodo right;
+        Nodo left;
+
+        public String getElement() {
+            return element;
+        }
+    }
+
     Nodo root = null;
     boolean isEmpty(){
         return root == null;
@@ -45,21 +52,18 @@ public class BST {
             return findMin(current.left);
         }
     }
-/*
-    public void insert (int e){
+
+    public void insert (String e){
         root = this.insert  (e, this.root);
     }
-
-    private Nodo insert (int e, Nodo current){
+    private Nodo insert (String e, Nodo current){
         if (current == null){
             return new Nodo(e);
-        } else if (e < current.left.element ){
+        } else if (e.compareTo(current.element) < 0){
             current.left = insert (e, current.left);
-        } else if (e > current.right.element) {
+        } else if (e.compareTo(current.element) > 0) {
             current.right = insert (e, current.right);
         }
         return current;
     }
- */
-
 }

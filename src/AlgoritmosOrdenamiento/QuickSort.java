@@ -17,14 +17,14 @@ public class QuickSort {
     }
 
     public static void quickSort(int[] arr, ListaEnlazada<String> l, int low, int high) {
-        if (l.getLargo()==0){
+        if (l.getLargo() == 0){
             return;
         }
         if (low >= high)
             return;
         // escoger el pivote
         int middle = low + (high - low) / 2;
-        String pivote=l.Obtener(middle);
+        String pivote = l.Obtener(middle);
         int pivot = arr[middle];
 
         // left < pivot y right > pivot
@@ -37,7 +37,6 @@ public class QuickSort {
             while (arr[j] > pivot) {
                 j--;
             }
-
             if (i <= j) {
                 int temp = arr[i];
                 arr[i] = arr[j];
