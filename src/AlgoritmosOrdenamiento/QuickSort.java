@@ -15,7 +15,6 @@ public class QuickSort {
         quickSort(x,new ListaEnlazada(), low, high);
         System.out.println(Arrays.toString(x));
     }
-
     public static void quickSort(int[] arr, ListaEnlazada<String> l, int low, int high) {
         if (l.getLargo() == 0){
             return;

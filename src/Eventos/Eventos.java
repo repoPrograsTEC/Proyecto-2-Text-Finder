@@ -46,8 +46,7 @@ public class Eventos {
     public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada<Archivo> lista, Stage primaryStage) {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
-            lista.InsertarFinal(new Archivo(file));
-            //TextFields.bindAutoCompletion(input, palabrasPosibles);
+            lista.InsertarFinal(new Archivo(file,file.getName()));
             FileInputStream input = new FileInputStream(
                     //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                     "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
@@ -58,14 +57,11 @@ public class Eventos {
             Label labelSeparacion = new Label("  ");
 
             vbox.getChildren().addAll(label, labelSeparacion);
-            //}
-        } catch (Exception ignored) {
-
+        } catch (NullPointerException | FileNotFoundException ignored) {
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
             alert.setContentText("Error al leer el archivo");
             alert.showAndWait();
-
         }
     }
 
@@ -145,18 +141,9 @@ public class Eventos {
             stage1.show();
         }
     }
-
     private static void abrirArchivo(Archivo x, TextField area,TextArea textArea) {
         if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
             textArea.appendText(x.Texto);
         }
-    }
-
-    public static Color colorAleatorio() {
-        Random random = new Random();
-        int r = random.nextInt(255);
-        int g = random.nextInt(255);
-        int b = random.nextInt(255);
-        return Color.rgb(r, g, b);
     }
 }

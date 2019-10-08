@@ -12,12 +12,13 @@ import java.time.LocalDateTime;
 public class Archivo {
     private static final ListaEnlazada<BST> ListaArboles=new ListaEnlazada<>();
     private BST ArbolPalabras= new BST();
-    private int Palabras;
+    public int Palabras;
     private LocalDateTime Date;
     private File URL;
-    public String Texto;
+    public String Texto,Nombre;
 
-    public Archivo(File URL) {
+    public Archivo(File URL, String Nombre) {
+        this.Nombre=Nombre;
         this.URL = URL;
         setDate();
         setPalabras();
@@ -54,7 +55,6 @@ public class Archivo {
             fr.close();
         }
         catch(IOException a){
-            System.out.println(a);
         }
     }
 
