@@ -1,5 +1,6 @@
 package AplicacionMain;
 
+import AlgoritmosOrdenamiento.BubbleSort;
 import AlgoritmosOrdenamiento.QuickSort;
 import Eventos.Eventos;
 import Estructuras.ListaEnlazada;
@@ -32,10 +33,6 @@ public class Main extends Application {
      * Variable para crear la lista que almacena los archivos
      */
     public ListaEnlazada<Archivo> ListaArchivo = new ListaEnlazada();
-    /**
-     * Colección para crear la sugerencia de palabras en la barra de búsqueda
-     */
-    public static String [] palabrasPosibles = new String[5000];
     /**
      * Variable grupo que almacena los componentes a agregar en la ventana principal
      */
@@ -83,13 +80,12 @@ public class Main extends Application {
                     @Override
                     public void handle(final ActionEvent e) {
                         Eventos.agregarEnBiblioteca(e, escogerArchivo, ListaArchivo, primaryStage);
-                        /*
-                        QuickSort.quickSort(ListaArchivo,0,ListaArchivo.getLargo()-1);
+                        BubbleSort.bubbleSort(ListaArchivo);
+                        //QuickSort.quickSort(ListaArchivo,0,ListaArchivo.getLargo()-1);
                         for(int i=0;i<ListaArchivo.getLargo();i++){
                             System.out.println(ListaArchivo.Obtener(i).Nombre);
                         }
 
-                         */
                     }
                 });
 

@@ -13,7 +13,7 @@ public class Archivo {
     private static final ListaEnlazada<BST> ListaArboles=new ListaEnlazada<>();
     private BST ArbolPalabras= new BST();
     public int Palabras;
-    private LocalDateTime Date;
+    public LocalDateTime Date;
     private File URL;
     public String Texto,Nombre;
 
