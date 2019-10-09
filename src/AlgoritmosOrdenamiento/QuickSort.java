@@ -42,7 +42,6 @@ public class QuickSort {
         // Recursividad para hacer quick en los lados del pivote
         if (low < j)
             quickSort(l, low, j);
-
         if (high > i)
             quickSort(l, i, high);
     }
