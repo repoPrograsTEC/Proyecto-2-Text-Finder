@@ -1,5 +1,6 @@
 package AplicacionMain;
 
+import AlgoritmosOrdenamiento.QuickSort;
 import Eventos.Eventos;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
@@ -82,6 +83,10 @@ public class Main extends Application {
                     @Override
                     public void handle(final ActionEvent e) {
                         Eventos.agregarEnBiblioteca(e, escogerArchivo, ListaArchivo, primaryStage);
+                        QuickSort.quickSort(ListaArchivo,0,ListaArchivo.getLargo()-1);
+                        for(int i=0;i<ListaArchivo.getLargo();i++){
+                            System.out.println(ListaArchivo.Obtener(i).Nombre);
+                        }
                     }
                 });
 

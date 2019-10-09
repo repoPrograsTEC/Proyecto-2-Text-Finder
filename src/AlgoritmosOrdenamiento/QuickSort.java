@@ -1,21 +1,11 @@
 package AlgoritmosOrdenamiento;
 
 import Estructuras.ListaEnlazada;
-
-import java.util.Arrays;
+import Objetos.Archivo;
 
 public class QuickSort {
-    public static void main(String[] args) {
-        int[] x = {9, 2, 4, 7, 3, 7, 10};
-        System.out.println(Arrays.toString(x));
 
-        int low = 0;
-        int high = x.length - 1;
-
-        quickSort(x,new ListaEnlazada(), low, high);
-        System.out.println(Arrays.toString(x));
-    }
-    public static void quickSort(int[] arr, ListaEnlazada<String> l, int low, int high) {
+    public static void quickSort(ListaEnlazada<Archivo> l, int low, int high) {
         if (l.getLargo() == 0){
             return;
         }
@@ -23,32 +13,37 @@ public class QuickSort {
             return;
         // escoger el pivote
         int middle = low + (high - low) / 2;
-        String pivote = l.Obtener(middle);
-        int pivot = arr[middle];
+        //int pivot = arr[middle];
+        String pivote = l.Obtener(middle).Nombre;
 
         // left < pivot y right > pivot
         int i = low, j = high;
         while (i <= j) {
-            while (arr[i] < pivot) {
+            int comparationMenor=l.Obtener(i).Nombre.compareTo(pivote);
+            while (l.Obtener(i).Nombre.compareTo(pivote)>0) {
                 i++;
             }
 
-            while (arr[j] > pivot) {
+            int comparationMayor=l.Obtener(j).Nombre.compareTo(pivote);
+            while (l.Obtener(j).Nombre.compareTo(pivote)<0) {
                 j--;
             }
             if (i <= j) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                Archivo temp = l.Obtener(i);
+                Archivo temp2= l.Obtener(j);
+                l.eliminar(i);
+                l.Insertar(i,temp2);
+                l.eliminar(j);
+                l.Insertar(j,temp);
                 i++;
                 j--;
             }
         }
         // Recursividad para hacer quick en los lados del pivote
         if (low < j)
-            quickSort(arr,l, low, j);
+            quickSort(l, low, j);
 
         if (high > i)
-            quickSort(arr,l, i, high);
+            quickSort(l, i, high);
     }
 }

@@ -29,10 +29,6 @@ public class Eventos {
      * Ventana de tipo alert para mostrar algún mensaje de error en la ejecución
      */
     private static Alert alert = new Alert(Alert.AlertType.WARNING);
-    /**
-     * Variable para almacenar el archivo agregado
-     */
-    private static Scanner x;
 
     /**
      * Método que agrega un archivo a la biblioteca
