@@ -2,7 +2,6 @@ package Eventos;
 
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,13 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.controlsfx.control.textfield.TextFields;
 import java.io.*;
-import java.util.Random;
-import java.util.Scanner;
 
 import static AplicacionMain.Main.*;
 
@@ -28,18 +23,16 @@ public class Eventos {
     /**
      * Ventana de tipo alert para mostrar algún mensaje de error en la ejecución
      */
-    private static Alert alert = new Alert(Alert.AlertType.WARNING);
+    private final static Alert alert = new Alert(Alert.AlertType.WARNING);
 
     /**
      * Método que agrega un archivo a la biblioteca
      *
-     * @param e              Evento de mouse al hacer clic en botón "Escoger Archivo"
      * @param escogerArchivo Variable para abrir la ventana para escoger el archivo a agregar
      * @param lista          Lista enlazada en donde se almacenan los archivos
      * @param primaryStage   Ventana principal del programa
-     * @throws FileNotFoundException Excepción lanzada en caso de error
      */
-    public static void agregarEnBiblioteca(javafx.event.ActionEvent e, FileChooser escogerArchivo, ListaEnlazada<Archivo> lista, Stage primaryStage) {
+    public static void agregarEnBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista, Stage primaryStage) {
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             lista.InsertarFinal(new Archivo(file,file.getName()));
@@ -64,11 +57,9 @@ public class Eventos {
     /**
      * Método que muestra el archivo en el área de texto de la ventana principal
      *
-     * @param event Evento de mouse al hacer clic en botón "Búsqueda"
      * @param lista Lista enlazada donde se almacenan los archivos
-     * @throws IOException Excepción lanzada en caso de error
      */
-    public static void mostrarArchivo(ActionEvent event, ListaEnlazada<Archivo> lista, Stage primaryStage) throws IOException {
+    public static void mostrarArchivo(ListaEnlazada<Archivo> lista, Stage primaryStage){
 
         if (lista.getLargo() != 0) {
             primaryStage.setIconified(true);
@@ -88,12 +79,12 @@ public class Eventos {
             gridPane.setLayoutX(20);
             gridPane.setLayoutY(20);
             gridPane.setHgap(18);
-            gridPane.setMargin(atras, new Insets(20d, 20d, 20d, 20d));
+            GridPane.setMargin(atras, new Insets(20d, 20d, 20d, 20d));
             gridPane.add(atras, columna, fila);
             fila++;
             fila++;
 
-            int posX = 30, posY = 40, cont = 0;
+            int posX = 30, posY = 40;
             HBox textos = new HBox();
             textos.setLayoutX(posX);
             textos.setLayoutY(posY);
@@ -113,7 +104,6 @@ public class Eventos {
                     abrirArchivo(lista.Obtener(i), input,areaDeTexto);
                     textos.getChildren().addAll(areaDeTexto, new Label("              "));
                     posX += 600;
-                    cont++;
                 }
             }
             // Contenedor para archivos con ocurrencias
@@ -123,7 +113,7 @@ public class Eventos {
             scrollPane.setMaxSize(1100d, 250d);
             scrollPane.setPrefWidth(1100d);
             scrollPane.setPrefHeight(250d);
-            gridPane.setMargin(scrollPane, new Insets(20d, 20d, 20d, 20d));
+            GridPane.setMargin(scrollPane, new Insets(20d, 20d, 20d, 20d));
             gridPane.add(scrollPane, columna, fila);
 
             Scene scene = new Scene(grupo2, 1300, 450);

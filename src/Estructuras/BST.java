@@ -15,7 +15,7 @@ public class BST {
         }
     }
 
-    Nodo root = null;
+    private Nodo root = null;
     boolean isEmpty(){
         return root == null;
     }
@@ -64,4 +64,9 @@ public class BST {
         }
         return current;
     }
+
+    public void Eliminar(int n){
+
+    }
+
 }

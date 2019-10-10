@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class Archivo {
     private static final ListaEnlazada<BST> ListaArboles=new ListaEnlazada<>();
-    private BST ArbolPalabras= new BST();
+    private final BST ArbolPalabras= new BST();
     public int Palabras;
     public LocalDateTime Date;
     private File URL;
@@ -54,7 +54,7 @@ public class Archivo {
             this.Palabras = a;
             fr.close();
         }
-        catch(IOException a){
+        catch(IOException ignored){
         }
     }
 
@@ -67,7 +67,6 @@ public class Archivo {
     }
 
     public static String limpiar(String s){
-        String a=s.replaceAll("[^a-zA-Z0-9]","");
-        return a;
+        return s.replaceAll("[^a-zA-Z0-9]","");
     }
 }

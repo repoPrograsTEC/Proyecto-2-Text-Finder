@@ -1,13 +1,9 @@
 package AplicacionMain;
 
-import AlgoritmosOrdenamiento.BubbleSort;
-import AlgoritmosOrdenamiento.QuickSort;
 import Eventos.Eventos;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -23,8 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 /**
  * Clase Main que contiene la interfaz gráfica de la aplicación
  */
@@ -32,11 +26,11 @@ public class Main extends Application {
     /**
      * Variable para crear la lista que almacena los archivos
      */
-    public ListaEnlazada<Archivo> ListaArchivo = new ListaEnlazada();
+    private ListaEnlazada<Archivo> ListaArchivo;
     /**
      * Variable grupo que almacena los componentes a agregar en la ventana principal
      */
-    public Group grupo = new Group();
+    private Group grupo = new Group();
     /**
      * Variable para crear la barra de búsqueda
      */
@@ -44,7 +38,7 @@ public class Main extends Application {
     /**
      * Contenedor para conectores dentro del contenedor Vbox
      */
-    ScrollPane scrollpane = new ScrollPane();
+    private ScrollPane scrollpane = new ScrollPane();
     /**
      * Contenedor para los elementos que se agregan al scrollpane
      */
@@ -52,19 +46,11 @@ public class Main extends Application {
     /**
      * Contenedor para los elementos que se agregan en el centro de la ventana
      */
-    public static Pane root = new Pane();
-    /**
-     * Botón para buscar coincidencias en la bibilioteca
-     */
-    public static Button buscar;
-
-    public static Scene escena;
+    private static Pane root = new Pane();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        /**
-         * Variable para abrir la ventana para escoger archivo
-         */
+    public void start(Stage primaryStage) {
+        ListaArchivo=new ListaEnlazada<>();
         final FileChooser escogerArchivo = new FileChooser();
         escogerArchivo.setTitle(" Escoger archivo para agregar a la biblioteca ");
         escogerArchivo.getExtensionFilters().addAll(
@@ -72,44 +58,15 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("DOCX", "*.docx"),
                 new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
-        /**
-         *  Botón que abre la ventana para escoger el archivo a agregar
-         */
         final Button abrirArchivo = new Button(" Escoger archivo ");
-        abrirArchivo.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        Eventos.agregarEnBiblioteca(e, escogerArchivo, ListaArchivo, primaryStage);
-                        BubbleSort.bubbleSort(ListaArchivo);
-                        //QuickSort.quickSort(ListaArchivo,0,ListaArchivo.getLargo()-1);
-                        for(int i=0;i<ListaArchivo.getLargo();i++){
-                            System.out.println(ListaArchivo.Obtener(i).Nombre);
-                        }
+        abrirArchivo.setOnAction(e -> Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, primaryStage));
 
-                    }
-                });
-
-        /**
-         * Variable para almacenar la foto para el botón de búsqueda
-         */
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);
 
-        /**
-         * Botón para realizar la búsqueda de coincidencias de palabras
-         */
-        buscar = new Button("", imageView);
+        Button buscar = new Button("", imageView);
         buscar.setPrefSize(50d,30d);
-        buscar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent e) {
-                try {
-                    Eventos.mostrarArchivo(e, ListaArchivo, primaryStage);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+        buscar.setOnAction(e -> Eventos.mostrarArchivo(ListaArchivo, primaryStage));
 
         scrollpane.setMaxSize(210d, 650d);
         scrollpane.setPrefWidth(210d);
@@ -129,16 +86,13 @@ public class Main extends Application {
         areaDeTexto.setPrefSize(750d, 500d);
         areaDeTexto.setLayoutX(200);
         areaDeTexto.setLayoutY(120);
-        areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+        areaDeTexto.setStyle("-fx-background-color: #000000;");
         areaDeTexto.setBorder(new Border(new BorderStroke(
                 Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         root.getChildren().add(areaDeTexto);
 
         grupo.getChildren().addAll(input, buscar);
 
-        /**
-         * Contenedor del scrollbar
-         */
         BorderPane borderPane = new BorderPane( grupo);
         borderPane.setBackground(Background.EMPTY);
         BorderPane.setMargin(scrollpane, new Insets(30d,10d,5d,40d));
@@ -147,10 +101,10 @@ public class Main extends Application {
         borderPane.setBottom(abrirArchivo);
         BorderPane.setMargin(root, new Insets(30d,20d,20d,20d));
         borderPane.setCenter(root);
-        borderPane.setStyle("-fx-background-color: white");
+        borderPane.setStyle("-fx-background-color: #8cbbff");
         root.getChildren().add(grupo);
 
-        escena = new Scene(borderPane, 1500, 800);
+        Scene escena = new Scene(borderPane, 1500, 800);
 
         primaryStage.setTitle(" Buscador de texto ");
         primaryStage.setScene(escena);
@@ -159,7 +113,7 @@ public class Main extends Application {
 
     /**
      * Método main que ejecuta la aplicación
-     * @param args
+     * @param args - Argumentos ha ejecutar.
      */
     public static void main(String[] args) {
         launch(args);
