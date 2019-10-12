@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Docs/Consolas.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Docs/Orca.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estructuras/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/BST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +165,35 @@
       <option name="project" value="LOCAL" />
       <updated>1570342994030</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Mejora en ventana de ocurrencias">
+      <created>1570343349280</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1570343349280</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Dirección de foto de archivo comentada">
+      <created>1570899187299</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1570899187299</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Selección múltiple de archivos agregada">
+      <created>1570900608286</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1570900608286</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Selección múltiple de archivos agregada">
+      <created>1570900633394</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1570900633394</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,6 +223,9 @@
     <MESSAGE value="Textos de prueba" />
     <MESSAGE value="Ventana de ocurrencias creada" />
     <MESSAGE value="Mejora en ventana de ocurrencias" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mejora en ventana de ocurrencias" />
+    <MESSAGE value="Dirección de foto de archivo comentada" />
+    <MESSAGE value="Selección múltiple de archivos agregada" />
+    <option name="LAST_COMMIT_MESSAGE" value="Selección múltiple de archivos agregada" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

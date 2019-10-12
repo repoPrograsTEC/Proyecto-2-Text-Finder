@@ -11,16 +11,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Archivo {
-    private static final ListaEnlazada<BST> ListaArboles=new ListaEnlazada<>();
-    private final BST ArbolPalabras= new BST();
-    public int Palabras;
+    private static final ListaEnlazada<BST> ListaArboles = new ListaEnlazada<>();
+    private final BST ArbolPalabras = new BST();
+    public int Palabras, numArchivo;
     public LocalDateTime Date;
     private File URL;
-    public String Texto,Nombre;
+    public String Texto, Nombre;
 
-    public Archivo(File URL, String Nombre) throws IOException {
+    public Archivo(File URL, String Nombre, int numArchivo) throws IOException {
         this.Nombre=Nombre;
         this.URL = URL;
+        this.numArchivo = numArchivo;
         setDate();
         System.out.println(URL.getName());
         Asignar(URL.getName());
@@ -122,6 +123,6 @@ public class Archivo {
     }
 
     public static String limpiar(String s){
-        return s.replaceAll("[^a-zA-Z0-9]","");
+        return s.replaceAll("[^a-zA-Z0-9]", "");
     }
 }

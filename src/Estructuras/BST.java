@@ -52,15 +52,15 @@ public class BST {
     }
 
     public void insert (String e){
-        root = this.insert  (e.toLowerCase(), this.root);
+        root = this.insertAux(e.toLowerCase(), this.root);
     }
-    private Nodo insert (String e, Nodo current){
+    private Nodo insertAux (String e, Nodo current){
         if (current == null){
             return new Nodo(e);
         } else if (e.compareTo(current.element) < 0){
-            current.left = insert (e, current.left);
+            current.left = insertAux (e, current.left);
         } else if (e.compareTo(current.element) > 0) {
-            current.right = insert (e, current.right);
+            current.right = insertAux (e, current.right);
         }
         return current;
     }
