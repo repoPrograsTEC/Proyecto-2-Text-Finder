@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="PDFBox">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Lib/PDFBox" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../Lib/PDFBox" recursive="false" />
+  </library>
+</component>
