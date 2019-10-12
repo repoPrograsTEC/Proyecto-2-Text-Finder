@@ -6,6 +6,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -90,18 +91,43 @@ public class Archivo {
             BufferedReader br = new BufferedReader(fr);
             int i, a = 0, inicio = 0;
             while((linea = br.readLine()) != null) {
-                Texto+=linea+"\n";
-                for(i = 0; i < linea.length(); i++){
-                    if(i == 0){
-                        if(linea.charAt(i) != ' '){
-                            inicio = i;
-                            a++;}
-                    }else{
-                        if(linea.charAt(i-1) == ' '){
-                            if(linea.charAt(i) != ' ') {
-                                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
+                if (a == 0){
+                    Texto += linea + "\n";
+                    Texto = Texto.substring(4, linea.length());
+                    for (i = 0; i < linea.length(); i++) {
+                        if (i == 0) {
+                            if (linea.charAt(i) != ' ') {
                                 inicio = i;
-                                a++;} } }
+                                a++;
+                            }
+                        } else {
+                            if (linea.charAt(i - 1) == ' ') {
+                                if (linea.charAt(i) != ' ') {
+                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                    inicio = i;
+                                    a++;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Texto += linea + "\n";
+                    for (i = 0; i < linea.length(); i++) {
+                        if (i == 0) {
+                            if (linea.charAt(i) != ' ') {
+                                inicio = i;
+                                a++;
+                            }
+                        } else {
+                            if (linea.charAt(i - 1) == ' ') {
+                                if (linea.charAt(i) != ' ') {
+                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                    inicio = i;
+                                    a++;
+                                }
+                            }
+                        }
+                    }
                 }
                 ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
                 inicio = 0;
