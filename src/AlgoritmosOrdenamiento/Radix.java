@@ -1,6 +1,5 @@
 package AlgoritmosOrdenamiento;
 
-import java.io.*;
 import java.util.*;
 
 class Radix {

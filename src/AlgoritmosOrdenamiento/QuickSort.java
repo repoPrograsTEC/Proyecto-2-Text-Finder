@@ -19,12 +19,10 @@ public class QuickSort {
         // left < pivot y right > pivot
         int i = low, j = high;
         while (i <= j) {
-            int comparationMenor=l.Obtener(i).Nombre.compareTo(pivote);
             while (l.Obtener(i).Nombre.compareTo(pivote)>0) {
                 i++;
             }
 
-            int comparationMayor=l.Obtener(j).Nombre.compareTo(pivote);
             while (l.Obtener(j).Nombre.compareTo(pivote)<0) {
                 j--;
             }
