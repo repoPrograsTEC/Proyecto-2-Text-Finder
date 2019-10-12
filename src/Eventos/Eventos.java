@@ -46,7 +46,7 @@ public class Eventos {
             Label labelSeparacion = new Label("  ");
 
             vbox.getChildren().addAll(label, labelSeparacion);
-        } catch (NullPointerException | FileNotFoundException ignored) {
+        } catch (NullPointerException | IOException ignored) {
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
             alert.setContentText("Error al leer el archivo");
