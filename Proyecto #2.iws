@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="Drag and Drop finalizado">
+    <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -9,6 +12,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Proyecto #2" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -27,7 +33,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/controlsfx-8.40.15.jar!/" />
+    <property name="findjar.last.used.dir" value="$USER_HOME$/Downloads" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/poi-4.1.0/docs" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -194,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570908116710</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Arreglo de null en texto">
+      <created>1570909706693</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1570909706693</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,7 +241,8 @@
     <MESSAGE value="Dirección de foto de archivo comentada" />
     <MESSAGE value="Selección múltiple de archivos agregada" />
     <MESSAGE value="Drag and Drop finalizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Drag and Drop finalizado" />
+    <MESSAGE value="Arreglo de null en texto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arreglo de null en texto" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

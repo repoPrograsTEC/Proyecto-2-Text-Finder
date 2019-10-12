@@ -75,7 +75,7 @@ public class Archivo {
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
             XWPFDocument document = new XWPFDocument(fis);
             List<XWPFParagraph> paragraphs = document.getParagraphs();
-            for(int i=0;i<paragraphs.size();i++){
+            for(int i = 0; i < paragraphs.size(); i++){
                 System.out.println(paragraphs.get(i).getParagraphText());
             }
             fis.close();
