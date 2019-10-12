@@ -1,11 +1,10 @@
 package AplicacionMain;
 
-import Eventos.Eventos;
 import Estructuras.ListaEnlazada;
+import Eventos.Eventos;
 import Objetos.Archivo;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,11 +45,19 @@ public class Main extends Application {
     /**
      * Contenedor para los elementos que se agregan en el centro de la ventana
      */
-    private static Pane root = new Pane();
+    public static Pane root = new Pane();
+    /**
+     * Contenedor para visualizar el texto deseado
+     */
+    private TextArea areaDeTexto = new TextArea();
+    /**
+     * Contador para el número de archivo
+     */
+    static int numero = 0;
 
     @Override
     public void start(Stage primaryStage) {
-        ListaArchivo=new ListaEnlazada<>();
+        ListaArchivo = new ListaEnlazada<>();
         final FileChooser escogerArchivo = new FileChooser();
         escogerArchivo.setTitle(" Escoger archivo para agregar a la biblioteca ");
         escogerArchivo.getExtensionFilters().addAll(
@@ -59,7 +66,7 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
         final Button abrirArchivo = new Button(" Escoger archivo ");
-        abrirArchivo.setOnAction(e -> Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, primaryStage));
+        abrirArchivo.setOnAction(e -> Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero));
 
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);
@@ -71,7 +78,7 @@ public class Main extends Application {
         scrollpane.setMaxSize(210d, 650d);
         scrollpane.setPrefWidth(210d);
         scrollpane.setPrefHeight(650d);
-        scrollpane.setCursor(Cursor.HAND);
+        //scrollpane.setCursor(Cursor.HAND);
         scrollpane.setContent(vbox);
         scrollpane.setBackground(Background.EMPTY);
         scrollpane.setStyle("-fx-border-color: black");
@@ -81,7 +88,7 @@ public class Main extends Application {
         input.setPrefHeight(40d);
         buscar.setLayoutX(900);
 
-        TextArea areaDeTexto = new TextArea();
+
         areaDeTexto.setEditable(false);
         areaDeTexto.setPrefSize(750d, 500d);
         areaDeTexto.setLayoutX(200);
