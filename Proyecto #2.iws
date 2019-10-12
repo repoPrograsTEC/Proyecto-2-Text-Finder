@@ -167,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570343349280</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Dirección de foto de archivo comentada">
+      <created>1570899187299</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1570899187299</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,6 +204,7 @@
     <MESSAGE value="Textos de prueba" />
     <MESSAGE value="Ventana de ocurrencias creada" />
     <MESSAGE value="Mejora en ventana de ocurrencias" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mejora en ventana de ocurrencias" />
+    <MESSAGE value="Dirección de foto de archivo comentada" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dirección de foto de archivo comentada" />
   </component>
 </project>

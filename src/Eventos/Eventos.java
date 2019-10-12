@@ -13,6 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static AplicacionMain.Main.*;
 
@@ -34,20 +36,24 @@ public class Eventos {
      */
     public static void agregarEnBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista, Stage primaryStage) {
         try {
-            File file = escogerArchivo.showOpenDialog(primaryStage);
-            lista.InsertarFinal(new Archivo(file,file.getName()));
-            FileInputStream input = new FileInputStream(
-                    //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
-                    //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
-                    "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
-                    //"C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
-            Image image = new Image(input, 80, 60, true, true);
-            ImageView imageView = new ImageView(image);
 
-            Label label = new Label("  " + file.getName().toUpperCase(), imageView);
-            Label labelSeparacion = new Label("  ");
+            List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
+            
+            for (File file : files) {
+                lista.InsertarFinal(new Archivo(file, file.getName()));
+                FileInputStream input = new FileInputStream(
+                        //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
+                        //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
+                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+                Image image = new Image(input, 80, 60, true, true);
+                ImageView imageView = new ImageView(image);
 
-            vbox.getChildren().addAll(label, labelSeparacion);
+                Label label = new Label("  " + file.getName().toUpperCase(), imageView);
+                Label labelSeparacion = new Label("  ");
+
+                vbox.getChildren().addAll(label, labelSeparacion);
+            }
+
         } catch (NullPointerException | FileNotFoundException ignored) {
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
