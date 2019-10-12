@@ -12,11 +12,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.*;
-import java.util.ArrayList;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
-import static AplicacionMain.Main.*;
+import static AplicacionMain.Main.input;
+import static AplicacionMain.Main.vbox;
 
 /**
  * Clase eventos en donde se agrupan todos los eventos a realizar en la aplicación
@@ -38,7 +41,7 @@ public class Eventos {
         try {
 
             List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
-            
+
             for (File file : files) {
                 lista.InsertarFinal(new Archivo(file, file.getName()));
                 FileInputStream input = new FileInputStream(
