@@ -33,11 +33,9 @@ public class Archivo {
         else{readTXTFile();}
     }
 
-
     private void setDate(){
         this.Date = LocalDateTime.now();
     }
-
 
     private void readPDFFile(File file) throws IOException {
         PDFTextStripper tStripper = new PDFTextStripper();
@@ -71,7 +69,6 @@ public class Archivo {
         System.out.println(content.trim());
     }
 
-
     private void readDocxFile(File file) {
         try {
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
@@ -85,7 +82,6 @@ public class Archivo {
             e.printStackTrace();
         }
     }
-
 
     private void readTXTFile(){
         try {

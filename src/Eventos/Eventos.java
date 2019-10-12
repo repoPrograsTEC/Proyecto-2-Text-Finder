@@ -55,14 +55,14 @@ public class Eventos {
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
-                Label label = new Label("  " + lista.Obtener(i).getNombre().toUpperCase(), imageView);
+                Label label = new Label("  " + lista.Obtener(i).Nombre.toUpperCase(), imageView);
                 Label labelSeparacion = new Label("  ");
 
                 int pos = i;
                 label.setOnDragDetected(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent evento) {
-                        movimientoDetectado(evento, imageView, lista.Obtener(pos).getNombre());
+                        movimientoDetectado(evento, imageView, lista.Obtener(pos).Nombre);
                     }});
 
                 vbox.getChildren().addAll(label, labelSeparacion);
@@ -78,7 +78,7 @@ public class Eventos {
                 @Override
                 public void handle(DragEvent evento) {
                     for (int num = 0; num < lista.getLargo(); num++){
-                        if (evento.getDragboard().getString().equals(lista.Obtener(num).getNombre())) {
+                        if (evento.getDragboard().getString().equals(lista.Obtener(num).Nombre)) {
                             soltar(evento, lista.Obtener(num), area);
                         }
                     }
