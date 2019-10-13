@@ -14,6 +14,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -84,7 +86,11 @@ public class Eventos {
                 public void handle(DragEvent evento) {
                     for (int num = 0; num < lista.getLargo(); num++) {
                         if (evento.getDragboard().getString().equals(lista.Obtener(num).Nombre)) {
-                            soltar(evento, lista.Obtener(num), area);
+                            try {
+                                soltar(evento, lista.Obtener(num), area);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -106,7 +112,7 @@ public class Eventos {
         e.consume();
     }
 
-    public static void soltar(DragEvent e, Archivo x, TextArea textArea) {
+    public static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
         textArea.clear();
         String tipoArchivo = x.getNombre().substring(x.getNombre().length()-1);
         if (tipoArchivo.equals("x")) {
@@ -119,7 +125,28 @@ public class Eventos {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        } else {
+
+        // LO QUE SE AGREGA ES UN ARCHIVO .PDF
+        } else if (tipoArchivo.equals("f")){
+            PDFTextStripper tStripper = new PDFTextStripper();
+            tStripper.setStartPage(1);
+            tStripper.setEndPage(3);
+            PDDocument document = PDDocument.load(x.getURL());
+            document.getClass();
+            String content = null;
+
+            if (!document.isEncrypted()) {
+                String pdfFileInText = tStripper.getText(document);
+                String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
+                for (String line : lines) {
+                    textArea.appendText(line);
+                    content += line;
+                }
+            }
+
+            assert content != null;
+
+        }else {
             // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .TXT
             textArea.appendText(x.Texto);
         }

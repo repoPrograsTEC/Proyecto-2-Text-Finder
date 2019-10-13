@@ -4,12 +4,12 @@ import Estructuras.BST;
 import Estructuras.ListaEnlazada;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Archivo {
     private static final ListaEnlazada<BST> ListaArboles = new ListaEnlazada<>();
@@ -40,30 +40,19 @@ public class Archivo {
 
     private void readPDFFile(File file) throws IOException {
         PDFTextStripper tStripper = new PDFTextStripper();
-
         tStripper.setStartPage(1);
-
         tStripper.setEndPage(3);
-
         PDDocument document = PDDocument.load(file);
-
         document.getClass();
 
         String content = null;
         if (!document.isEncrypted()) {
-
             String pdfFileInText = tStripper.getText(document);
-
             String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-
             for (String line : lines) {
-
                 System.out.println(line);
-
                 content += line;
-
             }
-
         }
 
         assert content != null;
@@ -73,11 +62,13 @@ public class Archivo {
     private void readDocxFile(File file) {
         try {
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            XWPFDocument document = new XWPFDocument(fis);
-            List<XWPFParagraph> paragraphs = document.getParagraphs();
-            for(int i = 0; i < paragraphs.size(); i++){
-                System.out.println(paragraphs.get(i).getParagraphText());
-            }
+            XWPFDocument document = new XWPFDocument(OPCPackage.open(fis));
+            XWPFWordExtractor extractor = new XWPFWordExtractor(document);
+            System.out.println(extractor.getText());
+            //List<XWPFParagraph> paragraphs = document.getParagraphs();
+            //for(int i = 0; i < paragraphs.size(); i++){
+            //    System.out.println(paragraphs.get(i).getParagraphText());
+            //}
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();
