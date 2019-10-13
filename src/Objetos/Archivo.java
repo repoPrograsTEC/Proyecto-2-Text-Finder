@@ -144,6 +144,26 @@ public class Archivo {
         return ArbolPalabras;
     }
 
+    public int getPalabras() {
+        return Palabras;
+    }
+
+    public int getNumArchivo() {
+        return numArchivo;
+    }
+
+    public File getURL() {
+        return URL;
+    }
+
+    public String getTexto() {
+        return Texto;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
     public static String limpiar(String s){
         return s.replaceAll("[^a-zA-Z0-9]", "");
     }
