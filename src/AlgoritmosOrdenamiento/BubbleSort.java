@@ -3,7 +3,15 @@ package AlgoritmosOrdenamiento;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 
+/**
+ * Clase BubbleSort que sirve para ordenar la búsqueda de archivos
+ */
 public class BubbleSort {
+
+    /**
+     * Método que ordena los archivos de la lista enlazada
+     * @param l Lista enlazada de archivos de la biblioteca
+     */
     public static void bubbleSort(ListaEnlazada<Archivo> l) {
         int n = l.getLargo();
         Archivo temp;

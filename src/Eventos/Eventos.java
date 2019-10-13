@@ -103,7 +103,12 @@ public class Eventos {
         }
     }
 
-
+    /**
+     * Método que ejecuta la acción de detectar el drag & drop
+     * @param e Evento del mouse
+     * @param imageView Imagen del archivo
+     * @param Name Nombre del archivo
+     */
     public static void movimientoDetectado(MouseEvent e, ImageView imageView, String Name) {
         Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
@@ -112,6 +117,13 @@ public class Eventos {
         e.consume();
     }
 
+    /**
+     * Método que agrega el texto seleccionado al área de texto de la ventana principal
+     * @param e Evento del Mouse
+     * @param x Archivo selecionado
+     * @param textArea Área de texto principal
+     * @throws IOException Excepción si el archivo no es válido
+     */
     public static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
         textArea.clear();
         String tipoArchivo = x.getNombre().substring(x.getNombre().length()-1);
@@ -153,7 +165,7 @@ public class Eventos {
     }
 
     /**
-     * Método que muestra el archivo en el área de texto de la ventana principal
+     * Método que muestra el archivo en el área de texto de la ventana secundaria (coincidencias)
      *
      * @param lista Lista enlazada donde se almacenan los archivos
      */
@@ -226,6 +238,12 @@ public class Eventos {
         }
     }
 
+    /**
+     * Método para abrir el archivo seleccionado y agregarlo al área de texto
+     * @param x Archivo seleccionado
+     * @param area Barra de búsqueda
+     * @param textArea Área de texto de la ventana secundaria
+     */
     private static void abrirArchivo(Archivo x, TextField area, TextArea textArea) {
         if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
             if (x.getURL().getName().charAt(x.getURL().getName().length()-1) == 'x'){

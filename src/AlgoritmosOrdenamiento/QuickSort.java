@@ -3,8 +3,17 @@ package AlgoritmosOrdenamiento;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 
+/**
+ * Clase QuickSort que sirve para ordenar la búsqueda de archivos
+ */
 public class QuickSort {
 
+    /**
+     * Método que ordena los archivos de la lista enlazada
+     * @param l lista enlazada de archivos
+     * @param low Variable para comparar y escoger el pivote
+     * @param high Variable para comparar y escoger el pivote
+     */
     public static void quickSort(ListaEnlazada<Archivo> l, int low, int high) {
         if (l.getLargo() == 0){
             return;

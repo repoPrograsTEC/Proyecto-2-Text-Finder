@@ -11,14 +11,50 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Clase Archivo en la que se establecen atributos y métodos para cada documento indizado
+ */
 public class Archivo {
+    /**
+     * Variable en la que se guardan los árboles creados de cada archivo
+     */
     private static final ListaEnlazada<BST> ListaArboles = new ListaEnlazada<>();
+    /**
+     * Variable que almacena las palabras del archivo en un árbol binario
+     */
     private final BST ArbolPalabras = new BST();
-    public int Palabras, numArchivo;
+    /**
+     * Variable que contiene el número de palabras en el documento
+     */
+    public int Palabras;
+    /**
+     * Varibale que contiene el número de archivo
+     */
+    public int numArchivo;
+    /**
+     * Variable que almacena la fecha en la que se agregó el documento a la biblioteca
+     */
     public LocalDateTime Date;
+    /**
+     * Variable que almacena la ruta del archivo
+     */
     private File URL;
-    public String Texto, Nombre;
+    /**
+     * Variable que almacena el texto del archivo
+     */
+    public String Texto;
+    /**
+     * Variable para almacenar el nombre del archivo
+     */
+    public String Nombre;
 
+    /**
+     * Constructor clase Archivo
+     * @param URL Extensión del archivo escogido
+     * @param Nombre Nombre del archivo seleccionado
+     * @param numArchivo Número de archivo para agregar
+     * @throws IOException Excepción si el archivo no es correcto
+     */
     public Archivo(File URL, String Nombre, int numArchivo) throws IOException {
         this.Nombre = Nombre;
         this.URL = URL;
@@ -27,6 +63,11 @@ public class Archivo {
         Asignar(URL.getName());
     }
 
+    /**
+     * Método que lee el archivo *.pdf
+     * @param file Ruta del archivo
+     * @throws IOException Excepción si el archivo no es correcto
+     */
     private void readPDFFile(File file) throws IOException {
         PDFTextStripper tStripper = new PDFTextStripper();
 
@@ -73,6 +114,11 @@ public class Archivo {
         document.close();
     }
 
+    /**
+     * Método que lee el archivo *.docx
+     * @param file Ruta del archivo
+     * @throws IOException Excepción si el archivo no es correcto
+     */
     private void readDocxFile(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         XWPFDocument document = new XWPFDocument(fis);
@@ -106,6 +152,9 @@ public class Archivo {
 
     }
 
+    /**
+     * Método que lee el archivo *.txt
+     */
     private void readTXTFile(){
         try {
             String linea;
@@ -162,40 +211,81 @@ public class Archivo {
         }
     }
 
+    /**
+     * Método que asigna cual documento se debe leer
+     * @param URL Nombre del archivo
+     * @throws IOException Excepción si el archivo no es correcto
+     */
     private void Asignar(String URL) throws IOException {
-        if (URL.charAt(URL.length()-1)=='x'){readDocxFile(this.URL);}
-        if (URL.charAt(URL.length()-1)=='f'){readPDFFile(this.URL);}
-        else{readTXTFile();}
+        if (URL.charAt(URL.length()-1)=='x') {
+            readDocxFile(this.URL);
+        } else if (URL.charAt(URL.length()-1)=='f'){
+            readPDFFile(this.URL);
+        } else {
+            readTXTFile();
+        }
     }
 
+    /**
+     * Método para establecer la fecha de ingreso del documento a la biblioteca
+     */
     private void setDate(){
         this.Date = LocalDateTime.now();
     }
 
+    /**
+     * Método que retorna el árbol binario del archivo deseado
+     * @return Árbol binario del archivo
+     */
     public BST getArbolPalabras() {
         return ArbolPalabras;
     }
 
+    /**
+     * Método que retorna la cantidad de palabras en el documento
+     * @return Cantidad de  palabras en el documento
+     */
     public int getPalabras() {
         return Palabras;
     }
 
+    /**
+     * Método que retorna el número de archivo
+     * @return Entero correspondiente al número del archivo
+     */
     public int getNumArchivo() {
         return numArchivo;
     }
 
+    /**
+     * Método que retorna la ruta del archivo
+     * @return Ruta del archivo deseado
+     */
     public File getURL() {
         return URL;
     }
 
+    /**
+     * Método que retorn el texto del archivo
+     * @return Texto del archivo
+     */
     public String getTexto() {
         return Texto;
     }
 
+    /**
+     * Método que retorna el nombre del archivo
+     * @return Nombre del archivo
+     */
     public String getNombre() {
         return Nombre;
     }
 
+    /**
+     * Método que elimina los caracteres innecesarios del texto
+     * @param s String a limpiar
+     * @return String sin caracteres no deseados
+     */
     public static String limpiar(String s){
         return s.replaceAll("[^a-zA-Z0-9]", "");
     }

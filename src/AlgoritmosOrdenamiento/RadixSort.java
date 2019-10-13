@@ -2,11 +2,18 @@ package AlgoritmosOrdenamiento;
 
 import java.util.*;
 
-class Radix {
+/**
+ * Clase RadixSort que sirve para ordenar la búsqueda de archivos
+ */
+class RadixSort {
 
-    // A utility function to get maximum value in arr[]
-    static int getMax(int arr[], int n)
-    {
+    /**
+     * Método para obtener el valor máximo del array
+     * @param arr Array de enteros
+     * @param n Largo del array
+     * @return Valor máximo del array
+     */
+    static int getMax(int arr[], int n) {
         int mx = arr[0];
         for (int i = 1; i < n; i++)
             if (arr[i] > mx)
@@ -16,8 +23,13 @@ class Radix {
 
     // A function to do counting sort of arr[] according to
     // the digit represented by exp.
-    static void countSort(int arr[], int n, int exp)
-    {
+    /**
+     * Método para contar los elementos ordenados
+     * @param arr Array de enteros
+     * @param n Largo del array
+     * @param exp Base numérica para realizar división y ordenar los elementos
+     */
+    static void countSort(int arr[], int n, int exp) {
         int output[] = new int[n]; // output array
         int i;
         int count[] = new int[10];
@@ -46,11 +58,14 @@ class Radix {
     }
 
     // The main function to that sorts arr[] of size n using
-    // Radix Sort
-    static void radixsort(int arr[])
-    {
+    // RadixSort Sort
+    /**
+     * Método para ordenar los elementos del array
+     * @param arr Array de enteros
+     */
+    static void radixsort(int arr[]) {
         // Find the maximum number to know number of digits
-        int m = getMax(arr,arr.length);
+        int m = getMax(arr, arr.length);
 
         // Do counting sort for every digit. Note that instead
         // of passing digit number, exp is passed. exp is 10^i
@@ -60,14 +75,18 @@ class Radix {
     }
 
     // A utility function to print an array
-    static void print(int arr[], int n)
-    {
-        for (int i=0; i<n; i++)
+    /**
+     * Método para imprimir el array
+     * @param arr Array de enteros
+     * @param n Largo del array
+     */
+    static void print(int arr[], int n) {
+        for (int i = 0; i < n; i++)
             System.out.print(arr[i]+" ");
     }
 
-
-    /*Driver function to check for above function*/
+    /*
+    // PRUEBA DEL ALGORITMO DE ORDENAMIENTO
     public static void main (String[] args)
     {
         int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
@@ -75,5 +94,6 @@ class Radix {
         radixsort(arr);
         print(arr, n);
     }
+
+     */
 }
-/* This code is contributed by Devesh Agrawal */

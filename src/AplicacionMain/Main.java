@@ -86,7 +86,6 @@ public class Main extends Application {
         scrollpane.setMaxSize(210d, 650d);
         scrollpane.setPrefWidth(210d);
         scrollpane.setPrefHeight(650d);
-        //scrollpane.setCursor(Cursor.HAND);
         scrollpane.setContent(vbox);
         scrollpane.setBackground(Background.EMPTY);
         scrollpane.setStyle("-fx-border-color: black");
