@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Clase Main que contiene la interfaz gráfica de la aplicación
  */
@@ -66,7 +68,13 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
         final Button abrirArchivo = new Button(" Escoger archivo ");
-        abrirArchivo.setOnAction(e -> Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero));
+        abrirArchivo.setOnAction(e -> {
+            try {
+                Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);

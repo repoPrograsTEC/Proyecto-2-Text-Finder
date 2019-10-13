@@ -14,10 +14,15 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+
 import static AplicacionMain.Main.input;
 import static AplicacionMain.Main.vbox;
 
@@ -39,14 +44,14 @@ public class Eventos {
      * @param primaryStage Ventana principal del programa
      */
     public static void agregarEnBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
-                                           TextArea area, Stage primaryStage, int numero) {
+                                           TextArea area, Stage primaryStage, int numero) throws IOException {
+
+        List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
         try {
-
-            List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
-
-
             for (int i = 0; i < files.size(); i++) {
-                lista.InsertarFinal(new Archivo(files.get(i), files.get(i).getName(), numero));
+                System.out.println(files.get(i).getName());
+                Archivo temp = new Archivo(files.get(i), files.get(i).getName(), numero);
+                lista.InsertarFinal(temp);
 
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
@@ -55,15 +60,16 @@ public class Eventos {
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
-                Label label = new Label("  " + lista.Obtener(i).Nombre.toUpperCase(), imageView);
+                Label label = new Label("  " + temp.Nombre.toUpperCase(), imageView);
                 Label labelSeparacion = new Label("  ");
 
                 int pos = i;
                 label.setOnDragDetected(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent evento) {
-                        movimientoDetectado(evento, imageView, lista.Obtener(pos).Nombre);
-                    }});
+                        movimientoDetectado(evento, imageView, temp.Nombre);
+                    }
+                });
 
                 vbox.getChildren().addAll(label, labelSeparacion);
             }
@@ -71,20 +77,20 @@ public class Eventos {
             area.setOnDragOver(new EventHandler<DragEvent>() {
                 @Override
                 public void handle(DragEvent evento) {
-                    evento.acceptTransferModes(TransferMode.COPY_OR_MOVE); }
+                    evento.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
             });
 
             area.setOnDragDropped(new EventHandler<DragEvent>() {
                 @Override
                 public void handle(DragEvent evento) {
-                    for (int num = 0; num < lista.getLargo(); num++){
+                    for (int num = 0; num < lista.getLargo(); num++) {
                         if (evento.getDragboard().getString().equals(lista.Obtener(num).Nombre)) {
                             soltar(evento, lista.Obtener(num), area);
                         }
                     }
                 }
             });
-
         } catch (NullPointerException | IOException ignored) {
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
@@ -104,7 +110,21 @@ public class Eventos {
 
     public static void soltar(DragEvent e, Archivo x, TextArea textArea) {
         textArea.clear();
-        textArea.appendText(x.Texto);
+        String tipoArchivo = x.getNombre().substring(x.getNombre().length()-1);
+        if (tipoArchivo.equals("x")) {
+            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .DOCX
+            try {
+                FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
+                XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
+                textArea.appendText(extractor.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .TXT
+            textArea.appendText(x.Texto);
+        }
     }
 
     /**
