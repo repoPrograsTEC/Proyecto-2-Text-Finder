@@ -90,20 +90,19 @@ public class Archivo {
         List<XWPFParagraph> paragraphs = document.getParagraphs();
         int i,inicio=0,a=0;
         for (XWPFParagraph linea : paragraphs) {
-            System.out.println(linea.getParagraphText());
-            Texto+=linea.getParagraphText()+"\n";
-            System.out.println(Texto);
-            Texto = Texto.substring(4, linea.getParagraphText().length());
-            for (i = 0; i < linea.getParagraphText().length(); i++) {
+            System.out.println(linea.getText());
+            Texto+=linea.getText()+"\n";
+            Texto = Texto.substring(4, linea.getText().length());
+            for (i = 0; i < linea.getText().length(); i++) {
                 if (i == 0) {
-                    if (linea.getParagraphText().charAt(i) != ' ') {
+                    if (linea.getText().charAt(i) != ' ') {
                         inicio = i;
                         a++;
                     }
                 } else {
-                    if (linea.getParagraphText().charAt(i - 1) == ' ') {
-                        if (linea.getParagraphText().charAt(i) != ' ') {
-                            ArbolPalabras.insert(limpiar(linea.getParagraphText().substring(inicio, i)));
+                    if (linea.getText().charAt(i - 1) == ' ') {
+                        if (linea.getText().charAt(i) != ' ') {
+                            ArbolPalabras.insert(limpiar(linea.getText().substring(inicio, i)));
                             inicio = i;
                             a++;
                         }
