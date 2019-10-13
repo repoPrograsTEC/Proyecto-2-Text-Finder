@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Proyecto2/Docs/Consolas.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Proyecto2/Docs/Orca.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/AplicacionMain/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto2/AplicacionMain/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/BST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/BST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Objetos/Archivo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Proyecto2/Objetos/Archivo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
@@ -215,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570918142315</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Arreglo en docx">
+      <created>1570936591100</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1570936591100</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

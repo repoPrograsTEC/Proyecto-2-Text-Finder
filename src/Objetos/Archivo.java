@@ -93,7 +93,7 @@ public class Archivo {
             String linea;
             FileReader fr = new FileReader (URL);
             BufferedReader br = new BufferedReader(fr);
-            int i, a = 0, inicio = 0;
+            int i=0, a = 0, inicio = 0;
             while((linea = br.readLine()) != null) {
                 if (a == 0){
                     Texto += linea + "\n";
