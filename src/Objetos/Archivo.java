@@ -4,7 +4,6 @@ import Estructuras.BST;
 import Estructuras.ListaEnlazada;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
@@ -15,16 +14,15 @@ import java.util.List;
 public class Archivo {
     private static final ListaEnlazada<BST> ListaArboles = new ListaEnlazada<>();
     private final BST ArbolPalabras = new BST();
-    public int Palabras;
+    public int Palabras, numArchivo;
     public LocalDateTime Date;
     private File URL;
     public String Texto, Nombre;
-    public int numero;
 
-    public Archivo(File URL, String Nombre, int numero) throws IOException {
-        this.Nombre = Nombre;
+    public Archivo(File URL, String Nombre, int numArchivo) throws IOException {
+        this.Nombre=Nombre;
         this.URL = URL;
-        this.numero = numero;
+        this.numArchivo = numArchivo;
         setDate();
         System.out.println(URL.getName());
         Asignar(URL.getName());
@@ -75,16 +73,14 @@ public class Archivo {
     private void readDocxFile(File file) {
         try {
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
-
-            List paragraphList = xdoc.getParagraphs();
-
-            for (int i = 0; i < paragraphList.size(); i++){
-                XWPFParagraph paragraph = (XWPFParagraph) paragraphList.get(i);
-                System.out.println(paragraph.getText());
+            XWPFDocument document = new XWPFDocument(fis);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+            for(int i = 0; i < paragraphs.size(); i++){
+                System.out.println(paragraphs.get(i).getParagraphText());
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -142,14 +138,6 @@ public class Archivo {
         }
         catch(IOException ignored){
         }
-    }
-
-    public File getURL() {
-        return URL;
-    }
-
-    public String getNombre() {
-        return Nombre;
     }
 
     public BST getArbolPalabras() {

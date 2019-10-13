@@ -49,7 +49,6 @@ public class Eventos {
         List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
         try {
             for (int i = 0; i < files.size(); i++) {
-                System.out.println(files.get(i).getName());
                 Archivo temp = new Archivo(files.get(i), files.get(i).getName(), numero);
                 lista.InsertarFinal(temp);
 
@@ -63,7 +62,6 @@ public class Eventos {
                 Label label = new Label("  " + temp.Nombre.toUpperCase(), imageView);
                 Label labelSeparacion = new Label("  ");
 
-                int pos = i;
                 label.setOnDragDetected(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent evento) {
