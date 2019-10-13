@@ -57,7 +57,7 @@ public class Eventos {
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                         //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
-                        "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
+                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
@@ -228,7 +228,18 @@ public class Eventos {
 
     private static void abrirArchivo(Archivo x, TextField area, TextArea textArea) {
         if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
-            textArea.appendText(x.Texto);
+            if (x.getURL().getName().charAt(x.getURL().getName().length()-1) == 'x'){
+                try {
+                    FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
+                    XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                    XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
+                    textArea.appendText(extractor.getText());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else{
+                textArea.appendText(x.Texto);
+            }
         }
     }
 }

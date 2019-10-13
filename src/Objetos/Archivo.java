@@ -20,7 +20,7 @@ public class Archivo {
     public String Texto, Nombre;
 
     public Archivo(File URL, String Nombre, int numArchivo) throws IOException {
-        this.Nombre=Nombre;
+        this.Nombre = Nombre;
         this.URL = URL;
         this.numArchivo = numArchivo;
         setDate();
