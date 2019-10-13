@@ -44,25 +44,26 @@ public class Eventos {
 
             List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
 
-
             for (int i = 0; i < files.size(); i++) {
-                lista.InsertarFinal(new Archivo(files.get(i), files.get(i).getName(), numero));
+                System.out.println(files.get(i).getName());
+                Archivo temp = new Archivo(files.get(i), files.get(i).getName(), numero);
+                lista.InsertarFinal(temp);
 
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                         //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
-                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+                        "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
-                Label label = new Label("  " + lista.Obtener(i).Nombre.toUpperCase(), imageView);
+                Label label = new Label("  " + temp.Nombre.toUpperCase(), imageView);
                 Label labelSeparacion = new Label("  ");
 
                 int pos = i;
                 label.setOnDragDetected(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent evento) {
-                        movimientoDetectado(evento, imageView, lista.Obtener(pos).Nombre);
+                        movimientoDetectado(evento, imageView, temp.Nombre);
                     }});
 
                 vbox.getChildren().addAll(label, labelSeparacion);
