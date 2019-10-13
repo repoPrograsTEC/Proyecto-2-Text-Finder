@@ -6,38 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Proyecto #2.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/AlgoritmosOrdenamiento/BubbleSort.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/AlgoritmosOrdenamiento/QuickSort.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/AlgoritmosOrdenamiento/Radix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/AplicacionMain/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/Consolas.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/Orca.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/PruebaDocx.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/PruebaPDF.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/PruebaPDF2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Docs/archivo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/BST$Nodo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/BST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/ListaEnlazada$Nodo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Estructuras/ListaEnlazada.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Eventos/Eventos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Imagenes/buscar2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Imagenes/texto.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/META-INF/Proyecto2.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Proyecto2/Objetos/Archivo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/Radix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/RadixSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estructuras/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/BST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="XSLT Stylesheet" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -282,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570939400653</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Javadoc">
+      <created>1570942843073</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1570942843073</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +287,6 @@
     <MESSAGE value="Refactor de eventos y metodos extra" />
     <MESSAGE value="Creación de areaText para visualizar documentos" />
     <MESSAGE value="Corrección en la visualización del archivo" />
-    <MESSAGE value="Javadoc" />
     <MESSAGE value="Ventana Auxiliar" />
     <MESSAGE value="Textos de prueba" />
     <MESSAGE value="Ventana de ocurrencias creada" />
@@ -319,7 +298,7 @@
     <MESSAGE value="Arreglo en despliegue" />
     <MESSAGE value="Arreglo en docx" />
     <MESSAGE value="Finalización de despliegue en ventana de coincidencias" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalización de despliegue en ventana de coincidencias" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc" />
   </component>
 </project>

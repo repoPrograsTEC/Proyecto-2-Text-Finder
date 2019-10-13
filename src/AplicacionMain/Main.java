@@ -63,9 +63,9 @@ public class Main extends Application {
         final FileChooser escogerArchivo = new FileChooser();
         escogerArchivo.setTitle(" Escoger archivo para agregar a la biblioteca ");
         escogerArchivo.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT", "*.txt"),
-                new FileChooser.ExtensionFilter("DOCX", "*.docx"),
-                new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+                new FileChooser.ExtensionFilter("txt", "*.txt"),
+                new FileChooser.ExtensionFilter("docx", "*.docx"),
+                new FileChooser.ExtensionFilter("pdf", "*.pdf"));
 
         final Button abrirArchivo = new Button(" Escoger archivo ");
         abrirArchivo.setOnAction(e -> {

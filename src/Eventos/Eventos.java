@@ -4,6 +4,7 @@ import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -212,8 +214,10 @@ public class Eventos {
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 if (!input.getText().equals("")) {
                     abrirArchivo(lista.Obtener(i), input, areaDeTexto);
-                    textos.getChildren().addAll(areaDeTexto, new Label("              "));
-                    posX += 600;
+                    if (areaDeTexto.getText() != null) {
+                        textos.getChildren().addAll(areaDeTexto, new Label("              "));
+                        posX += 600;
+                    }
                 }
             }
             // Contenedor para archivos con ocurrencias
@@ -225,8 +229,28 @@ public class Eventos {
             scrollPane.setPrefHeight(250d);
             GridPane.setMargin(scrollPane, new Insets(20d, 20d, 20d, 20d));
             gridPane.add(scrollPane, columna, fila);
+            fila++;
+            fila++;
 
-            Scene scene = new Scene(grupo2, 1300, 450);
+            ToolBar toolBar = new ToolBar();
+            toolBar.setCursor(Cursor.HAND);
+            toolBar.setMaxSize(180d, 20d);
+            toolBar.setPrefSize(180d,20d);
+            toolBar.setStyle("-fx-background-color: transparent; -fx-background-radius: 30; -fx-border-radius: 30; " +
+                            "-fx-border-width:5; -fx-border-color: #FC3D44;");
+            Label label = new Label(" Ordenar por : ");
+            Label separador = new Label("    ");
+            Button button = new Button("   Nombre   ");
+            Button button1 = new Button("     Fecha     ");
+            Button button2 = new Button("   Tamaño   ");
+
+
+            toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
+            //toolBar.setStyle("-fx-background-color: #1d178f; -fx-border-color: gray; -fx-border-width: .25px; -fx-padding: 0 20 0 20;");
+            GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 900d));
+            gridPane.add(toolBar, 0, 0);
+
+            Scene scene = new Scene(grupo2, 1200, 500);
 
             grupo2.getChildren().add(gridPane);
             stage1.setScene(scene);
@@ -244,7 +268,7 @@ public class Eventos {
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    private static void abrirArchivo(Archivo x, TextField area, TextArea textArea) {
+    private static TextArea abrirArchivo(Archivo x, TextField area, TextArea textArea) {
         if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
             if (x.getURL().getName().charAt(x.getURL().getName().length()-1) == 'x'){
                 try {
@@ -258,6 +282,9 @@ public class Eventos {
             } else{
                 textArea.appendText(x.Texto);
             }
+        } else{
+            textArea.setText(null);
         }
+        return textArea;
     }
 }
