@@ -2,6 +2,7 @@ package Objetos;
 
 import Estructuras.BST;
 import Estructuras.ListaEnlazada;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -24,7 +25,6 @@ public class Archivo {
         this.URL = URL;
         this.numArchivo = numArchivo;
         setDate();
-        System.out.println(URL.getName());
         Asignar(URL.getName());
     }
 
@@ -49,39 +49,74 @@ public class Archivo {
 
         document.getClass();
 
-        String content = null;
         if (!document.isEncrypted()) {
 
             String pdfFileInText = tStripper.getText(document);
 
             String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-
-            for (String line : lines) {
-
-                System.out.println(line);
-
-                content += line;
+            int i,inicio=0,a=0;
+            for (String linea : lines) {
+                Texto+=linea+"\n";
+                Texto = Texto.substring(4, linea.length());
+                for (i = 0; i < linea.length(); i++) {
+                    if (i == 0) {
+                        if (linea.charAt(i) != ' ') {
+                            inicio = i;
+                            a++;
+                        }
+                    } else {
+                        if (linea.charAt(i - 1) == ' ') {
+                            if (linea.charAt(i) != ' ') {
+                                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                inicio = i;
+                                a++;
+                            }
+                        }
+                    }
+                }
+                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
+                inicio = 0;
 
             }
-
+            ListaArboles.InsertarFinal(ArbolPalabras);
+            this.Palabras = a;
         }
-
-        assert content != null;
-        System.out.println(content.trim());
+        document.close();
     }
 
-    private void readDocxFile(File file) {
-        try {
-            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-            XWPFDocument document = new XWPFDocument(fis);
-            List<XWPFParagraph> paragraphs = document.getParagraphs();
-            for(int i = 0; i < paragraphs.size(); i++){
-                System.out.println(paragraphs.get(i).getParagraphText());
+    private void readDocxFile(File file) throws IOException {
+        FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+        XWPFDocument document = new XWPFDocument(fis);
+        List<XWPFParagraph> paragraphs = document.getParagraphs();
+        int i,inicio=0,a=0;
+        for (XWPFParagraph linea : paragraphs) {
+            System.out.println(linea.getParagraphText());
+            Texto+=linea.getParagraphText()+"\n";
+            System.out.println(Texto);
+            Texto = Texto.substring(4, linea.getParagraphText().length());
+            for (i = 0; i < linea.getParagraphText().length(); i++) {
+                if (i == 0) {
+                    if (linea.getParagraphText().charAt(i) != ' ') {
+                        inicio = i;
+                        a++;
+                    }
+                } else {
+                    if (linea.getParagraphText().charAt(i - 1) == ' ') {
+                        if (linea.getParagraphText().charAt(i) != ' ') {
+                            ArbolPalabras.insert(limpiar(linea.getParagraphText().substring(inicio, i)));
+                            inicio = i;
+                            a++;
+                        }
+                    }
+                }
             }
-            fis.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            ArbolPalabras.insert(limpiar(linea.getParagraphText().substring(inicio,i)));
+            inicio = 0;
         }
+        ListaArboles.InsertarFinal(ArbolPalabras);
+        this.Palabras = a;
+        fis.close();
+
     }
 
     private void readTXTFile(){
