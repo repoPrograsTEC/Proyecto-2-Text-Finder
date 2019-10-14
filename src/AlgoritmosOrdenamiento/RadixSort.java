@@ -2,7 +2,6 @@ package AlgoritmosOrdenamiento;
 
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
-
 import java.util.*;
 
 /**
@@ -16,7 +15,7 @@ public class RadixSort {
      * @param n Largo del array
      * @return Valor máximo del array
      */
-    private static int getMax(int arr[], int n) {
+    private static int getMax(int[] arr, int n) {
         int mx = arr[0];
         for (int i = 1; i < n; i++)
             if (arr[i] > mx)
@@ -30,10 +29,10 @@ public class RadixSort {
      * @param n Largo del array
      * @param exp Base numérica para realizar división y ordenar los elementos
      */
-    private static void countSort(int arr[], int n, int exp) {
-        int output[] = new int[n]; // output array
+    private static void countSort(int[] arr, int n, int exp) {
+        int[] output = new int[n]; // output array
         int i;
-        int count[] = new int[10];
+        int[] count = new int[10];
         Arrays.fill(count,0);
 
         for (i = 0; i < n; i++)
