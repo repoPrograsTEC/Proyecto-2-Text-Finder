@@ -90,6 +90,7 @@ public class Busqueda {
             Button button2 = new Button("   Tamaño   ");
 
 
+
             toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
             //toolBar.setStyle("-fx-background-color: #1d178f; -fx-border-color: gray; -fx-border-width: .25px; -fx-padding: 0 20 0 20;");
             GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 900d));

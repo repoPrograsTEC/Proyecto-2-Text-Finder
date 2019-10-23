@@ -54,7 +54,7 @@ public class Main extends Application {
     /**
      * Contador para el número de archivo
      */
-    static int numero = 0;
+    private static int numero = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -68,11 +68,7 @@ public class Main extends Application {
 
         final Button abrirArchivo = new Button(" Escoger archivo ");
         abrirArchivo.setOnAction(e -> {
-            try {
-                Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
         });
 
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);

@@ -4,17 +4,10 @@ import AplicacionMain.Busqueda;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -28,7 +21,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static AplicacionMain.Main.input;
 import static AplicacionMain.Main.vbox;
 
 /**
@@ -49,12 +41,12 @@ public class Eventos {
      * @param primaryStage Ventana principal del programa
      */
     public static void agregarEnBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
-                                           TextArea area, Stage primaryStage, int numero) throws IOException {
+                                           TextArea area, Stage primaryStage, int numero){
 
         List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
         try {
-            for (int i = 0; i < files.size(); i++) {
-                Archivo temp = new Archivo(files.get(i), files.get(i).getName(), numero);
+            for (File file : files) {
+                Archivo temp = new Archivo(file, file.getName(), numero);
                 lista.InsertarFinal(temp);
 
                 FileInputStream input = new FileInputStream(
@@ -112,7 +104,7 @@ public class Eventos {
      * @param imageView Imagen del archivo
      * @param Name Nombre del archivo
      */
-    public static void movimientoDetectado(MouseEvent e, ImageView imageView, String Name) {
+    private static void movimientoDetectado(MouseEvent e, ImageView imageView, String Name) {
         Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
         ClipboardContent content = new ClipboardContent();
         content.putString(Name);
@@ -127,7 +119,7 @@ public class Eventos {
      * @param textArea Área de texto principal
      * @throws IOException Excepción si el archivo no es válido
      */
-    public static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
+    private static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
         textArea.clear();
         String tipoArchivo = x.getNombre().substring(x.getNombre().length()-1);
         if (tipoArchivo.equals("x")) {
@@ -182,7 +174,7 @@ public class Eventos {
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    public static TextArea abrirArchivo(Archivo x, TextField area, TextArea textArea) {
+    public static void abrirArchivo(Archivo x, TextField area, TextArea textArea) {
         if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
             if (x.getURL().getName().charAt(x.getURL().getName().length()-1) == 'x'){
                 try {
@@ -195,10 +187,11 @@ public class Eventos {
                 }
             } else{
                 textArea.appendText(x.Texto);
+                int linea=x.getArbolPalabras().Obtener(area.getText().toLowerCase()).getFila();
+                System.out.println(x.lineas.Obtener(linea));
             }
         } else{
             textArea.setText(null);
         }
-        return textArea;
     }
 }
