@@ -43,6 +43,7 @@ public class Archivo {
      * Variable que almacena el texto del archivo
      */
     public String Texto;
+    public ListaEnlazada<String> lineas=new ListaEnlazada<>();
     /**
      * Variable que almacena el texto del archivo
      */
@@ -94,10 +95,11 @@ public class Archivo {
             String pdfFileInText = tStripper.getText(document);
 
             String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-            int i,inicio=0,a=0;
+            int i,inicio=0,a=0, fila=0;
             for (String linea : lines) {
                 Texto+=linea+"\n";
                 Texto = Texto.substring(4, linea.length());
+                lineas.InsertarFinal(linea+"\n");
                 for (i = 0; i < linea.length(); i++) {
                     if (i == 0) {
                         if (linea.charAt(i) != ' ') {
@@ -107,16 +109,16 @@ public class Archivo {
                     } else {
                         if (linea.charAt(i - 1) == ' ') {
                             if (linea.charAt(i) != ' ') {
-                                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)),fila);
                                 inicio = i;
                                 a++;
                             }
                         }
                     }
                 }
-                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
+                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)),fila);
                 inicio = 0;
-
+                fila++;
             }
             ListaArboles.InsertarFinal(ArbolPalabras);
             this.Palabras = a;
@@ -133,10 +135,11 @@ public class Archivo {
         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         XWPFDocument document = new XWPFDocument(fis);
         List<XWPFParagraph> paragraphs = document.getParagraphs();
-        int i,inicio=0,a=0;
+        int i,inicio=0,a=0, fila=0;
         for (XWPFParagraph linea : paragraphs) {
             Texto+=linea.getText()+"\n";
             Texto = Texto.substring(4, linea.getText().length());
+            lineas.InsertarFinal(linea+"\n");
             for (i = 0; i < linea.getText().length(); i++) {
                 if (i == 0) {
                     if (linea.getText().charAt(i) != ' ') {
@@ -146,15 +149,16 @@ public class Archivo {
                 } else {
                     if (linea.getText().charAt(i - 1) == ' ') {
                         if (linea.getText().charAt(i) != ' ') {
-                            ArbolPalabras.insert(limpiar(linea.getText().substring(inicio, i)));
+                            ArbolPalabras.insert(limpiar(linea.getText().substring(inicio, i)),fila);
                             inicio = i;
                             a++;
                         }
                     }
                 }
             }
-            ArbolPalabras.insert(limpiar(linea.getParagraphText().substring(inicio,i)));
+            ArbolPalabras.insert(limpiar(linea.getParagraphText().substring(inicio,i)),fila);
             inicio = 0;
+            fila++;
         }
         ListaArboles.InsertarFinal(ArbolPalabras);
         this.Palabras = a;
@@ -170,11 +174,12 @@ public class Archivo {
             String linea;
             FileReader fr = new FileReader (URL);
             BufferedReader br = new BufferedReader(fr);
-            int i=0, a = 0, inicio = 0;
+            int i=0, a = 0, inicio = 0,fila=0;
             while((linea = br.readLine()) != null) {
                 if (a == 0){
                     Texto += linea + "\n";
                     Texto = Texto.substring(4, linea.length());
+                    lineas.InsertarFinal(linea+"\n");
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
@@ -184,7 +189,7 @@ public class Archivo {
                         } else {
                             if (linea.charAt(i - 1) == ' ') {
                                 if (linea.charAt(i) != ' ') {
-                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)),fila);
                                     inicio = i;
                                     a++;
                                 }
@@ -193,6 +198,7 @@ public class Archivo {
                     }
                 } else {
                     Texto += linea + "\n";
+                    lineas.InsertarFinal(linea+"\n");
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
@@ -202,7 +208,7 @@ public class Archivo {
                         } else {
                             if (linea.charAt(i - 1) == ' ') {
                                 if (linea.charAt(i) != ' ') {
-                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)));
+                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)),fila);
                                     inicio = i;
                                     a++;
                                 }
@@ -210,8 +216,9 @@ public class Archivo {
                         }
                     }
                 }
-                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)));
+                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)),fila);
                 inicio = 0;
+                fila++;
             }
             ListaArboles.InsertarFinal(ArbolPalabras);
             this.Palabras = a;

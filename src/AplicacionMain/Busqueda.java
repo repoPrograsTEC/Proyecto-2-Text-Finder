@@ -103,6 +103,7 @@ public class Busqueda {
             Button button2 = new Button("   Tamaño   ");
 
 
+
             toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
             GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 920d));
             gridPane.add(toolBar, 0, 0);

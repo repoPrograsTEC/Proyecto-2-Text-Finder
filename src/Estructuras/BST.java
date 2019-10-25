@@ -12,19 +12,24 @@ public class BST {
          * Constructor clase Nodo
          * @param element Palabra del texto
          */
-        Nodo(String element) {
+        Nodo(String element, int fila) {
             this.element = element;
+            this.Fila=fila;
         }
         String element;
         Nodo right;
         Nodo left;
-
+        int Fila;
         /**
          * Método que retorna la palabra del nodo
          * @return Palabra almacenada en el nodo
          */
         public String getElement() {
             return element;
+        }
+
+        public int getFila() {
+            return Fila;
         }
     }
 
@@ -70,6 +75,22 @@ public class BST {
         }
     }
 
+
+    public Nodo Obtener(String e){
+        return ObtenerAux(e, root);
+    }
+
+    private Nodo ObtenerAux(String e, Nodo current){
+        int cmp = e.compareTo(current.element);
+        if (cmp < 0) {
+            return ObtenerAux(e,current.left);
+        } else if (cmp > 0) {
+            return ObtenerAux(e,current.right);
+        } else {
+            return current;
+        }
+    }
+
     /**
      * Método que retorna el nodo menor del árbol
      * @return Nodo menor
@@ -97,8 +118,8 @@ public class BST {
      * Método que inserta un nodo en el árbol
      * @param e Palabra a agregar
      */
-    public void insert (String e){
-        root = this.insertAux(e.toLowerCase(), this.root);
+    public void insert (String e, int Fila){
+        root = this.insertAux(e.toLowerCase(), this.root, Fila);
     }
 
     /**
@@ -107,13 +128,13 @@ public class BST {
      * @param current Nodo actual
      * @return Nodo agregado al árbol
      */
-    private Nodo insertAux (String e, Nodo current){
+    private Nodo insertAux (String e, Nodo current, int fila){
         if (current == null){
-            return new Nodo(e);
+            return new Nodo(e, fila);
         } else if (e.compareTo(current.element) < 0){
-            current.left = insertAux (e, current.left);
+            current.left = insertAux (e, current.left, fila);
         } else if (e.compareTo(current.element) > 0) {
-            current.right = insertAux (e, current.right);
+            current.right = insertAux (e, current.right, fila);
         }
         return current;
     }

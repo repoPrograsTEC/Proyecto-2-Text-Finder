@@ -63,7 +63,7 @@ public class Main extends Application {
     /**
      * Contador para el número de archivo
      */
-    static int numero = 0;
+    private static int numero = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -77,11 +77,7 @@ public class Main extends Application {
 
         Button abrirArchivo = new Button("       Agregar       ");
         abrirArchivo.setOnAction(e -> {
-            try {
-                Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
         });
         Button actualizar = new Button("      Actualizar     ");
         actualizar.setOnAction(e -> {
@@ -119,6 +115,7 @@ public class Main extends Application {
         input.setLayoutX(200);
         input.setPrefWidth(650);
         input.setPrefHeight(40d);
+        input.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ");
         buscar.setLayoutX(900);
 
 
@@ -126,7 +123,7 @@ public class Main extends Application {
         areaDeTexto.setPrefSize(750d, 500d);
         areaDeTexto.setLayoutX(200);
         areaDeTexto.setLayoutY(120);
-        areaDeTexto.setStyle("-fx-background-color: #000000;");
+        areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #fafbff; ");
         areaDeTexto.setBorder(new Border(new BorderStroke(
                 Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         areaDeTexto.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -194,7 +191,7 @@ public class Main extends Application {
         borderPane.setBottom(toolBar);
         BorderPane.setMargin(root, new Insets(30d,20d,20d,20d));
         borderPane.setCenter(root);
-        borderPane.setStyle("-fx-background-color: #8cbbff");
+        borderPane.setStyle("-fx-background-color: #ffe4b3");
         root.getChildren().add(grupo);
 
         Scene escena = new Scene(borderPane, 1500, 800);
