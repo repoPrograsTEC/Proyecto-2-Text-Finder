@@ -262,11 +262,7 @@ public class Eventos {
 
     }
 
-    public static void find_replace_in_DOCX(XWPFDocument doc, String palabraBuscar) throws IOException{
-        /**
-         * if uploaded doc then use HWPF else if uploaded Docx file use
-         * XWPFDocument
-         */
+    private static void find_replace_in_DOCX(XWPFDocument doc, String palabraBuscar) throws IOException{
         for (XWPFParagraph p : doc.getParagraphs()) {
             List<XWPFRun> runs = p.getRuns();
             if (runs != null) {

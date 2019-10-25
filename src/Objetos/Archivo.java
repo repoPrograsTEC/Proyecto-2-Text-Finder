@@ -313,19 +313,19 @@ public class Archivo {
         palabra=palabra.toLowerCase();
         System.out.println(palabra);
         for (int x=0; x<texto.length();x++){
+
             if (texto.charAt(x)==palabra.charAt(0)){
                 cont++;
                 inicio=x;
             }
-            else if(texto.charAt(x)==palabra.charAt(cont)){
-                if (cont==palabra.length()-1){
-                    fin=x;
+            else if(texto.charAt(x)==palabra.charAt(cont)) {
+                if (cont == palabra.length() - 1) {
+                    fin = x;
                     break;
-                }else{
+                } else {
                     cont++;
                 }
-            }
-            else{
+            } else{
                 inicio=0;
                 fin=0;
                 cont=0;

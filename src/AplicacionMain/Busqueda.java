@@ -65,7 +65,7 @@ public class Busqueda {
                 areaDeTexto.setPrefSize(500d, 230d);
                 areaDeTexto.setLayoutX(posX);
                 areaDeTexto.setLayoutY(posY);
-                areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #912aff; ");
+                areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #7d00ff; ");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 if (!input.getText().equals("")) {
@@ -108,7 +108,7 @@ public class Busqueda {
             toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
             GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 920d));
             gridPane.add(toolBar, 0, 0);
-            gridPane.setStyle("-fx-background-color: #8cbbff");
+            gridPane.setStyle("-fx-background-color: #7771ff");
             Scene scene = new Scene(gridPane, 1200, 500);
 
             stage1.setScene(scene);
