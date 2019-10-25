@@ -7,8 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -262,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570942843073</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Correción en despliegue de AreaText">
+      <created>1570951086432</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1570951086432</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,6 +309,7 @@
     <MESSAGE value="Arreglo en docx" />
     <MESSAGE value="Finalización de despliegue en ventana de coincidencias" />
     <MESSAGE value="Javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc" />
+    <MESSAGE value="Correción en despliegue de AreaText" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correción en despliegue de AreaText" />
   </component>
 </project>

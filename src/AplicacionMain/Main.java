@@ -3,20 +3,25 @@ package AplicacionMain;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
 import Objetos.Archivo;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 /**
@@ -26,7 +31,7 @@ public class Main extends Application {
     /**
      * Variable para crear la lista que almacena los archivos
      */
-    private ListaEnlazada<Archivo> ListaArchivo;
+    public static ListaEnlazada<Archivo> ListaArchivo;
     /**
      * Variable grupo que almacena los componentes a agregar en la ventana principal
      */
@@ -38,7 +43,7 @@ public class Main extends Application {
     /**
      * Contenedor para conectores dentro del contenedor Vbox
      */
-    private ScrollPane scrollpane = new ScrollPane();
+    public static ScrollPane scrollpane = new ScrollPane();
     /**
      * Contenedor para los elementos que se agregan al scrollpane
      */
@@ -47,6 +52,10 @@ public class Main extends Application {
      * Contenedor para los elementos que se agregan en el centro de la ventana
      */
     public static Pane root = new Pane();
+    /**
+     * Contenedor de  la ventana principal
+     */
+    public BorderPane borderPane;
     /**
      * Contenedor para visualizar el texto deseado
      */
@@ -66,7 +75,7 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("docx", "*.docx"),
                 new FileChooser.ExtensionFilter("pdf", "*.pdf"));
 
-        final Button abrirArchivo = new Button(" Escoger archivo ");
+        Button abrirArchivo = new Button("       Agregar       ");
         abrirArchivo.setOnAction(e -> {
             try {
                 Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
@@ -74,13 +83,31 @@ public class Main extends Application {
                 ex.printStackTrace();
             }
         });
+        Button actualizar = new Button("      Actualizar     ");
+        actualizar.setOnAction(e -> {
+                    //Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
+                });
+        Button eliminar = new Button("       Eliminar       ");
+        eliminar.setOnAction(e -> {
+                Eventos.eliminarDeBiblioteca(ListaArchivo);
+        });
 
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);
 
         Button buscar = new Button("", imageView);
         buscar.setPrefSize(50d,30d);
-        buscar.setOnAction(e -> Eventos.mostrarArchivo(ListaArchivo, primaryStage));
+        buscar.setCursor(Cursor.HAND);
+        Tooltip tooltip = new Tooltip(" Buscar Texto ");
+        tooltip.setFont(Font.font("Cambria", 18));
+        buscar.setTooltip(tooltip);
+        buscar.setOnAction(e -> {
+            try {
+                Eventos.mostrarArchivo(ListaArchivo, primaryStage);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
         scrollpane.setMaxSize(210d, 650d);
         scrollpane.setPrefWidth(210d);
@@ -102,16 +129,69 @@ public class Main extends Application {
         areaDeTexto.setStyle("-fx-background-color: #000000;");
         areaDeTexto.setBorder(new Border(new BorderStroke(
                 Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        areaDeTexto.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                //areaDeTexto.setScaleX(1.2);
+                //areaDeTexto.setScaleY(1.2);
+                ScaleTransition st = new ScaleTransition(Duration.millis(1000), areaDeTexto);
+                st.setByX(1.1f);
+                st.setByY(1.1f);
+                st.setToX(1.2);
+                st.setToY(1.2);
+                st.setCycleCount((int) 1f);
+                st.setAutoReverse(false);
+                if (areaDeTexto.getWidth() < 800d && areaDeTexto.getHeight() < 550d){
+                    st.play();
+                } else {
+                    st.stop();
+                }
+            }
+        });
+        areaDeTexto.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                //areaDeTexto.setScaleX(1);
+                //areaDeTexto.setScaleY(1);
+                ScaleTransition st = new ScaleTransition(Duration.millis(1000), areaDeTexto);
+                st.setByX(-1.1f);
+                st.setByY(-1.1f);
+                st.setToX(1);
+                st.setToY(1);
+                st.setCycleCount((int) 1f);
+                st.setAutoReverse(true);
+                if (areaDeTexto.getWidth() >= 750d && areaDeTexto.getHeight() >= 500d){
+                    st.play();
+                } else {
+                    st.stop();
+                }
+            }
+        });
+
         root.getChildren().add(areaDeTexto);
 
         grupo.getChildren().addAll(input, buscar);
 
-        BorderPane borderPane = new BorderPane( grupo);
+        ToolBar toolBar = new ToolBar();
+        toolBar.setCursor(Cursor.HAND);
+        toolBar.setMaxSize(220d, 30d);
+        toolBar.setPrefSize(220d,30d);
+        toolBar.setStyle("-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30; " +
+                "-fx-border-width:3; -fx-border-color: #000000;");
+
+        Label label = new Label("         Biblioteca : ");
+        label.setFont(Font.font("Cambria", 21));
+        Tooltip tooltip2 = new Tooltip(" Administrar Biblioteca de Archivos ");
+        tooltip2.setFont(Font.font("Cambria", 18));
+        label.setTooltip(tooltip2);
+        Label separador = new Label("    ");
+
+        toolBar.getItems().addAll(label, abrirArchivo, new Separator(), actualizar, new Separator(), eliminar);
+
+        borderPane = new BorderPane( grupo);
         borderPane.setBackground(Background.EMPTY);
         BorderPane.setMargin(scrollpane, new Insets(30d,10d,5d,40d));
         borderPane.setLeft(scrollpane);
-        BorderPane.setMargin(abrirArchivo, new Insets(5d,20d,40d,70d));
-        borderPane.setBottom(abrirArchivo);
+        BorderPane.setMargin(toolBar, new Insets(5d,20d,40d,35d));
+        borderPane.setBottom(toolBar);
         BorderPane.setMargin(root, new Insets(30d,20d,20d,20d));
         borderPane.setCenter(root);
         borderPane.setStyle("-fx-background-color: #8cbbff");

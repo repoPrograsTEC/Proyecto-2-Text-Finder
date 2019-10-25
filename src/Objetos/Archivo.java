@@ -28,7 +28,7 @@ public class Archivo {
      */
     public int Palabras;
     /**
-     * Varibale que contiene el número de archivo
+     * Variable que contiene el número de archivo
      */
     public int numArchivo;
     /**
@@ -44,9 +44,17 @@ public class Archivo {
      */
     public String Texto;
     /**
+     * Variable que almacena el texto del archivo
+     */
+    public String TextoCoincidencias ;
+    /**
      * Variable para almacenar el nombre del archivo
      */
     public String Nombre;
+    /**
+     * Variable para saber si el archivo se elimina de la lista
+     */
+    public boolean eliminado;
 
     /**
      * Constructor clase Archivo
@@ -59,6 +67,8 @@ public class Archivo {
         this.Nombre = Nombre;
         this.URL = URL;
         this.numArchivo = numArchivo;
+        this.TextoCoincidencias = "";
+        this.eliminado = false;
         setDate();
         Asignar(URL.getName());
     }

@@ -1,5 +1,9 @@
 package Estructuras;
 
+import AplicacionMain.Main;
+import Objetos.Archivo;
+import javafx.scene.control.Alert;
+
 /**
  * Clase para crear una lista enlazada simple
  */
