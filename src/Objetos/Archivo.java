@@ -306,4 +306,33 @@ public class Archivo {
     public static String limpiar(String s){
         return s.replaceAll("[^a-zA-Z0-9]", "");
     }
+
+    public static int[] Find(String texto, String palabra){
+        int inicio=0, fin=0, cont=0;
+        texto=texto.toLowerCase();
+        palabra=palabra.toLowerCase();
+        System.out.println(palabra);
+        for (int x=0; x<texto.length();x++){
+            if (texto.charAt(x)==palabra.charAt(0)){
+                cont++;
+                inicio=x;
+            }
+            else if(texto.charAt(x)==palabra.charAt(cont)){
+                if (cont==palabra.length()-1){
+                    fin=x;
+                    break;
+                }else{
+                    cont++;
+                }
+            }
+            else{
+                inicio=0;
+                fin=0;
+                cont=0;
+            }
+        }
+        System.out.println(inicio);
+        System.out.println(fin);
+        return new int[]{inicio, fin+1};
+    }
 }

@@ -3,6 +3,7 @@ package AplicacionMain;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
 import Objetos.Archivo;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -64,7 +65,7 @@ public class Busqueda {
                 areaDeTexto.setPrefSize(500d, 230d);
                 areaDeTexto.setLayoutX(posX);
                 areaDeTexto.setLayoutY(posY);
-                areaDeTexto.setStyle("-fx-background-color: #1d178f;");
+                areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #912aff; ");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 if (!input.getText().equals("")) {
@@ -72,6 +73,9 @@ public class Busqueda {
                     if (areaDeTexto.getText() != null) {
                         textos.getChildren().addAll(areaDeTexto, new Label("              "));
                         posX += 600;
+
+
+
                     }
                 }
             }

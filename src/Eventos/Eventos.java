@@ -1,18 +1,17 @@
 package Eventos;
 
 import AplicacionMain.Busqueda;
+import Estructuras.BST;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -28,15 +27,12 @@ import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import java.awt.image.ImageObserver;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.text.AttributedCharacterIterator;
-import java.util.Arrays;
 import java.util.List;
 
 import static AplicacionMain.Main.vbox;
@@ -218,11 +214,13 @@ public class Eventos {
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    public static TextArea abrirArchivo(ListaEnlazada listaEnlazada , Archivo x, TextField area, TextArea textArea) throws IOException {
-        if (x.getArbolPalabras().contains(Archivo.limpiar(area.getText().toLowerCase()))){
+    public static void abrirArchivo(ListaEnlazada listaEnlazada , Archivo x, TextField area, TextArea textArea){
+        String palabra=(Archivo.limpiar(area.getText().toLowerCase()));
+        if (x.getArbolPalabras().contains(palabra)) {
 
+            BST.Nodo nodo = x.getArbolPalabras().Obtener(palabra);
             // CASO EN QUE EL ARCHIVO ES .DOCX
-            if (x.getURL().getName().charAt(x.getURL().getName().length()-1) == 'x'){
+            if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
                 try {
                     /*
                     FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
@@ -242,53 +240,57 @@ public class Eventos {
                         textArea.setTooltip(tooltip2);
                     }
 
-            } catch (Exception ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } else{
-                textArea.appendText(x.Texto);
-                int linea=x.getArbolPalabras().Obtener(area.getText().toLowerCase()).getFila();
-                System.out.println(linea);
+            } else {
+                textArea.appendText(x.lineas.Obtener(nodo.getFila()));
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        int[] inter = Archivo.Find(x.lineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                        textArea.selectRange(inter[0],inter[1]);
+                    }
+                });
+            int linea=x.getArbolPalabras().Obtener(area.getText().toLowerCase()).getFila();
+                //System.out.println(linea);
             }
         } else{
             textArea.setText(null);
         }
-        return textArea;
+
     }
 
     public static void find_replace_in_DOCX(XWPFDocument doc, String palabraBuscar) throws IOException{
-        try {
-            /**
-             * if uploaded doc then use HWPF else if uploaded Docx file use
-             * XWPFDocument
-             */
-            for (XWPFParagraph p : doc.getParagraphs()) {
-                List<XWPFRun> runs = p.getRuns();
-                if (runs != null) {
-                    for (XWPFRun r : runs) {
-                        String text = r.getText(0);
-                        if (text != null && text.contains(palabraBuscar)) {
-                            Text t2 = new Text();
-                            t2.setStyle("-fx-fill: RED;-fx-font-weight:normal;");
-                            t2.setText(palabraBuscar);
-                            text = text.replace(palabraBuscar, palabraBuscar.toUpperCase());
-                            r.setText(text, 0);
-                        }
+        /**
+         * if uploaded doc then use HWPF else if uploaded Docx file use
+         * XWPFDocument
+         */
+        for (XWPFParagraph p : doc.getParagraphs()) {
+            List<XWPFRun> runs = p.getRuns();
+            if (runs != null) {
+                for (XWPFRun r : runs) {
+                    String text = r.getText(0);
+                    if (text != null && text.contains(palabraBuscar)) {
+                        Text t2 = new Text();
+                        t2.setStyle("-fx-fill: RED;-fx-font-weight:normal;");
+                        t2.setText(palabraBuscar);
+                        text = text.replace(palabraBuscar, palabraBuscar.toUpperCase());
+                        r.setText(text, 0);
                     }
                 }
             }
-            /*
-             * for (XWPFTable tbl : doc.getTables()) { for (XWPFTableRow row :
-             * tbl.getRows()) { for (XWPFTableCell cell : row.getTableCells()) {
-             * for (XWPFParagraph p : cell.getParagraphs()) { for (XWPFRun r :
-             * p.getRuns()) { String text = r.getText(0); if
-             * (text.contains(“needle”)) { text = text.replace(“key”,
-             * “kkk”); r.setText(text); } } } } } }
-             */
-            //doc.write(new FileOutputStream(“d:\\output.docx”));
-        } finally {
-
         }
+        /*
+         * for (XWPFTable tbl : doc.getTables()) { for (XWPFTableRow row :
+         * tbl.getRows()) { for (XWPFTableCell cell : row.getTableCells()) {
+         * for (XWPFParagraph p : cell.getParagraphs()) { for (XWPFRun r :
+         * p.getRuns()) { String text = r.getText(0); if
+         * (text.contains(“needle”)) { text = text.replace(“key”,
+         * “kkk”); r.setText(text); } } } } } }
+         */
+        //doc.write(new FileOutputStream(“d:\\output.docx”));
 
     }
 
