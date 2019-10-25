@@ -21,8 +21,6 @@ import static AplicacionMain.Main.input;
  * Clase Búsqueda que contiene la ventana de coincidencias de palabras
  */
 public class Busqueda {
-    public static ScrollPane scrollPane;
-    public static HBox textos;
     /**
      * Método ventana que muestra una ventana en donde se visualizan las coincidencias de palabras en la biblioteca
      * @param lista Lista que contiene los archivos de la biblioteca
@@ -54,12 +52,12 @@ public class Busqueda {
             fila++;
 
             int posX = 30, posY = 40;
-            textos = new HBox();
+            HBox textos = new HBox();
             textos.setLayoutX(posX);
             textos.setLayoutY(posY);
 
             // Ciclo para agregar los archivos con ocurrencias
-            scrollPane = new ScrollPane();
+            ScrollPane scrollPane = new ScrollPane();
             for (int i = 0; i < lista.getLargo(); i++) {
                 TextArea areaDeTexto = new TextArea();
                 areaDeTexto.setEditable(false);
@@ -101,7 +99,6 @@ public class Busqueda {
             Button button = new Button("   Nombre   ");
             Button button1 = new Button("     Fecha     ");
             Button button2 = new Button("   Tamaño   ");
-
 
 
             toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
