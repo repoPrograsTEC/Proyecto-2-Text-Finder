@@ -113,6 +113,9 @@ public class Busqueda {
             Button button = new Button("   Nombre   ");
             button.setOnAction(event -> {
                 QuickSort.quickSort(lista,0,lista.getLargo()-1);
+                for (int x=0;x<lista.getLargo();x++){
+                    System.out.println(lista.Obtener(x).Nombre);
+                }
                 try {
                     stage1.close();
                     ventana(lista,primaryStage);
