@@ -5,8 +5,12 @@ import Estructuras.BST;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -28,6 +32,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -214,11 +219,11 @@ public class Eventos {
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    public static void abrirArchivo(ListaEnlazada listaEnlazada , Archivo x, TextField area, TextArea textArea){
+    public static void abrirArchivo(Archivo x, TextField area, TextArea textArea){
         String palabra=(Archivo.limpiar(area.getText().toLowerCase()));
         if (x.getArbolPalabras().contains(palabra)) {
 
-            BST.Nodo nodo = x.getArbolPalabras().Obtener(palabra);
+            BST.Nodo nodo = x.getArbolPalabras().Obtener(Archivo.limpiar(palabra));
             // CASO EN QUE EL ARCHIVO ES .DOCX
             if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
                 try {
@@ -261,6 +266,36 @@ public class Eventos {
         }
 
     }
+
+
+    public static void abrirThread (File file){
+        if (!Desktop.isDesktopSupported()) {
+            System.out.println("Desktop not supported");
+            return;
+        }
+
+        if (!Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+            System.out.println("File opening not supported");
+            return;
+        }
+
+        final Task<Void> task = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                try {
+                    Desktop.getDesktop().open(file);
+                } catch (IOException e) {
+                    System.err.println(e.toString());
+                }
+                return null;
+            }
+        };
+
+        final Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
 
     private static void find_replace_in_DOCX(XWPFDocument doc, String palabraBuscar) throws IOException{
         for (XWPFParagraph p : doc.getParagraphs()) {

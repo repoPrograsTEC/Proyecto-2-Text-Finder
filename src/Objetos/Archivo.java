@@ -43,6 +43,7 @@ public class Archivo {
      * Variable que almacena el texto del archivo
      */
     public String Texto;
+
     public ListaEnlazada<String> lineas=new ListaEnlazada<>();
     /**
      * Variable que almacena el texto del archivo

@@ -3,17 +3,19 @@ package AplicacionMain;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
 import Objetos.Archivo;
-import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 import static AplicacionMain.Main.input;
@@ -54,6 +56,9 @@ public class Busqueda {
 
             int posX = 30, posY = 40;
             HBox textos = new HBox();
+            HBox botones= new HBox();
+            botones.setSpacing(500);
+            textos.setSpacing(50);
             textos.setLayoutX(posX);
             textos.setLayoutY(posY);
 
@@ -69,17 +74,26 @@ public class Busqueda {
                 areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #7d00ff; ");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+
+                Button boton=new Button(lista.Obtener(i).getNombre());
+                int finalI = i;
+                boton.setOnAction(event -> Eventos.abrirThread(lista.Obtener(finalI).getURL()));
+
                 if (!input.getText().equals("")) {
-                    Eventos.abrirArchivo(lista, lista.Obtener(i), input, areaDeTexto);
+                    Eventos.abrirArchivo(lista.Obtener(i), input, areaDeTexto);
                     if (areaDeTexto.getText() != null) {
-                        textos.getChildren().addAll(areaDeTexto, new Label("              "));
+                        textos.getChildren().addAll(areaDeTexto);
+                        botones.getChildren().addAll(boton);
                         posX += 600;
 
                     }
                 }
             }
             // Contenedor para archivos con ocurrencias
-            scrollPane.setContent(textos);
+            VBox contenido=new VBox(textos,botones);
+            scrollPane.setContent(contenido);
+            //scrollPane.setContent(textos);
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
             scrollPane.setMaxSize(1100d, 250d);
