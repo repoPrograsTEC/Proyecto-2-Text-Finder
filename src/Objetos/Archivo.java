@@ -311,7 +311,6 @@ public class Archivo {
         int inicio=0, fin=0, cont=0;
         texto=texto.toLowerCase();
         palabra=palabra.toLowerCase();
-        System.out.println(palabra);
         for (int x=0; x<texto.length();x++){
 
             if (texto.charAt(x)==palabra.charAt(0)){
@@ -331,8 +330,6 @@ public class Archivo {
                 cont=0;
             }
         }
-        System.out.println(inicio);
-        System.out.println(fin);
         return new int[]{inicio, fin+1};
     }
 }

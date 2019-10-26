@@ -62,9 +62,10 @@ public class Busqueda {
             for (int i = 0; i < lista.getLargo(); i++) {
                 TextArea areaDeTexto = new TextArea();
                 areaDeTexto.setEditable(false);
-                areaDeTexto.setPrefSize(500d, 230d);
+                areaDeTexto.setPrefSize(500d, 170d);
                 areaDeTexto.setLayoutX(posX);
                 areaDeTexto.setLayoutY(posY);
+                areaDeTexto.setWrapText(true);
                 areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #7d00ff; ");
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -73,8 +74,6 @@ public class Busqueda {
                     if (areaDeTexto.getText() != null) {
                         textos.getChildren().addAll(areaDeTexto, new Label("              "));
                         posX += 600;
-
-
 
                     }
                 }
