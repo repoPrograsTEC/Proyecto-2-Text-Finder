@@ -258,8 +258,6 @@ public class Eventos {
                         textArea.selectRange(inter[0],inter[1]);
                     }
                 });
-            int linea=x.getArbolPalabras().Obtener(area.getText().toLowerCase()).getFila();
-                //System.out.println(linea);
             }
         } else{
             textArea.setText(null);

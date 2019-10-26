@@ -1,21 +1,19 @@
 package AplicacionMain;
 
+import AlgoritmosOrdenamiento.BubbleSort;
+import AlgoritmosOrdenamiento.QuickSort;
+import AlgoritmosOrdenamiento.RadixSort;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
 import Objetos.Archivo;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.io.IOException;
 
 import static AplicacionMain.Main.input;
@@ -93,7 +91,6 @@ public class Busqueda {
             // Contenedor para archivos con ocurrencias
             VBox contenido=new VBox(textos,botones);
             scrollPane.setContent(contenido);
-            //scrollPane.setContent(textos);
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
             scrollPane.setMaxSize(1100d, 250d);
@@ -114,9 +111,35 @@ public class Busqueda {
             label.setFont(Font.font("Cambria", 21));
             Label separador = new Label("    ");
             Button button = new Button("   Nombre   ");
+            button.setOnAction(event -> {
+                QuickSort.quickSort(lista,0,lista.getLargo()-1);
+                try {
+                    stage1.close();
+                    ventana(lista,primaryStage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             Button button1 = new Button("     Fecha     ");
+            button1.setOnAction(event -> {
+                BubbleSort.bubbleSort(lista);
+                try {
+                    stage1.close();
+                    ventana(lista,primaryStage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             Button button2 = new Button("   Tamaño   ");
-
+            button2.setOnAction(event -> {
+                RadixSort.radixsort(lista);
+                try {
+                    stage1.close();
+                    ventana(lista,primaryStage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
 
             toolBar.getItems().addAll(label, button, new Separator(), button1, new Separator(), button2);
             GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 920d));
