@@ -138,13 +138,4 @@ public class BST {
         }
         return current;
     }
-
-    /**
-     * Método que elimina un nodo del árbol
-     * @param n Posición a eliminar
-     */
-    public void Eliminar(int n){
-
-    }
-
 }

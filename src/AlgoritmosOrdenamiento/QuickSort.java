@@ -39,8 +39,8 @@ public class QuickSort {
                 Archivo temp = l.Obtener(i);
                 Archivo temp2= l.Obtener(j);
                 l.eliminar(i);
-                l.Insertar(i,temp2);
                 l.eliminar(j);
+                l.Insertar(i,temp2);
                 l.Insertar(j,temp);
                 i++;
                 j--;

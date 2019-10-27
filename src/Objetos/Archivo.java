@@ -43,6 +43,7 @@ public class Archivo {
      * Variable que almacena el texto del archivo
      */
     public String Texto;
+
     public ListaEnlazada<String> lineas=new ListaEnlazada<>();
     /**
      * Variable que almacena el texto del archivo
@@ -305,5 +306,31 @@ public class Archivo {
      */
     public static String limpiar(String s){
         return s.replaceAll("[^a-zA-Z0-9]", "");
+    }
+
+    public static int[] Find(String texto, String palabra){
+        int inicio=0, fin=0, cont=0;
+        texto=texto.toLowerCase();
+        palabra=palabra.toLowerCase();
+        for (int x=0; x<texto.length();x++){
+
+            if (texto.charAt(x)==palabra.charAt(0)){
+                cont++;
+                inicio=x;
+            }
+            else if(texto.charAt(x)==palabra.charAt(cont)) {
+                if (cont == palabra.length() - 1) {
+                    fin = x;
+                    break;
+                } else {
+                    cont++;
+                }
+            } else{
+                inicio=0;
+                fin=0;
+                cont=0;
+            }
+        }
+        return new int[]{inicio, fin+1};
     }
 }
