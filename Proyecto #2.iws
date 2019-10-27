@@ -8,10 +8,7 @@
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -272,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570951086432</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Cambios ventana principal">
+      <created>1571966181876</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1571966181877</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -310,6 +314,7 @@
     <MESSAGE value="Finalización de despliegue en ventana de coincidencias" />
     <MESSAGE value="Javadoc" />
     <MESSAGE value="Correción en despliegue de AreaText" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correción en despliegue de AreaText" />
+    <MESSAGE value="Cambios ventana principal" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios ventana principal" />
   </component>
 </project>

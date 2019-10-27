@@ -172,8 +172,8 @@ public class Eventos {
      *
      * @param lista Lista enlazada donde se almacenan los archivos
      */
-    public static void mostrarArchivo(ListaEnlazada<Archivo> lista, Stage primaryStage){
-        Busqueda.Ventana(lista, primaryStage);
+    public static void mostrarArchivo(ListaEnlazada<Archivo> lista, Stage primaryStage) throws IOException {
+        Busqueda.ventana(lista, primaryStage);
     }
 
     /**

@@ -70,7 +70,7 @@ public class Busqueda {
                 areaDeTexto.setBorder(new Border(new BorderStroke(
                         Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 if (!input.getText().equals("")) {
-                    Eventos.abrirArchivo(lista, lista.Obtener(i), input, areaDeTexto);
+                    //Eventos.abrirArchivo(lista, lista.Obtener(i), input, areaDeTexto);
                     if (areaDeTexto.getText() != null) {
                         textos.getChildren().addAll(areaDeTexto, new Label("              "));
                         posX += 600;
