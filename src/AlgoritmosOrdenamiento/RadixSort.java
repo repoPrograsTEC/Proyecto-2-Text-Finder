@@ -2,25 +2,28 @@ package AlgoritmosOrdenamiento;
 
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
-import java.util.*;
+
+import java.util.Arrays;
 
 /**
  * Clase RadixSort que sirve para ordenar la búsqueda de archivos
  */
 public class RadixSort {
-
     /**
-     * Método para obtener el valor máximo del array
-     * @param arr Array de enteros
-     * @param n Largo del array
-     * @return Valor máximo del array
+     * Método para ordenar los elementos del array
+     * @param lista lista de archivos para ordenar.
      */
-    private static int getMax(int[] arr, int n) {
-        int mx = arr[0];
-        for (int i = 1; i < n; i++)
-            if (arr[i] > mx)
-                mx = arr[i];
-        return mx;
+    public static void radixsort(ListaEnlazada<Archivo> lista) {
+        int [] arr = new int[lista.getLargo()];
+        for (int i = 0; i < lista.getLargo(); i++){
+            arr[i] = lista.Obtener(i).Palabras;
+        }
+        int m = getMax(arr, arr.length);
+        for (int exp = 1; m/exp > 0; exp *= 10){
+            countSort(arr, arr.length, exp);}
+
+        Reconocer(lista,arr);
+
     }
 
     /**
@@ -50,17 +53,19 @@ public class RadixSort {
             arr[i] = output[i];
     }
 
-
+    /**
+     * Método para reconocer cual archivo tiene mayor tamaño
+     * @param lista Lista enlazada de archivos
+     * @param arr Array de enteros con las cantidades de palabras de los archivos
+     */
     private static void Reconocer(ListaEnlazada<Archivo> lista, int[] arr){
-        int num=0;
-        for (int i:arr){
-            for (int x=0;x<lista.getLargo();x++){
-                int palabras=lista.Obtener(x).Palabras;
-                if (palabras==i){
-                    Archivo ordenar=lista.Obtener(x);
-
+        int num = 0;
+        for (int i : arr){
+            for (int x = 0; x < lista.getLargo(); x++){
+                int palabras = lista.Obtener(x).Palabras;
+                if (palabras == i){
+                    Archivo ordenar = lista.Obtener(x);
                     lista.eliminar(x);
-
                     lista.Insertar(num,ordenar);
                     break;
                 }
@@ -70,19 +75,17 @@ public class RadixSort {
     }
 
     /**
-     * Método para ordenar los elementos del array
-     * @param lista lista de archivos para ordenar.
+     * Método para obtener el valor máximo del array
+     * @param arr Array de enteros
+     * @param n Largo del array
+     * @return Valor máximo del array
      */
-    public static void radixsort(ListaEnlazada<Archivo> lista) {
-        int [] arr= new int[lista.getLargo()];
-        for (int i=0;i<lista.getLargo();i++){
-            arr[i]=lista.Obtener(i).Palabras;
-        }
-        int m = getMax(arr, arr.length);
-        for (int exp = 1; m/exp > 0; exp *= 10){
-            countSort(arr, arr.length, exp);}
-
-        Reconocer(lista,arr);
-
+    private static int getMax(int[] arr, int n) {
+        int mx = arr[0];
+        for (int i = 1; i < n; i++)
+            if (arr[i] > mx)
+                mx = arr[i];
+        return mx;
     }
+
 }

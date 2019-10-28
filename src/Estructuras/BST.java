@@ -75,11 +75,21 @@ public class BST {
         }
     }
 
-
+    /**
+     * Método para obtener una palabra específica
+     * @param e String a obtener
+     * @return String encontrado
+     */
     public Nodo Obtener(String e){
         return ObtenerAux(e, root);
     }
 
+    /**
+     * Método auxiliar para obtener la palabra específica
+     * @param e String a obtener
+     * @param current Nodo actual
+     * @return Nodo actual en el que se encuentra la palabra
+     */
     private Nodo ObtenerAux(String e, Nodo current){
         int cmp = e.compareTo(current.element);
         if (cmp < 0) {

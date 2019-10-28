@@ -7,10 +7,10 @@ import Objetos.Archivo;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -71,7 +71,7 @@ public class Eventos {
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                         //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
-                        "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
+                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
@@ -141,7 +141,6 @@ public class Eventos {
 
         //Main.scrollpane.getContent();
     }
-
 
     /**
      * Método que ejecuta la acción de detectar el drag & drop
@@ -254,7 +253,7 @@ public class Eventos {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        int[] inter = Archivo.Find(x.lineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                        int[] inter = Archivo.find(x.lineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
                         textArea.selectRange(inter[0],inter[1]);
                     }
                 });
@@ -265,7 +264,10 @@ public class Eventos {
 
     }
 
-
+    /**
+     * Método para abrir el archivo seleeccionado
+     * @param file Archivo a abrir
+     */
     public static void abrirThread (File file){
         if (!Desktop.isDesktopSupported()) {
             System.out.println("Desktop not supported");
@@ -294,7 +296,12 @@ public class Eventos {
         thread.start();
     }
 
-
+    /**
+     * Método para resaltar la ocurrencia en el texto a buscar
+     * @param doc Documento docx
+     * @param palabraBuscar String a buscar
+     * @throws IOException Si el archivo no existe o no es válido
+     */
     private static void find_replace_in_DOCX(XWPFDocument doc, String palabraBuscar) throws IOException{
         for (XWPFParagraph p : doc.getParagraphs()) {
             List<XWPFRun> runs = p.getRuns();
@@ -323,10 +330,13 @@ public class Eventos {
 
     }
 
-
-
-
-
+    /**
+     * Método para reemplazar un caracter en el texto
+     * @param doc Documento docx
+     * @param findText Palabra a buscar
+     * @param replaceText Palabra a reemplazar
+     * @return String reemplazado
+     */
     private static HWPFDocument replaceText(HWPFDocument doc, String findText, String replaceText) {
         Range r = doc.getRange();
         for (int i = 0; i < r.numSections(); ++i) {
@@ -345,16 +355,26 @@ public class Eventos {
         return doc;
     }
 
+    /**
+     * Método para abrir un documento de tipo docx
+     * @param file Nombre del archivo
+     * @return Documento docx parseado
+     * @throws Exception Si el archivo no existe o no es válido, genera excepción
+     */
     private  HWPFDocument openDocument(String file) throws Exception {
         URL res = getClass().getClassLoader().getResource(file);
         HWPFDocument document = null;
         if (res != null) {
-            document = new HWPFDocument(new POIFSFileSystem(
-                    new File(res.getPath())));
+            document = new HWPFDocument(new POIFSFileSystem(new File(res.getPath())));
         }
         return document;
     }
 
+    /**
+     * Método para escribir en un documento tipo docx
+     * @param doc Documento docx
+     * @param file Texto del documento
+     */
     private void saveDocument(HWPFDocument doc, String file) {
         try (FileOutputStream out = new FileOutputStream(file)) {
             doc.write(out);

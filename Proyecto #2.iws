@@ -7,8 +7,14 @@
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/RadixSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/RadixSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estructuras/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/BST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -276,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571966181877</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Cambios ventana principal">
+      <created>1572152155648</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1572152155648</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
