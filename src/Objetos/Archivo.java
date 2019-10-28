@@ -81,46 +81,50 @@ public class Archivo {
      * @throws IOException Excepción si el archivo no es correcto
      */
     private void readPDFFile(File file) throws IOException {
-        PDFTextStripper tStripper = new PDFTextStripper();
-        tStripper.setStartPage(1);
-        tStripper.setEndPage(3);
-        PDDocument document = PDDocument.load(file);
-        document.getClass();
+        try {
+            PDFTextStripper tStripper = new PDFTextStripper();
+            tStripper.setStartPage(1);
+            tStripper.setEndPage(3);
+            PDDocument document = PDDocument.load(file);
+            document.getClass();
 
-        if (!document.isEncrypted()) {
+            if (!document.isEncrypted()) {
 
-            String pdfFileInText = tStripper.getText(document);
+                String pdfFileInText = tStripper.getText(document);
 
-            String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-            int i, inicio = 0, a = 0, fila = 0;
-            for (String linea : lines) {
-                Texto += linea+"\n";
-                Texto = Texto.substring(4, linea.length());
-                listaLineas.InsertarFinal(linea+"\n");
-                for (i = 0; i < linea.length(); i++) {
-                    if (i == 0) {
-                        if (linea.charAt(i) != ' ') {
-                            inicio = i;
-                            a++;
-                        }
-                    } else {
-                        if (linea.charAt(i - 1) == ' ') {
+                String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
+                int i, inicio = 0, a = 0, fila = 0;
+                for (String linea : lines) {
+                    Texto += linea + "\n";
+                    Texto = Texto.substring(4, linea.length());
+                    listaLineas.InsertarFinal(linea + "\n");
+                    for (i = 0; i < linea.length(); i++) {
+                        if (i == 0) {
                             if (linea.charAt(i) != ' ') {
-                                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)),fila);
                                 inicio = i;
                                 a++;
                             }
+                        } else {
+                            if (linea.charAt(i - 1) == ' ') {
+                                if (linea.charAt(i) != ' ') {
+                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
+                                    inicio = i;
+                                    a++;
+                                }
+                            }
                         }
                     }
+                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
+                    inicio = 0;
+                    fila++;
                 }
-                ArbolPalabras.insert(limpiar(linea.substring(inicio,i)),fila);
-                inicio = 0;
-                fila++;
+                ListaArboles.InsertarFinal(ArbolPalabras);
+                this.Palabras = a;
             }
-            ListaArboles.InsertarFinal(ArbolPalabras);
-            this.Palabras = a;
+            document.close();
+        } catch (Exception ignored){
+
         }
-        document.close();
     }
 
     /**
@@ -233,7 +237,6 @@ public class Archivo {
      */
     private void Asignar(String URL) throws IOException {
         String nombre = URL.substring(URL.length() - 4 , URL.length());
-        System.out.println(" Nombre: " + nombre);
         if (nombre.equals("docx")) {
             readDocxFile(this.URL);
         } else if (nombre.equals(".pdf")){
