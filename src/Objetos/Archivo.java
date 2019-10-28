@@ -175,8 +175,9 @@ public class Archivo {
             while((linea = br.readLine()) != null) {
                 if (a == 0){
                     Texto += linea + "\n";
-                    Texto = Texto.substring(4, linea.length());
+                    Texto = Texto.substring(4, Texto.length());
                     listaLineas.InsertarFinal(linea + "\n");
+
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
@@ -195,7 +196,7 @@ public class Archivo {
                     }
                 } else {
                     Texto += linea + "\n";
-                    listaLineas.InsertarFinal(linea+"\n");
+                    listaLineas.InsertarFinal(linea + "\n");
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
