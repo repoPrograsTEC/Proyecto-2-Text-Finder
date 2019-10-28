@@ -116,6 +116,68 @@ public class Eventos {
             alert.showAndWait();
         }
     }
+    /**
+     * Método que ejecuta la acción de detectar el drag & drop
+     * @param e Evento del mouse
+     * @param imageView Imagen del archivo
+     * @param Name Nombre del archivo
+     */
+    private static void movimientoDetectado(MouseEvent e, ImageView imageView, String Name) {
+        Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putString(Name);
+        db.setContent(content);
+        e.consume();
+    }
+
+    /**
+     * Método que agrega el texto seleccionado al área de texto de la ventana principal
+     * @param e Evento del Mouse
+     * @param x Archivo selecionado
+     * @param textArea Área de texto principal
+     * @throws IOException Excepción si el archivo no es válido
+     */
+    private static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
+        textArea.clear();
+        String archivoDocx = x.getNombre().substring(x.getNombre().length() - 4, x.getNombre().length());
+        String tipoArchivo = x.getNombre().substring(x.getNombre().length() - 3, x.getNombre().length());
+
+        if (archivoDocx.equals("docx")) {
+            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .DOCX
+            try {
+                FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
+                XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
+                textArea.appendText(extractor.getText());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            // LO QUE SE AGREGA ES UN ARCHIVO .PDF
+        } else if (tipoArchivo.equals("pdf")){
+            PDFTextStripper tStripper = new PDFTextStripper();
+            tStripper.setStartPage(1);
+            tStripper.setEndPage(3);
+            PDDocument document = PDDocument.load(x.getURL());
+            document.getClass();
+            String content = null;
+
+            if (!document.isEncrypted()) {
+                String pdfFileInText = tStripper.getText(document);
+                String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
+                for (String line : lines) {
+                    textArea.appendText(line);
+                    content += line;
+                }
+            }
+
+            assert content != null;
+
+        }else {
+            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .TXT
+            textArea.appendText(x.Texto);
+        }
+    }
 
     /**
      * Método que elimina un archivo de la biblioteca
@@ -140,67 +202,6 @@ public class Eventos {
         }
 
         //Main.scrollpane.getContent();
-    }
-
-    /**
-     * Método que ejecuta la acción de detectar el drag & drop
-     * @param e Evento del mouse
-     * @param imageView Imagen del archivo
-     * @param Name Nombre del archivo
-     */
-    private static void movimientoDetectado(MouseEvent e, ImageView imageView, String Name) {
-        Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent content = new ClipboardContent();
-        content.putString(Name);
-        db.setContent(content);
-        e.consume();
-    }
-
-    /**
-     * Método que agrega el texto seleccionado al área de texto de la ventana principal
-     * @param e Evento del Mouse
-     * @param x Archivo selecionado
-     * @param textArea Área de texto principal
-     * @throws IOException Excepción si el archivo no es válido
-     */
-    private static void soltar(DragEvent e, Archivo x, TextArea textArea) throws IOException {
-        textArea.clear();
-        String tipoArchivo = x.getNombre().substring(x.getNombre().length()-1);
-        if (tipoArchivo.equals("x")) {
-            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .DOCX
-            try {
-                FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
-                XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
-                XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
-                textArea.appendText(extractor.getText());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
-        // LO QUE SE AGREGA ES UN ARCHIVO .PDF
-        } else if (tipoArchivo.equals("f")){
-            PDFTextStripper tStripper = new PDFTextStripper();
-            tStripper.setStartPage(1);
-            tStripper.setEndPage(3);
-            PDDocument document = PDDocument.load(x.getURL());
-            document.getClass();
-            String content = null;
-
-            if (!document.isEncrypted()) {
-                String pdfFileInText = tStripper.getText(document);
-                String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-                for (String line : lines) {
-                    textArea.appendText(line);
-                    content += line;
-                }
-            }
-
-            assert content != null;
-
-        }else {
-            // LO QUE SE AGREGA AL ÁREA DE TEXTO ES UN ARCHIVO .TXT
-            textArea.appendText(x.Texto);
-        }
     }
 
     /**
@@ -248,12 +249,12 @@ public class Eventos {
                     ex.printStackTrace();
                 }
             } else {
-                textArea.appendText(x.lineas.Obtener(nodo.getFila()));
+                textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
 
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        int[] inter = Archivo.find(x.lineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                        int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
                         textArea.selectRange(inter[0],inter[1]);
                     }
                 });

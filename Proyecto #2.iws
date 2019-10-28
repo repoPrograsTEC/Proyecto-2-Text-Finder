@@ -5,14 +5,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="Current File" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
+    <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="Cambios">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/BubbleSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/RadixSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/RadixSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estructuras/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/BST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/ListaEnlazada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
@@ -289,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572152155648</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Cambios">
+      <created>1572221983453</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1572221983453</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,6 +330,8 @@
     <MESSAGE value="Javadoc" />
     <MESSAGE value="Correción en despliegue de AreaText" />
     <MESSAGE value="Cambios ventana principal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios ventana principal" />
+    <MESSAGE value="Cambios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

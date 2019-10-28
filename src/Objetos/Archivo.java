@@ -44,7 +44,7 @@ public class Archivo {
      */
     public String Texto;
 
-    public ListaEnlazada<String> lineas=new ListaEnlazada<>();
+    public ListaEnlazada<String> listaLineas = new ListaEnlazada<>();
     /**
      * Variable que almacena el texto del archivo
      */
@@ -82,13 +82,9 @@ public class Archivo {
      */
     private void readPDFFile(File file) throws IOException {
         PDFTextStripper tStripper = new PDFTextStripper();
-
         tStripper.setStartPage(1);
-
         tStripper.setEndPage(3);
-
         PDDocument document = PDDocument.load(file);
-
         document.getClass();
 
         if (!document.isEncrypted()) {
@@ -96,11 +92,11 @@ public class Archivo {
             String pdfFileInText = tStripper.getText(document);
 
             String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-            int i,inicio=0,a=0, fila=0;
+            int i, inicio = 0, a = 0, fila = 0;
             for (String linea : lines) {
-                Texto+=linea+"\n";
+                Texto += linea+"\n";
                 Texto = Texto.substring(4, linea.length());
-                lineas.InsertarFinal(linea+"\n");
+                listaLineas.InsertarFinal(linea+"\n");
                 for (i = 0; i < linea.length(); i++) {
                     if (i == 0) {
                         if (linea.charAt(i) != ' ') {
@@ -136,11 +132,11 @@ public class Archivo {
         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         XWPFDocument document = new XWPFDocument(fis);
         List<XWPFParagraph> paragraphs = document.getParagraphs();
-        int i,inicio=0,a=0, fila=0;
+        int i, inicio = 0, a = 0, fila = 0;
         for (XWPFParagraph linea : paragraphs) {
-            Texto+=linea.getText()+"\n";
+            Texto += linea.getText() + "\n";
             Texto = Texto.substring(4, linea.getText().length());
-            lineas.InsertarFinal(linea+"\n");
+            listaLineas.InsertarFinal(linea+"\n");
             for (i = 0; i < linea.getText().length(); i++) {
                 if (i == 0) {
                     if (linea.getText().charAt(i) != ' ') {
@@ -175,12 +171,12 @@ public class Archivo {
             String linea;
             FileReader fr = new FileReader (URL);
             BufferedReader br = new BufferedReader(fr);
-            int i=0, a = 0, inicio = 0,fila=0;
+            int i = 0, a = 0, inicio = 0, fila = 0;
             while((linea = br.readLine()) != null) {
                 if (a == 0){
                     Texto += linea + "\n";
                     Texto = Texto.substring(4, linea.length());
-                    lineas.InsertarFinal(linea+"\n");
+                    listaLineas.InsertarFinal(linea + "\n");
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
@@ -199,7 +195,7 @@ public class Archivo {
                     }
                 } else {
                     Texto += linea + "\n";
-                    lineas.InsertarFinal(linea+"\n");
+                    listaLineas.InsertarFinal(linea+"\n");
                     for (i = 0; i < linea.length(); i++) {
                         if (i == 0) {
                             if (linea.charAt(i) != ' ') {
@@ -235,9 +231,11 @@ public class Archivo {
      * @throws IOException Excepción si el archivo no es correcto
      */
     private void Asignar(String URL) throws IOException {
-        if (URL.charAt(URL.length()-1)=='x') {
+        String nombre = URL.substring(URL.length() - 4 , URL.length());
+        System.out.println(" Nombre: " + nombre);
+        if (nombre.equals("docx")) {
             readDocxFile(this.URL);
-        } else if (URL.charAt(URL.length()-1)=='f'){
+        } else if (nombre.equals(".pdf")){
             readPDFFile(this.URL);
         } else {
             readTXTFile();
