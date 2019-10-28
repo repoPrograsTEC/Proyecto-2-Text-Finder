@@ -39,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import static AplicacionMain.Main.vbox;
 
@@ -85,7 +86,7 @@ public class Eventos {
                     }
                 });
 
-                vbox.getChildren().addAll(label, labelSeparacion);
+                vbox.getChildren().add(label);
             }
 
             area.setOnDragOver(new EventHandler<DragEvent>() {
@@ -112,7 +113,7 @@ public class Eventos {
         } catch (NullPointerException | IOException ignored) {
             alert.setTitle(" Precaución ");
             alert.setHeaderText(null);
-            alert.setContentText("Error al leer el archivo");
+            alert.setContentText("Error al agregar o leer el archivo");
             alert.showAndWait();
         }
     }
@@ -179,30 +180,75 @@ public class Eventos {
         }
     }
 
+
+
+    // REVISAR
+
     /**
      * Método que elimina un archivo de la biblioteca
      */
     public static void eliminarDeBiblioteca(ListaEnlazada<Archivo> listaEnlazada) {
-        String[] listaArchivos = new String[listaEnlazada.getLargo()];
-        for (int i = 0; i < listaArchivos.length; i++) {
-            listaArchivos[i] = listaEnlazada.Obtener(i).getURL().getName();
-        }
+        //try {
+            String[] listaArchivos = new String[listaEnlazada.getLargo()];
+            if (listaEnlazada.getLargo() == 0){
+                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
+            } else {
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    listaArchivos[i] = listaEnlazada.Obtener(i).getURL().getName();
+                }
 
-        ChoiceDialog d = new ChoiceDialog(listaArchivos[0], listaArchivos);
+                ChoiceDialog archivoPorEliminar = new ChoiceDialog(" Seleccione un archivo ", listaArchivos);
 
-        d.setHeaderText(null);
-        d.setContentText("  Escoger archivo a eliminar:  ");
-        d.showAndWait();
+                archivoPorEliminar.setHeaderText(null);
+                archivoPorEliminar.setContentText("  Escoger archivo a eliminar:                      ");
+                archivoPorEliminar.setResizable(true);
+                archivoPorEliminar.getDialogPane().setPrefWidth(600);
 
-        System.out.println(d.getSelectedItem());
-        for (int i = 0; i < listaArchivos.length; i++) {
-            if (d.getSelectedItem().equals(listaArchivos[i])){
-                listaEnlazada.eliminar(i);
+                final int[] cont = {new Integer(0)};
+                Optional<String> result = archivoPorEliminar.showAndWait();
+                result.ifPresent(String -> {
+                    cont[0] = archivoPorEliminar.getItems().indexOf(archivoPorEliminar);
+                });
+
+                int a = 0;
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    if (archivoPorEliminar.getSelectedItem().equals(listaArchivos[i])) {
+                        if (i == cont[0]) {
+                            listaEnlazada.eliminar(i);
+                            vbox.getChildren().remove(i);
+                            a++;
+                        }
+                    }
+                }
+                if (a == 0){
+                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
+                    alert1.setTitle(" Precaución ");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" No se escogió algún archivo para eliminar de la biblioteca ");
+                    alert1.setResizable(true);
+                    alert1.getDialogPane().setPrefWidth(500);
+                    alert1.showAndWait();
+                }
             }
+        /*
+        } catch (Exception e) {
+            Alert alert1 = new Alert(Alert.AlertType.WARNING);
+            alert1.setTitle(" Precaución ");
+            alert1.setHeaderText(null);
+            alert1.setContentText(" No se pueden eliminar archivos porque la biblioteca está vacía ");
+            alert1.setResizable(true);
+            alert1.getDialogPane().setPrefWidth(550);
+            alert1.showAndWait();
         }
 
-        //Main.scrollpane.getContent();
+         */
     }
+
+
+
+
+
+
 
     /**
      * Método que muestra el archivo en el área de texto de la ventana secundaria (coincidencias)
