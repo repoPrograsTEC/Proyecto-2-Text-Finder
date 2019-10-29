@@ -81,50 +81,61 @@ public class Archivo {
      * @throws IOException Excepción si el archivo no es correcto
      */
     private void readPDFFile(File file) throws IOException {
-        try {
-            PDFTextStripper tStripper = new PDFTextStripper();
-            tStripper.setStartPage(1);
-            tStripper.setEndPage(3);
-            PDDocument document = PDDocument.load(file);
-            document.getClass();
+        // ELIMINAR ERROR DE LOGGER AL AGREGAR UN ARCHIVO .PDF
+        String[] loggers = { "org.apache.pdfbox.util.PDFStreamEngine",
+                "org.apache.pdfbox.pdmodel.font.PDSimpleFont",
+                "org.apache.pdfbox.pdmodel.font.PDFont",
+                "org.apache.pdfbox.pdmodel.font.FontManager",
+                "org.apache.pdfbox.pdfparser.PDFObjectStreamParser",
+                "org.apache.fontbox.ttf.PostScriptTable",
+                "org.apache.pdfbox.io.ScratchFileBuffer",
+                "org.apache.pdfbox.cos.COSDocument"};
+        for (String logger : loggers) {
+            org.apache.log4j.Logger logpdfengine = org.apache.log4j.Logger.getLogger(logger);
+            logpdfengine.setLevel(org.apache.log4j.Level.OFF);
+        }
 
-            if (!document.isEncrypted()) {
 
-                String pdfFileInText = tStripper.getText(document);
+        PDFTextStripper tStripper = new PDFTextStripper();
+        tStripper.setStartPage(1);
+        tStripper.setEndPage(3);
+        PDDocument document = PDDocument.load(file);
 
-                String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
-                int i, inicio = 0, a = 0, fila = 0;
-                for (String linea : lines) {
-                    Texto += linea + "\n";
-                    Texto = Texto.substring(4, linea.length());
-                    listaLineas.InsertarFinal(linea + "\n");
-                    for (i = 0; i < linea.length(); i++) {
-                        if (i == 0) {
+        if (!document.isEncrypted()) {
+
+            String pdfFileInText = tStripper.getText(document);
+
+            String[] lines = pdfFileInText.split("\\r\\n\\r\\n");
+            int i, inicio = 0, a = 0, fila = 0;
+            for (String linea : lines) {
+                Texto += linea + "\n";
+                Texto = Texto.substring(4, linea.length());
+                listaLineas.InsertarFinal(linea + "\n");
+                for (i = 0; i < linea.length(); i++) {
+                    if (i == 0) {
+                        if (linea.charAt(i) != ' ') {
+                            inicio = i;
+                            a++;
+                        }
+                    } else {
+                        if (linea.charAt(i - 1) == ' ') {
                             if (linea.charAt(i) != ' ') {
+                                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
                                 inicio = i;
                                 a++;
                             }
-                        } else {
-                            if (linea.charAt(i - 1) == ' ') {
-                                if (linea.charAt(i) != ' ') {
-                                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
-                                    inicio = i;
-                                    a++;
-                                }
-                            }
                         }
                     }
-                    ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
-                    inicio = 0;
-                    fila++;
                 }
-                ListaArboles.InsertarFinal(ArbolPalabras);
-                this.Palabras = a;
+                ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
+                inicio = 0;
+                fila++;
             }
-            document.close();
-        } catch (Exception ignored){
-
+            ListaArboles.InsertarFinal(ArbolPalabras);
+            this.Palabras = a;
         }
+        document.close();
+
     }
 
     /**
@@ -164,6 +175,7 @@ public class Archivo {
         ListaArboles.InsertarFinal(ArbolPalabras);
         this.Palabras = a;
         fis.close();
+        document.close();
 
     }
 
@@ -225,6 +237,7 @@ public class Archivo {
             ListaArboles.InsertarFinal(ArbolPalabras);
             this.Palabras = a;
             fr.close();
+            br.close();
         }
         catch(IOException ignored){
         }

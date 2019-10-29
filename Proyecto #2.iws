@@ -6,8 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +39,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="findjar.last.used.dir" value="$USER_HOME$/Downloads" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/poi-4.1.0/docs" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/apache-log4j-2.12.1-bin/log4j-api-2.12.1.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -310,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572235534172</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Método eliminar de biblioteca">
+      <created>1572239855806</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1572239855806</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -353,7 +361,8 @@
     <MESSAGE value="Cambio en verificación de archivo" />
     <MESSAGE value="Cambio en despliegue de txt" />
     <MESSAGE value="Corrección en bug de archivo pdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrección en bug de archivo pdf" />
+    <MESSAGE value="Método eliminar de biblioteca" />
+    <option name="LAST_COMMIT_MESSAGE" value="Método eliminar de biblioteca" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
