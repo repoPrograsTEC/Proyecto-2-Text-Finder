@@ -77,7 +77,7 @@ public class Main extends Application {
 
         Button abrirArchivo = new Button("       Agregar       ");
         abrirArchivo.setOnAction(e -> {
-            Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
+                Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
         });
         Button actualizar = new Button("      Actualizar     ");
         actualizar.setOnAction(e -> {

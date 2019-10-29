@@ -315,6 +315,14 @@ public class Archivo {
     }
 
     /**
+     * Método para establecer el nombre del archivo
+     * @param nombre String con el nombre del archivo
+     */
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    /**
      * Método que elimina los caracteres innecesarios del texto
      * @param s String a limpiar
      * @return String sin caracteres no deseados

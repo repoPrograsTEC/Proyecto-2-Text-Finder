@@ -7,7 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto #2.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -318,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572239855806</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Error de logger corregido">
+      <created>1572391839922</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1572391839922</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,7 +372,8 @@
     <MESSAGE value="Cambio en despliegue de txt" />
     <MESSAGE value="Corrección en bug de archivo pdf" />
     <MESSAGE value="Método eliminar de biblioteca" />
-    <option name="LAST_COMMIT_MESSAGE" value="Método eliminar de biblioteca" />
+    <MESSAGE value="Error de logger corregido" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error de logger corregido" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
