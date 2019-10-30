@@ -135,9 +135,6 @@ public class Eventos {
         }
     }
 
-
-
-    // REVISAR
     /**
      * Método que agrega un archivo actualizado a la biblioteca
      *
@@ -148,7 +145,6 @@ public class Eventos {
      */
     public static void agregarEnBibliotecaActualizado(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
                                            TextArea area, Stage primaryStage, int numero){
-        String agregado;
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             Archivo temp = new Archivo(file, file.getName(), numero);
@@ -162,8 +158,9 @@ public class Eventos {
                     //break;
                 }
             }
-            lista.eliminar(numero);
+
             lista.Insertar(numero, temp);
+            lista.eliminar(numero);
 
             FileInputStream input = new FileInputStream(
                     //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
@@ -216,9 +213,6 @@ public class Eventos {
             a = 1;
         }
     }
-
-
-
 
     /**
      * Método que ejecuta la acción de detectar el drag & drop
@@ -283,9 +277,6 @@ public class Eventos {
         }
     }
 
-
-
-    //REVISAR
     /**
      * Método para actualizar la biblioteca
      * @param listaEnlazada Lista de archivos
@@ -337,9 +328,6 @@ public class Eventos {
             alert1.showAndWait();
         }
     }
-
-
-
 
     /**
      * Método que elimina un archivo de la biblioteca
