@@ -81,7 +81,7 @@ public class Main extends Application {
         });
         Button actualizar = new Button("      Actualizar     ");
         actualizar.setOnAction(e -> {
-                    //Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
+                    Eventos.actualizarBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
                 });
         Button eliminar = new Button("       Eliminar       ");
         eliminar.setOnAction(e -> {

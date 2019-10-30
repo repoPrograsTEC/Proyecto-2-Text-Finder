@@ -68,12 +68,9 @@ public class Eventos {
                                            TextArea area, Stage primaryStage, int numero){
 
         List<File> files = escogerArchivo.showOpenMultipleDialog(primaryStage);
-
         try {
-
             for (File file : files) {
                 Archivo temp = new Archivo(file, file.getName(), numero);
-
                 for (int cont = 0; cont < lista.getLargo(); cont++) {
                     if (temp.getNombre().equals(lista.Obtener(cont).getNombre())) {
                         String[] string = temp.getNombre().split("\\.");
@@ -105,66 +102,6 @@ public class Eventos {
 
                 vbox.getChildren().add(label);
 
-                /*
-                else {
-                    Archivo temp = new Archivo(file, file.getName(), numero);
-
-                    for (int cont = 0; cont < lista.getLargo(); cont++) {
-                        if (temp.getNombre().equals(lista.Obtener(cont).getNombre())) {
-                            String[] string = temp.getNombre().split("\\.");
-                            string[0] = string[0] + "(" + a + ")" + ".";
-                            String nombre = string[0] + string[1];
-                            temp.setNombre(nombre);
-                            a++;
-                            //break;
-                        }
-                    }
-
-                    lista.InsertarFinal(temp);
-
-
-                    String[] string = temp.getNombre().split("\\(");
-                    for (String palabra : string) {
-                        System.out.println("Palabra: " + palabra);
-                    }
-
-                    System.out.println("Extensión: " + string[string.length - 1].substring(2));
-
-                    if (string[string.length - 1].substring(2).equals("docx")) {
-                        string[0] = string[0] + "(" + a + ")" + "." + string[string.length - 1].substring(3);
-                        String nombre = string[0];
-                        temp.setNombre(nombre);
-                    } else if (string[string.length - 1].substring(2).equals(".pdf")) {
-                        string[0] = string[0] + "(" + a + ")" + string[string.length - 1].substring(2);
-                        String nombre = string[0];
-                        temp.setNombre(nombre);
-                    } else {
-                        string[0] = string[0] + "(" + a + ")" + string[string.length - 1].substring(2);
-                        String nombre = string[0];
-                        temp.setNombre(nombre);
-                    }
-
-
-                    FileInputStream input = new FileInputStream(
-                            //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
-                            //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
-                            "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
-                    Image image = new Image(input, 100, 80, true, true);
-                    ImageView imageView = new ImageView(image);
-
-                    Label label = new Label("  " + temp.Nombre.toUpperCase(), imageView);
-                    Label labelSeparacion = new Label("  ");
-
-                    label.setOnDragDetected(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent evento) {
-                            movimientoDetectado(evento, imageView, temp.Nombre);
-                        }
-                    });
-
-                    vbox.getChildren().add(label);
-                }
-                */
             }
 
             area.setOnDragOver(new EventHandler<DragEvent>() {
@@ -197,6 +134,91 @@ public class Eventos {
             a = 1;
         }
     }
+
+
+
+    // REVISAR
+    /**
+     * Método que agrega un archivo actualizado a la biblioteca
+     *
+     * @param escogerArchivo Variable para abrir la ventana para escoger el archivo a agregar
+     * @param lista Lista enlazada en donde se almacenan los archivos
+     * @param area Área de texto en donde se visualiza el archivo seleccionado
+     * @param primaryStage Ventana principal del programa
+     */
+    public static void agregarEnBibliotecaActualizado(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
+                                           TextArea area, Stage primaryStage, int numero){
+        String agregado;
+        try {
+            File file = escogerArchivo.showOpenDialog(primaryStage);
+            Archivo temp = new Archivo(file, file.getName(), numero);
+            for (int cont = 0; cont < lista.getLargo(); cont++) {
+                if (temp.getNombre().equals(lista.Obtener(cont).getNombre())) {
+                    String[] string = temp.getNombre().split("\\.");
+                    string[0] = string[0] + "(" + a + ")" + ".";
+                    String nombre = string[0] + string[1];
+                    temp.setNombre(nombre);
+                    a++;
+                    //break;
+                }
+            }
+            lista.eliminar(numero);
+            lista.Insertar(numero, temp);
+
+            FileInputStream input = new FileInputStream(
+                    //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
+                    //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
+                    "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
+            Image image = new Image(input, 100, 80, true, true);
+            ImageView imageView = new ImageView(image);
+
+            Label label = new Label("  " + temp.Nombre.toUpperCase(), imageView);
+            Label labelSeparacion = new Label("  ");
+
+            label.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent evento) {
+                    movimientoDetectado(evento, imageView, temp.Nombre);
+                }
+            });
+
+            vbox.getChildren().set(numero, label);
+
+
+            area.setOnDragOver(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent evento) {
+                    evento.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+            });
+
+            area.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent evento) {
+                    for (int num = 0; num < lista.getLargo(); num++) {
+                        if (evento.getDragboard().getString().equals(lista.Obtener(num).Nombre)) {
+                            try {
+                                soltar(evento, lista.Obtener(num), area);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            });
+
+        } catch (NullPointerException | IOException ignored) {
+            alert.setTitle(" Precaución ");
+            alert.setHeaderText(null);
+            alert.setContentText("Error al agregar o leer el archivo");
+            alert.showAndWait();
+        } finally {
+            a = 1;
+        }
+    }
+
+
+
 
     /**
      * Método que ejecuta la acción de detectar el drag & drop
@@ -261,6 +283,64 @@ public class Eventos {
         }
     }
 
+
+
+    //REVISAR
+    /**
+     * Método para actualizar la biblioteca
+     * @param listaEnlazada Lista de archivos
+     */
+    public static void actualizarBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> listaEnlazada,
+                                            TextArea area, Stage primaryStage, int numero) {
+        try {
+            String[] listaArchivos = new String[listaEnlazada.getLargo()];
+            if (listaEnlazada.getLargo() == 0){
+                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
+            } else {
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    listaArchivos[i] = listaEnlazada.Obtener(i).getNombre();
+                }
+
+                ChoiceDialog<String> archivoParaActualizar = new ChoiceDialog<>(" Seleccione un archivo ", listaArchivos);
+
+                archivoParaActualizar.setHeaderText(null);
+                archivoParaActualizar.setContentText("  Escoger archivo para actualizar:                      ");
+                archivoParaActualizar.setResizable(true);
+                archivoParaActualizar.getDialogPane().setPrefWidth(600);
+                archivoParaActualizar.showAndWait();
+
+                int a = 0;
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    if (archivoParaActualizar.getSelectedItem().equals(listaArchivos[i])) {
+                        agregarEnBibliotecaActualizado(escogerArchivo, listaEnlazada, area, primaryStage, i);
+                        a++;
+                    }
+                }
+                if (a == 0){
+                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
+                    alert1.setTitle(" Precaución ");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" No se escogió algún archivo para actualizar de la biblioteca ");
+                    alert1.setResizable(true);
+                    alert1.getDialogPane().setPrefWidth(500);
+                    alert1.showAndWait();
+                }
+            }
+
+        } catch (Exception e) {
+            Alert alert1 = new Alert(Alert.AlertType.WARNING);
+            alert1.setTitle(" Precaución ");
+            alert1.setHeaderText(null);
+            alert1.setContentText(" No se pueden actualizar archivos porque la biblioteca está vacía ");
+            alert1.setResizable(true);
+            alert1.getDialogPane().setPrefWidth(550);
+            alert1.showAndWait();
+        }
+    }
+
+
+
+
     /**
      * Método que elimina un archivo de la biblioteca
      */
@@ -281,13 +361,10 @@ public class Eventos {
                 archivoPorEliminar.setResizable(true);
                 archivoPorEliminar.getDialogPane().setPrefWidth(600);
                 archivoPorEliminar.showAndWait();
-                System.out.println(" ArchivoPorEliminar: " + archivoPorEliminar.getSelectedItem());
 
                 int a = 0;
                 for (int i = 0; i < listaArchivos.length; i++) {
-                    System.out.println("Entró al ciclo #1");
                     if (archivoPorEliminar.getSelectedItem().equals(listaArchivos[i])) {
-                        System.out.println("Entró al ciclo #2");
                         listaEnlazada.eliminar(i);
                         vbox.getChildren().remove(i);
                         a++;
