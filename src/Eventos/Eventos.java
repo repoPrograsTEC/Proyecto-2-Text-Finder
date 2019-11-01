@@ -451,21 +451,8 @@ public class Eventos {
                     Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
                     tooltip2.setFont(Font.font("Cambria", 18));
                     textArea.setTooltip(tooltip2);
-                
+                    textArea.setEditable(false);
 
-                    /*
-                    x.Texto = x.Texto.toLowerCase();
-                    FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
-                    XWPFDocument doc = new XWPFDocument(OPCPackage.open(fis));
-                    if (doc != null) {
-                        find_replace_in_DOCX(doc, area.getText());
-                        //textArea.appendText("          Archivo:  " + x.getURL().getName() + "\n");
-                        textArea.appendText(new XWPFWordExtractor(doc).getText());
-                        Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
-                        tooltip2.setFont(Font.font("Cambria", 18));
-                        textArea.setTooltip(tooltip2);
-                    }
-                    */
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -475,18 +462,84 @@ public class Eventos {
                         }
                     });
 
+                    textArea.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (!textArea.getSelectedText().isEmpty()) {
+                                textArea.deselect();
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                        textArea.selectRange(inter[0],inter[1]);
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                    textArea.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (textArea.getSelectedText().isEmpty()) {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int[] inter = Archivo.find(extractor.getText(), area.getText().toLowerCase());
+                                        textArea.selectRange(inter[0],inter[1]);
+                                    }
+                                });
+                            }
+                        }
+                    });
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
             }else {
                 textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
+                Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                tooltip2.setFont(Font.font("Cambria", 18));
+                textArea.setTooltip(tooltip2);
+                textArea.setEditable(false);
 
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
                         textArea.selectRange(inter[0],inter[1]);
+                    }
+                });
+
+                textArea.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (!textArea.getSelectedText().isEmpty()) {
+                            textArea.deselect();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                    textArea.selectRange(inter[0],inter[1]);
+                                }
+                            });
+                        }
+                    }
+                });
+
+                textArea.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (textArea.getSelectedText().isEmpty()) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                    textArea.selectRange(inter[0],inter[1]);
+                                }
+                            });
+                        }
                     }
                 });
             }

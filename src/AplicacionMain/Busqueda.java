@@ -6,10 +6,12 @@ import AlgoritmosOrdenamiento.RadixSort;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
 import Objetos.Archivo;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -72,8 +74,12 @@ public class Busqueda {
                     areaDeTexto.setLayoutX(posX);
                     areaDeTexto.setLayoutY(posY);
                     areaDeTexto.setWrapText(true);
-                    areaDeTexto.setStyle(" -fx-font-size: 1.5em; -fx-control-inner-background:#000000; -fx-font-family: Cambria;" +
-                            " -fx-highlight-fill: #FF8933 ; -fx-highlight-text-fill: #000000; -fx-text-fill: #FFFFFF; ");
+                    areaDeTexto.setStyle("-fx-font-size: 1.5em; " +
+                                        "-fx-control-inner-background:#000000;" +
+                                        "-fx-font-family: Cambria;" +
+                                        "-fx-highlight-fill: #FF8933;" +
+                                        "-fx-highlight-text-fill: #000000;" +
+                                        "-fx-text-fill: #FFFFFF;");
                     areaDeTexto.setBorder(new Border(new BorderStroke(
                             Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -85,6 +91,17 @@ public class Busqueda {
 
                     int finalI = i;
                     boton.setOnAction(event -> Eventos.abrirThread(lista.Obtener(finalI).getURL()));
+
+                    areaDeTexto.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (!areaDeTexto.getSelectedText().isEmpty()) {
+                                areaDeTexto.deselect();
+
+                            }
+                        }
+                    });
+
 
                     if (!input.getText().equals("")) {
                         Eventos.abrirArchivo(lista.Obtener(i), input, areaDeTexto);
@@ -181,5 +198,8 @@ public class Busqueda {
                                 "la biblioteca está vacía");
             alert.showAndWait();
         }
+    }
+    public static void aux(TextArea textArea, int posInicio, int posFinal){
+
     }
 }

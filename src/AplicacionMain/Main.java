@@ -130,8 +130,8 @@ public class Main extends Application {
         areaDeTexto.setPrefSize(750d, 500d);
         areaDeTexto.setLayoutX(200);
         areaDeTexto.setLayoutY(120);
-        areaDeTexto.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; " +
-                "-fx-highlight-fill: #d64dff; -fx-highlight-text-fill: #000000; -fx-text-fill: #fafbff; ");
+        areaDeTexto.setStyle(" -fx-font-size: 1.5em; -fx-control-inner-background:#000000; -fx-font-family: Cambria;" +
+                " -fx-highlight-fill: #FF8933 ; -fx-highlight-text-fill: #000000; -fx-text-fill: #FFFFFF; ");
         areaDeTexto.setBorder(new Border(new BorderStroke(
                 Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         areaDeTexto.setOnMouseEntered(new EventHandler<MouseEvent>() {
