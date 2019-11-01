@@ -88,6 +88,13 @@ public class Main extends Application {
                 Eventos.eliminarDeBiblioteca(ListaArchivo);
         });
 
+        /*
+        Button indizar = new Button("       Indizar       ");
+        indizar.setOnAction(e -> {
+            Eventos.indizar(ListaArchivo);
+        });
+        */
+
         Image image = new Image("Imagenes/buscar2.jpg", 50, 30, true, false);
         ImageView imageView = new ImageView(image);
 
@@ -118,7 +125,6 @@ public class Main extends Application {
         input.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; " +
                 "-fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ");
         buscar.setLayoutX(900);
-
 
         areaDeTexto.setEditable(false);
         areaDeTexto.setPrefSize(750d, 500d);
@@ -174,7 +180,7 @@ public class Main extends Application {
         toolBar.setMaxSize(220d, 30d);
         toolBar.setPrefSize(220d,30d);
         toolBar.setStyle("-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30; " +
-                "-fx-border-width:3; -fx-border-color: #000000;");
+                "-fx-border-width:5; -fx-border-color: #000000;");
 
         Label label = new Label("         Biblioteca : ");
         label.setFont(Font.font("Cambria", 21));
@@ -183,7 +189,9 @@ public class Main extends Application {
         label.setTooltip(tooltip2);
         Label separador = new Label("    ");
 
-        toolBar.getItems().addAll(label, abrirArchivo, new Separator(), actualizar, new Separator(), eliminar);
+        toolBar.getItems().addAll(label, abrirArchivo, new Separator(),
+                                actualizar, new Separator(), eliminar);
+                                //new Separator(), indizar
 
         borderPane = new BorderPane( grupo);
         borderPane.setBackground(Background.EMPTY);

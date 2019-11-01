@@ -136,6 +136,58 @@ public class Eventos {
     }
 
     /**
+     * Método para actualizar la biblioteca
+     * @param listaEnlazada Lista de archivos
+     */
+    public static void actualizarBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> listaEnlazada,
+                                            TextArea area, Stage primaryStage, int numero) {
+        try {
+            String[] listaArchivos = new String[listaEnlazada.getLargo()];
+            if (listaEnlazada.getLargo() == 0){
+                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
+            } else {
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    listaArchivos[i] = listaEnlazada.Obtener(i).getNombre();
+                }
+
+                ChoiceDialog<String> archivoParaActualizar = new ChoiceDialog<>(" Seleccione un archivo ", listaArchivos);
+
+                archivoParaActualizar.setHeaderText(null);
+                archivoParaActualizar.setContentText("  Escoger archivo para actualizar:                      ");
+                archivoParaActualizar.setResizable(true);
+                archivoParaActualizar.getDialogPane().setPrefWidth(650);
+                archivoParaActualizar.showAndWait();
+
+                int a = 0;
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    if (archivoParaActualizar.getSelectedItem().equals(listaArchivos[i])) {
+                        agregarEnBibliotecaActualizado(escogerArchivo, listaEnlazada, area, primaryStage, i);
+                        a++;
+                    }
+                }
+                if (a == 0){
+                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
+                    alert1.setTitle(" Precaución ");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" No se escogió algún archivo para actualizar de la biblioteca ");
+                    alert1.setResizable(true);
+                    alert1.getDialogPane().setPrefWidth(500);
+                    alert1.showAndWait();
+                }
+            }
+
+        } catch (Exception e) {
+            Alert alert1 = new Alert(Alert.AlertType.WARNING);
+            alert1.setTitle(" Precaución ");
+            alert1.setHeaderText(null);
+            alert1.setContentText(" No se pueden actualizar archivos porque la biblioteca está vacía ");
+            alert1.setResizable(true);
+            alert1.getDialogPane().setPrefWidth(550);
+            alert1.showAndWait();
+        }
+    }
+
+    /**
      * Método que agrega un archivo actualizado a la biblioteca
      *
      * @param escogerArchivo Variable para abrir la ventana para escoger el archivo a agregar
@@ -143,8 +195,8 @@ public class Eventos {
      * @param area Área de texto en donde se visualiza el archivo seleccionado
      * @param primaryStage Ventana principal del programa
      */
-    public static void agregarEnBibliotecaActualizado(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
-                                           TextArea area, Stage primaryStage, int numero){
+    private static void agregarEnBibliotecaActualizado(FileChooser escogerArchivo, ListaEnlazada<Archivo> lista,
+                                                       TextArea area, Stage primaryStage, int numero){
         try {
             File file = escogerArchivo.showOpenDialog(primaryStage);
             Archivo temp = new Archivo(file, file.getName(), numero);
@@ -215,6 +267,92 @@ public class Eventos {
     }
 
     /**
+     * Método que elimina un archivo de la biblioteca
+     */
+    public static void eliminarDeBiblioteca(ListaEnlazada<Archivo> listaEnlazada) {
+        try {
+            String[] listaArchivos = new String[listaEnlazada.getLargo()];
+            if (listaEnlazada.getLargo() == 0){
+                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
+            } else {
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    listaArchivos[i] = listaEnlazada.Obtener(i).getNombre();
+                }
+
+                ChoiceDialog<String> archivoPorEliminar = new ChoiceDialog<>(" Seleccione un archivo ", listaArchivos);
+
+                archivoPorEliminar.setHeaderText(null);
+                archivoPorEliminar.setContentText("  Escoger archivo a eliminar:                      ");
+                archivoPorEliminar.setResizable(true);
+                archivoPorEliminar.getDialogPane().setPrefWidth(600);
+                archivoPorEliminar.showAndWait();
+
+                int a = 0;
+                for (int i = 0; i < listaArchivos.length; i++) {
+                    if (archivoPorEliminar.getSelectedItem().equals(listaArchivos[i])) {
+                        listaEnlazada.eliminar(i);
+                        vbox.getChildren().remove(i);
+                        a++;
+                    }
+                }
+                if (a == 0){
+                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
+                    alert1.setTitle(" Precaución ");
+                    alert1.setHeaderText(null);
+                    alert1.setContentText(" No se escogió algún archivo para eliminar de la biblioteca ");
+                    alert1.setResizable(true);
+                    alert1.getDialogPane().setPrefWidth(500);
+                    alert1.showAndWait();
+                }
+            }
+
+        } catch (Exception e) {
+            Alert alert1 = new Alert(Alert.AlertType.WARNING);
+            alert1.setTitle(" Precaución ");
+            alert1.setHeaderText(null);
+            alert1.setContentText(" No se pueden eliminar archivos porque la biblioteca está vacía ");
+            alert1.setResizable(true);
+            alert1.getDialogPane().setPrefWidth(550);
+            alert1.showAndWait();
+        }
+    }
+
+
+
+
+
+    // REVISAR
+    /**
+     * Método para indizar los archivos en la biblioteca
+     * @param listaArchivos Lista enlazada de archivos
+     */
+    public static void indizar(ListaEnlazada<Archivo> listaArchivos) {
+        try {
+            for (int i = 0; i < listaArchivos.getLargo(); i++) {
+                Archivo temp = listaArchivos.Obtener(i);
+                temp.Asignar(temp.getURL().getName());
+                System.out.println("Largo ListaArboles desde método indizar: " + Archivo.ListaArboles.getLargo());
+                //Archivo.Asignar(listaArchivos.Obtener(i).getURL().getName());
+            }
+
+            Alert confirmacion = new Alert(Alert.AlertType.INFORMATION);
+            confirmacion.setTitle(" Confirmación ");
+            confirmacion.setHeaderText(null);
+            confirmacion.setContentText(" El o los archivos se han indizado correctamente");
+            confirmacion.showAndWait();
+        } catch (Exception ignored){
+
+        }
+    }
+
+
+
+
+
+
+
+
+    /**
      * Método que ejecuta la acción de detectar el drag & drop
      * @param e Evento del mouse
      * @param imageView Imagen del archivo
@@ -278,109 +416,6 @@ public class Eventos {
     }
 
     /**
-     * Método para actualizar la biblioteca
-     * @param listaEnlazada Lista de archivos
-     */
-    public static void actualizarBiblioteca(FileChooser escogerArchivo, ListaEnlazada<Archivo> listaEnlazada,
-                                            TextArea area, Stage primaryStage, int numero) {
-        try {
-            String[] listaArchivos = new String[listaEnlazada.getLargo()];
-            if (listaEnlazada.getLargo() == 0){
-                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
-            } else {
-                for (int i = 0; i < listaArchivos.length; i++) {
-                    listaArchivos[i] = listaEnlazada.Obtener(i).getNombre();
-                }
-
-                ChoiceDialog<String> archivoParaActualizar = new ChoiceDialog<>(" Seleccione un archivo ", listaArchivos);
-
-                archivoParaActualizar.setHeaderText(null);
-                archivoParaActualizar.setContentText("  Escoger archivo para actualizar:                      ");
-                archivoParaActualizar.setResizable(true);
-                archivoParaActualizar.getDialogPane().setPrefWidth(600);
-                archivoParaActualizar.showAndWait();
-
-                int a = 0;
-                for (int i = 0; i < listaArchivos.length; i++) {
-                    if (archivoParaActualizar.getSelectedItem().equals(listaArchivos[i])) {
-                        agregarEnBibliotecaActualizado(escogerArchivo, listaEnlazada, area, primaryStage, i);
-                        a++;
-                    }
-                }
-                if (a == 0){
-                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
-                    alert1.setTitle(" Precaución ");
-                    alert1.setHeaderText(null);
-                    alert1.setContentText(" No se escogió algún archivo para actualizar de la biblioteca ");
-                    alert1.setResizable(true);
-                    alert1.getDialogPane().setPrefWidth(500);
-                    alert1.showAndWait();
-                }
-            }
-
-        } catch (Exception e) {
-            Alert alert1 = new Alert(Alert.AlertType.WARNING);
-            alert1.setTitle(" Precaución ");
-            alert1.setHeaderText(null);
-            alert1.setContentText(" No se pueden actualizar archivos porque la biblioteca está vacía ");
-            alert1.setResizable(true);
-            alert1.getDialogPane().setPrefWidth(550);
-            alert1.showAndWait();
-        }
-    }
-
-    /**
-     * Método que elimina un archivo de la biblioteca
-     */
-    public static void eliminarDeBiblioteca(ListaEnlazada<Archivo> listaEnlazada) {
-        try {
-            String[] listaArchivos = new String[listaEnlazada.getLargo()];
-            if (listaEnlazada.getLargo() == 0){
-                throw new ArrayIndexOutOfBoundsException(" Tamaño no aceptable ");
-            } else {
-                for (int i = 0; i < listaArchivos.length; i++) {
-                    listaArchivos[i] = listaEnlazada.Obtener(i).getNombre();
-                }
-
-                ChoiceDialog<String> archivoPorEliminar = new ChoiceDialog<>(" Seleccione un archivo ", listaArchivos);
-
-                archivoPorEliminar.setHeaderText(null);
-                archivoPorEliminar.setContentText("  Escoger archivo a eliminar:                      ");
-                archivoPorEliminar.setResizable(true);
-                archivoPorEliminar.getDialogPane().setPrefWidth(600);
-                archivoPorEliminar.showAndWait();
-
-                int a = 0;
-                for (int i = 0; i < listaArchivos.length; i++) {
-                    if (archivoPorEliminar.getSelectedItem().equals(listaArchivos[i])) {
-                        listaEnlazada.eliminar(i);
-                        vbox.getChildren().remove(i);
-                        a++;
-                    }
-                }
-                if (a == 0){
-                    Alert alert1 = new Alert(Alert.AlertType.WARNING);
-                    alert1.setTitle(" Precaución ");
-                    alert1.setHeaderText(null);
-                    alert1.setContentText(" No se escogió algún archivo para eliminar de la biblioteca ");
-                    alert1.setResizable(true);
-                    alert1.getDialogPane().setPrefWidth(500);
-                    alert1.showAndWait();
-                }
-            }
-
-        } catch (Exception e) {
-            Alert alert1 = new Alert(Alert.AlertType.WARNING);
-            alert1.setTitle(" Precaución ");
-            alert1.setHeaderText(null);
-            alert1.setContentText(" No se pueden eliminar archivos porque la biblioteca está vacía ");
-            alert1.setResizable(true);
-            alert1.getDialogPane().setPrefWidth(550);
-            alert1.showAndWait();
-        }
-    }
-
-    /**
      * Método que muestra el archivo en el área de texto de la ventana secundaria (coincidencias)
      *
      * @param lista Lista enlazada donde se almacenan los archivos
@@ -389,26 +424,36 @@ public class Eventos {
         Busqueda.ventana(lista, primaryStage);
     }
 
+
+
+
+
+    //REVISAR
     /**
      * Método para abrir el archivo seleccionado y agregarlo al área de texto
      * @param x Archivo seleccionado
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    public static void abrirArchivo(Archivo x, TextField area, TextArea textArea){
-        String palabra=(Archivo.limpiar(area.getText().toLowerCase()));
+    public static void abrirArchivo(Archivo x, TextField area, TextArea textArea) throws IOException {
+        String palabra = (Archivo.limpiar(area.getText().toLowerCase()));
         if (x.getArbolPalabras().contains(palabra)) {
 
             BST.Nodo nodo = x.getArbolPalabras().Obtener(Archivo.limpiar(palabra));
             // CASO EN QUE EL ARCHIVO ES .DOCX
             if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
                 try {
-                    /*
+
                     FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
                     XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
                     XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
                     textArea.appendText(extractor.getText());
-                    */
+                    Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                    tooltip2.setFont(Font.font("Cambria", 18));
+                    textArea.setTooltip(tooltip2);
+                
+
+                    /*
                     x.Texto = x.Texto.toLowerCase();
                     FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
                     XWPFDocument doc = new XWPFDocument(OPCPackage.open(fis));
@@ -420,11 +465,21 @@ public class Eventos {
                         tooltip2.setFont(Font.font("Cambria", 18));
                         textArea.setTooltip(tooltip2);
                     }
+                    */
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            int[] inter = Archivo.find(extractor.getText(), area.getText().toLowerCase());
+                            textArea.selectRange(inter[0],inter[1]);
+                        }
+                    });
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } else {
+
+            }else {
                 textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
 
                 Platform.runLater(new Runnable() {
@@ -441,8 +496,12 @@ public class Eventos {
 
     }
 
+
+
+
+
     /**
-     * Método para abrir el archivo seleeccionado
+     * Método para abrir el archivo seleccionado desde la computadora
      * @param file Archivo a abrir
      */
     public static void abrirThread (File file){

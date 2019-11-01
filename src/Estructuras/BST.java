@@ -8,6 +8,11 @@ public class BST {
      * Clase Nodo que almacena los valores de las palabras
      */
     public static class Nodo {
+        String element;
+        Nodo right;
+        Nodo left;
+        int Fila;
+
         /**
          * Constructor clase Nodo
          * @param element Palabra del texto
@@ -16,10 +21,7 @@ public class BST {
             this.element = element;
             this.Fila=fila;
         }
-        String element;
-        Nodo right;
-        Nodo left;
-        int Fila;
+
         /**
          * Método que retorna la palabra del nodo
          * @return Palabra almacenada en el nodo

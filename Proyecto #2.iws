@@ -7,7 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estructuras/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estructuras/BST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +46,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -338,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572409258771</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Actualización de archivo terminado">
+      <created>1572456704425</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1572456704425</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -358,7 +369,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Refactor de eventos y metodos extra" />
     <MESSAGE value="Creación de areaText para visualizar documentos" />
     <MESSAGE value="Corrección en la visualización del archivo" />
     <MESSAGE value="Ventana Auxiliar" />
@@ -383,7 +393,8 @@
     <MESSAGE value="Error de logger corregido" />
     <MESSAGE value="Eliminación correcta de archivo" />
     <MESSAGE value="Actualización de archivo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización de archivo" />
+    <MESSAGE value="Actualización de archivo terminado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización de archivo terminado" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
