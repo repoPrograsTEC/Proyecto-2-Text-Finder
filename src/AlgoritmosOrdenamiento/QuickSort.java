@@ -45,7 +45,7 @@ public class QuickSort {
                 j--;
             }
         }
-        //call quickSort recursively
+
         if (lowerIndex < j) {
             quicksort(names,lowerIndex, j);
         }
