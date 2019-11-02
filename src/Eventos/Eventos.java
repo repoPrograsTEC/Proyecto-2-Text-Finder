@@ -4,9 +4,13 @@ import AplicacionMain.Busqueda;
 import Estructuras.BST;
 import Estructuras.ListaEnlazada;
 import Objetos.Archivo;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -14,10 +18,13 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hwpf.HWPFDocument;
@@ -40,6 +47,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import static AplicacionMain.Main.input;
 import static AplicacionMain.Main.vbox;
 
 /**
@@ -424,11 +432,6 @@ public class Eventos {
         Busqueda.ventana(lista, primaryStage);
     }
 
-
-
-
-
-    //REVISAR
     /**
      * Método para abrir el archivo seleccionado y agregarlo al área de texto
      * @param x Archivo seleccionado
@@ -549,15 +552,11 @@ public class Eventos {
 
     }
 
-
-
-
-
     /**
      * Método para abrir el archivo seleccionado desde la computadora
      * @param file Archivo a abrir
      */
-    public static void abrirThread (File file){
+    public static void abrirThread(File file){
         if (!Desktop.isDesktopSupported()) {
             System.out.println("Desktop not supported");
             return;
@@ -584,6 +583,121 @@ public class Eventos {
         thread.setDaemon(true);
         thread.start();
     }
+
+
+    public static void verArchivoCompleto(ListaEnlazada<Archivo> lista,
+                                          Stage primaryStage2,
+                                          String nombreArchivo){
+        try{
+            primaryStage2.setIconified(true);
+
+            Stage stage2 = new Stage();
+
+            int columna = 0;
+            int fila = 0;
+            BorderPane borderPane = new BorderPane();
+            borderPane.setStyle("-fx-background-color: #ffe4b3");
+
+            TextArea areaDeTexto2 = new TextArea();
+            areaDeTexto2.setEditable(false);
+            areaDeTexto2.setPrefSize(750d, 500d);
+            areaDeTexto2.setLayoutX(200);
+            areaDeTexto2.setLayoutY(120);
+            areaDeTexto2.setWrapText(true);
+            areaDeTexto2.setStyle("-fx-font-size: 1.5em; " +
+                    "-fx-control-inner-background:#000000;" +
+                    "-fx-font-family: Cambria;" +
+                    "-fx-highlight-fill: #FF8933;" +
+                    "-fx-highlight-text-fill: #000000;" +
+                    "-fx-text-fill: #FFFFFF;");
+            areaDeTexto2.setBorder(new Border(new BorderStroke(
+                    Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+            for (int i = 0; i < lista.getLargo(); i++) {
+                if (lista.Obtener(i).getNombre().equals(nombreArchivo)) {
+                    areaDeTexto2.setText(lista.Obtener(i).getTexto());
+                }
+            }
+
+            areaDeTexto2.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override public void handle(MouseEvent e) {
+                    ScaleTransition st = new ScaleTransition(Duration.millis(1000), areaDeTexto2);
+                    st.setByX(1.1f);
+                    st.setByY(1.1f);
+                    st.setToX(1.2);
+                    st.setToY(1.2);
+                    st.setCycleCount((int) 1f);
+                    st.setAutoReverse(false);
+                    if (areaDeTexto2.getWidth() < 800d && areaDeTexto2.getHeight() < 550d){
+                        st.play();
+                    } else {
+                        st.stop();
+                    }
+                }
+            });
+            areaDeTexto2.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override public void handle(MouseEvent e) {
+                    ScaleTransition st = new ScaleTransition(Duration.millis(1000), areaDeTexto2);
+                    st.setByX(-1.1f);
+                    st.setByY(-1.1f);
+                    st.setToX(1);
+                    st.setToY(1);
+                    st.setCycleCount((int) 1f);
+                    st.setAutoReverse(true);
+                    if (areaDeTexto2.getWidth() >= 750d && areaDeTexto2.getHeight() >= 500d){
+                        st.play();
+                    } else {
+                        st.stop();
+                    }
+                }
+            });
+
+            ToolBar toolBar2 = new ToolBar();
+            toolBar2.setCursor(Cursor.HAND);
+            toolBar2.setMaxSize(120d, 20d);
+            toolBar2.setPrefSize(120d, 20d);
+            toolBar2.setStyle("-fx-background-color: white;" +
+                    "-fx-background-radius: 30;" +
+                    "-fx-border-radius: 30; " +
+                    "-fx-border-width:5;" +
+                    "-fx-border-color: #000000;");
+            Label label2 = new Label(" Atrás ");
+            label2.setFont(Font.font("Cambria", 21));
+
+            label2.setOnMousePressed(event -> {
+                primaryStage2.setIconified(false);
+                stage2.close();
+                input.clear();
+            });
+
+            toolBar2.getItems().addAll(label2);
+            GridPane.setMargin(toolBar2, new Insets(20d, 20d, 20d, 40d));
+            borderPane.getChildren().add(toolBar2);
+            GridPane.setMargin(areaDeTexto2, new Insets(20d, 20d, 20d, 40d));
+            borderPane.getChildren().add(areaDeTexto2);
+
+            Scene scene2 = new Scene(borderPane, 1200, 500);
+
+            stage2.setScene(scene2);
+            stage2.setTitle(" Ocurrencias encontradas ");
+            stage2.setX(100d);
+            stage2.setY(100d);
+            stage2.setResizable(false);
+            stage2.show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+            /*
+            Alert alert2 = new Alert(Alert.AlertType.WARNING);
+            alert2.setTitle(" Precaución ");
+            alert2.setHeaderText(null);
+            alert2.setContentText("No se puede realizar la búsqueda porque " +
+                   "no se han indizado los archivos de la biblioteca");
+            alert2.showAndWait();
+            */
+        }
+    }
+
 
     /**
      * Método para resaltar la ocurrencia en el texto a buscar

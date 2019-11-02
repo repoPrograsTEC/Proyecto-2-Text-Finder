@@ -90,7 +90,10 @@ public class Busqueda {
                     boton.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
 
                     int finalI = i;
-                    boton.setOnAction(event -> Eventos.abrirThread(lista.Obtener(finalI).getURL()));
+                    boton.setOnAction(event ->
+                            Eventos.verArchivoCompleto(lista, stage1, lista.Obtener(finalI).getNombre())
+                            //Eventos.abrirThread(lista.Obtener(finalI).getURL());
+                    );
 
                     areaDeTexto.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
                         @Override
@@ -131,8 +134,11 @@ public class Busqueda {
                 toolBar.setCursor(Cursor.HAND);
                 toolBar.setMaxSize(180d, 20d);
                 toolBar.setPrefSize(180d, 20d);
-                toolBar.setStyle("-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30; " +
-                        "-fx-border-width:5; -fx-border-color: #000000;");
+                toolBar.setStyle("-fx-background-color: white;" +
+                                "-fx-background-radius: 30;" +
+                                "-fx-border-radius: 30; " +
+                                "-fx-border-width:5;" +
+                                "-fx-border-color: #000000;");
                 Label label = new Label(" Ordenar por : ");
                 label.setFont(Font.font("Cambria", 21));
                 Label separador = new Label("    ");
@@ -198,8 +204,5 @@ public class Busqueda {
                                 "la biblioteca está vacía");
             alert.showAndWait();
         }
-    }
-    public static void aux(TextArea textArea, int posInicio, int posFinal){
-
     }
 }

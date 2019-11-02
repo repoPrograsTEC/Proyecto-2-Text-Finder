@@ -193,7 +193,7 @@ public class Main extends Application {
                                 actualizar, new Separator(), eliminar);
                                 //new Separator(), indizar
 
-        borderPane = new BorderPane( grupo);
+        borderPane = new BorderPane(grupo);
         borderPane.setBackground(Background.EMPTY);
         BorderPane.setMargin(scrollpane, new Insets(30d,10d,5d,40d));
         borderPane.setLeft(scrollpane);
