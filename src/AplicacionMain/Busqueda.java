@@ -1,7 +1,6 @@
 package AplicacionMain;
 
 import AlgoritmosOrdenamiento.BubbleSort;
-import AlgoritmosOrdenamiento.QuickSort;
 import AlgoritmosOrdenamiento.RadixSort;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
@@ -144,7 +143,7 @@ public class Busqueda {
                 Label separador = new Label("    ");
                 Button button = new Button("   Nombre   ");
                 button.setOnAction(event -> {
-                    QuickSort.quickSort(lista, 0, lista.getLargo() - 1);
+                    //QuickSort.quickSort(lista, 0, lista.getLargo() - 1);
                     for (int x = 0; x < lista.getLargo(); x++) {
                         System.out.println(lista.Obtener(x).Nombre);
                     }
