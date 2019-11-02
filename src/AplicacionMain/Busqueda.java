@@ -91,7 +91,7 @@ public class Busqueda {
 
                     int finalI = i;
                     boton.setOnAction(event ->
-                            Eventos.verArchivoCompleto(lista, stage1, lista.Obtener(finalI).getNombre())
+                            Eventos.verArchivoCompleto(lista, primaryStage, stage1, lista.Obtener(finalI).getNombre())
                             //Eventos.abrirThread(lista.Obtener(finalI).getURL());
                     );
 

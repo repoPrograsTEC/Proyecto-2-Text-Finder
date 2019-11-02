@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import static AplicacionMain.Main.input;
 import static AplicacionMain.Main.vbox;
 
 /**
@@ -586,6 +585,7 @@ public class Eventos {
 
 
     public static void verArchivoCompleto(ListaEnlazada<Archivo> lista,
+                                          Stage primaryStage,
                                           Stage primaryStage2,
                                           String nombreArchivo){
         try{
@@ -593,16 +593,15 @@ public class Eventos {
 
             Stage stage2 = new Stage();
 
-            int columna = 0;
-            int fila = 0;
             BorderPane borderPane = new BorderPane();
             borderPane.setStyle("-fx-background-color: #ffe4b3");
 
             TextArea areaDeTexto2 = new TextArea();
             areaDeTexto2.setEditable(false);
             areaDeTexto2.setPrefSize(750d, 500d);
+            areaDeTexto2.setMaxSize(750d,500d);
             areaDeTexto2.setLayoutX(200);
-            areaDeTexto2.setLayoutY(120);
+            areaDeTexto2.setLayoutY(90);
             areaDeTexto2.setWrapText(true);
             areaDeTexto2.setStyle("-fx-font-size: 1.5em; " +
                     "-fx-control-inner-background:#000000;" +
@@ -615,9 +614,17 @@ public class Eventos {
 
             for (int i = 0; i < lista.getLargo(); i++) {
                 if (lista.Obtener(i).getNombre().equals(nombreArchivo)) {
-                    areaDeTexto2.setText(lista.Obtener(i).getTexto());
+                    if (lista.Obtener(i).getNombre().charAt(lista.Obtener(i).getNombre().length() - 1) == 'x') {
+                        FileInputStream fis = new FileInputStream(lista.Obtener(i).getURL().getAbsolutePath());
+                        XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                        XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
+                        areaDeTexto2.appendText(extractor.getText());
+                    } else {
+                        areaDeTexto2.setText(lista.Obtener(i).getTexto());
+                    }
                 }
             }
+
 
             areaDeTexto2.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override public void handle(MouseEvent e) {
@@ -652,6 +659,7 @@ public class Eventos {
                 }
             });
 
+
             ToolBar toolBar2 = new ToolBar();
             toolBar2.setCursor(Cursor.HAND);
             toolBar2.setMaxSize(120d, 20d);
@@ -661,22 +669,22 @@ public class Eventos {
                     "-fx-border-radius: 30; " +
                     "-fx-border-width:5;" +
                     "-fx-border-color: #000000;");
-            Label label2 = new Label(" Atrás ");
+            Label label2 = new Label("     Atrás ");
             label2.setFont(Font.font("Cambria", 21));
 
             label2.setOnMousePressed(event -> {
-                primaryStage2.setIconified(false);
+                primaryStage.setIconified(false);
                 stage2.close();
-                input.clear();
+                //input.clear();
             });
 
             toolBar2.getItems().addAll(label2);
-            GridPane.setMargin(toolBar2, new Insets(20d, 20d, 20d, 40d));
-            borderPane.getChildren().add(toolBar2);
-            GridPane.setMargin(areaDeTexto2, new Insets(20d, 20d, 20d, 40d));
-            borderPane.getChildren().add(areaDeTexto2);
+            BorderPane.setMargin(toolBar2, new Insets(20d, 20d, 10d, 40d));
+            borderPane.setTop(toolBar2);
+            BorderPane.setMargin(areaDeTexto2, new Insets(10d, 20d, 20d, 40d));
+            borderPane.setCenter(areaDeTexto2);
 
-            Scene scene2 = new Scene(borderPane, 1200, 500);
+            Scene scene2 = new Scene(borderPane, 1200, 750);
 
             stage2.setScene(scene2);
             stage2.setTitle(" Ocurrencias encontradas ");
