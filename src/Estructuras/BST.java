@@ -54,6 +54,7 @@ public class BST {
      * @return Si se contiene la palabra en el texto o no
      */
     public boolean contains (String e){
+
         return this.containsAux (e.toLowerCase(), root);
     }
 

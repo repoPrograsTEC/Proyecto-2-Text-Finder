@@ -1,6 +1,7 @@
 package AplicacionMain;
 
 import AlgoritmosOrdenamiento.BubbleSort;
+import AlgoritmosOrdenamiento.QuickSort;
 import AlgoritmosOrdenamiento.RadixSort;
 import Estructuras.ListaEnlazada;
 import Eventos.Eventos;
@@ -24,13 +25,13 @@ import static AplicacionMain.Main.input;
  * Clase Búsqueda que contiene la ventana de coincidencias de palabras
  */
 public class Busqueda {
+
     /**
      * Método ventana que muestra una ventana en donde se visualizan las coincidencias de palabras en la biblioteca
      * @param lista Lista que contiene los archivos de la biblioteca
      * @param primaryStage Escenario de la ventana
      */
     public static void ventana(ListaEnlazada<Archivo> lista, Stage primaryStage) throws IOException {
-
         if (lista.getLargo() != 0) {
             if (Archivo.ListaArboles.getLargo() != 0) {
                 primaryStage.setIconified(true);
@@ -131,7 +132,7 @@ public class Busqueda {
 
                 ToolBar toolBar = new ToolBar();
                 toolBar.setCursor(Cursor.HAND);
-                toolBar.setMaxSize(180d, 20d);
+                toolBar.setMaxSize(200d, 20d);
                 toolBar.setPrefSize(180d, 20d);
                 toolBar.setStyle("-fx-background-color: white;" +
                                 "-fx-background-radius: 30;" +
@@ -143,7 +144,7 @@ public class Busqueda {
                 Label separador = new Label("    ");
                 Button button = new Button("   Nombre   ");
                 button.setOnAction(event -> {
-                    //QuickSort.quickSort(lista, 0, lista.getLargo() - 1);
+                    QuickSort.quickSort(lista);
                     for (int x = 0; x < lista.getLargo(); x++) {
                         System.out.println(lista.Obtener(x).Nombre);
                     }
