@@ -8,6 +8,9 @@
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +65,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.QuickSort">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AplicacionMain.Main" />
       <module name="Proyecto #2" />
@@ -91,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.QuickSort" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.QuickSort" />
       </list>
     </recent_temporary>
   </component>
@@ -387,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572670796288</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Quick">
+      <created>1572672321571</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1572672321571</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -407,7 +417,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Textos de prueba" />
     <MESSAGE value="Ventana de ocurrencias creada" />
     <MESSAGE value="Mejora en ventana de ocurrencias" />
     <MESSAGE value="Dirección de foto de archivo comentada" />
@@ -432,7 +441,8 @@
     <MESSAGE value="Selección de texto corregida" />
     <MESSAGE value="Cambios en apertura de archivo" />
     <MESSAGE value="Apertura de archivo en coincidencia terminado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Apertura de archivo en coincidencia terminado" />
+    <MESSAGE value="Quick" />
+    <option name="LAST_COMMIT_MESSAGE" value="Quick" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

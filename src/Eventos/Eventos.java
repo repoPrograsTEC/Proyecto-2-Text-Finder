@@ -46,6 +46,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import static AplicacionMain.Main.vbox;
 
@@ -427,8 +428,32 @@ public class Eventos {
      *
      * @param lista Lista enlazada donde se almacenan los archivos
      */
-    public static void mostrarArchivo(ListaEnlazada<Archivo> lista, Stage primaryStage) throws IOException {
-        Busqueda.ventana(lista, primaryStage);
+    public static void mostrarArchivo(ListaEnlazada<Archivo> lista, TextField textField, Stage primaryStage) throws IOException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación de búsqueda");
+        alert.setHeaderText(null);
+        alert.setContentText("Escoja la forma a buscar en la biblioteca: ");
+
+        ButtonType buttonTypeOne = new ButtonType(" Por palabra ");
+        ButtonType buttonTypeTwo = new ButtonType(" Por frase ");;
+        ButtonType buttonTypeCancel = new ButtonType(" Cancel ", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+        String[] textoIngresado = textField.getText().split(" ");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne && textoIngresado.length == 1){
+            Busqueda.ventana(lista, primaryStage);
+        } else if (result.get() == buttonTypeTwo && textoIngresado.length > 1) {
+            Busqueda.ventana(lista, primaryStage);
+        }
+
+
+
+
+        //Busqueda.ventana(lista, primaryStage);
     }
 
     /**

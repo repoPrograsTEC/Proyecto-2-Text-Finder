@@ -77,7 +77,9 @@ public class QuickSort {
              * In each iteration, we will increment left until we find element greater than pivot
              * We will decrement right until we find element less than pivot
              */
-            while (array[i] < pivot) { i++; } while (array[j] > pivot) {
+            while (array[i] < pivot) {
+                i++;
+            } while (array[j] > pivot) {
                 j--;
             }
             if (i <= j) {

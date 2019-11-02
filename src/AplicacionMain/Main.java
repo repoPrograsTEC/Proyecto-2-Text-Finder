@@ -106,7 +106,7 @@ public class Main extends Application {
         buscar.setTooltip(tooltip);
         buscar.setOnAction(e -> {
             try {
-                Eventos.mostrarArchivo(ListaArchivo, primaryStage);
+                Eventos.mostrarArchivo(ListaArchivo, input, primaryStage);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

@@ -255,7 +255,7 @@ public class Archivo {
      * @param file Ruta del archivo
      * @throws IOException Excepción si el archivo no es correcto
      */
-    public static void buscarEnPdf(Archivo file, String palabraParaBuscar) throws IOException {
+    public static int buscarEnPdf(Archivo file, String palabraParaBuscar) throws IOException {
         // ELIMINAR ERROR DE LOGGER AL AGREGAR UN ARCHIVO .PDF
         String[] loggers = { "org.apache.pdfbox.util.PDFStreamEngine",
                 "org.apache.pdfbox.pdmodel.font.PDSimpleFont",
@@ -295,10 +295,9 @@ public class Archivo {
                     } else {
                         if (linea.charAt(i - 1) == ' ') {
                             if (linea.charAt(i) != ' ') {
-                                //ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
                                 String palabraEnTexto = linea.substring(inicio + 1  , i).toLowerCase();
                                 if(palabraEnTexto.equals(palabraParaBuscar)){
-                                        find(palabraEnTexto,palabraParaBuscar);
+                                    return palabraEnTexto.length();
                                 }
                                 inicio = i;
                                 cantidadPalabras++;
@@ -306,15 +305,12 @@ public class Archivo {
                         }
                     }
                 }
-                //ArbolPalabras.insert(limpiar(linea.substring(inicio, i)), fila);
                 inicio = 0;
                 fila++;
             }
-            //ListaArboles.InsertarFinal(ArbolPalabras);
-            //this.Palabras = cantidadPalabras;
         }
         document.close();
-
+        return palabraParaBuscar.length();
     }
 
     /**
