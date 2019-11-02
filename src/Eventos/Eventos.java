@@ -94,7 +94,7 @@ public class Eventos {
                 FileInputStream input = new FileInputStream(
                         //Direccion Daniel: "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png"
                         //Dirección Esteban: "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png"
-                        "/Users/daniel/IdeaProjects/Proyecto-2-Text-Finder/src/Imagenes/texto.png");
+                        "C:/Users/Personal/IdeaProjects/Proyecto #2/src/Imagenes/texto.png");
                 Image image = new Image(input, 100, 80, true, true);
                 ImageView imageView = new ImageView(image);
 
@@ -358,8 +358,6 @@ public class Eventos {
 
 
 
-
-
     /**
      * Método que ejecuta la acción de detectar el drag & drop
      * @param e Evento del mouse
@@ -437,7 +435,7 @@ public class Eventos {
 
         ButtonType buttonTypeOne = new ButtonType(" Por palabra ");
         ButtonType buttonTypeTwo = new ButtonType(" Por frase ");;
-        ButtonType buttonTypeCancel = new ButtonType(" Cancel ", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeCancel = new ButtonType(" Cancelar ", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
 
@@ -446,14 +444,26 @@ public class Eventos {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne && textoIngresado.length == 1){
             Busqueda.ventana(lista, primaryStage);
+
+        }else if (result.get() == buttonTypeOne && textoIngresado.length > 1){
+            Alert alert2 = new Alert(Alert.AlertType.WARNING);
+            alert2.setTitle("Precaución");
+            alert2.setHeaderText(null);
+            alert2.setWidth(200d);
+            alert2.setContentText(" Se debe ingresar solo una palabra para realizar este tipo de búsqueda ");
+            alert2.showAndWait();
+
         } else if (result.get() == buttonTypeTwo && textoIngresado.length > 1) {
-            Busqueda.ventana(lista, primaryStage);
+            Busqueda.ventana(lista, textoIngresado, primaryStage);
+
+        } else if (result.get() == buttonTypeTwo && textoIngresado.length == 1) {
+            Alert alert3 = new Alert(Alert.AlertType.WARNING);
+            alert3.setTitle("Precaución");
+            alert3.setHeaderText(null);
+            alert3.setWidth(200d);
+            alert3.setContentText(" Se deben ingresar varias palabras para realizar este tipo de búsqueda ");
+            alert3.showAndWait();
         }
-
-
-
-
-        //Busqueda.ventana(lista, primaryStage);
     }
 
     /**
@@ -462,7 +472,7 @@ public class Eventos {
      * @param area Barra de búsqueda
      * @param textArea Área de texto de la ventana secundaria
      */
-    public static void abrirArchivo(Archivo x, TextField area, TextArea textArea) throws IOException {
+    public static void abrirArchivoPorPalabra(Archivo x, TextField area, TextArea textArea) throws IOException {
         String palabra = (Archivo.limpiar(area.getText().toLowerCase()));
         if (x.getArbolPalabras().contains(palabra)) {
 
@@ -577,6 +587,141 @@ public class Eventos {
     }
 
     /**
+     * Método para abrir el archivo seleccionado y agregarlo al área de texto
+     * @param x Archivo seleccionado
+     * @param area Barra de búsqueda
+     * @param textArea Área de texto de la ventana secundaria
+     */
+    public static void abrirArchivoPorFrase(Archivo x,
+                                            TextField area,
+                                            String[] array,
+                                            TextArea textArea) throws IOException {
+
+        String palabraIngresada = (Archivo.limpiar(array[0].toLowerCase()));
+        if (x.getArbolPalabras().contains(palabraIngresada)) {
+            BST.Nodo nodo = x.getArbolPalabras().Obtener(Archivo.limpiar(palabraIngresada));
+
+            // CASO EN QUE EL ARCHIVO ES .DOCX
+            if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
+                try {
+
+                    FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
+                    XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                    XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
+                    textArea.appendText(extractor.getText());
+                    Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                    tooltip2.setFont(Font.font("Cambria", 18));
+                    textArea.setTooltip(tooltip2);
+                    textArea.setEditable(false);
+
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (String palabraIngresada : array) {
+                                int[] inter = Archivo.find(extractor.getText(), area.getText().toLowerCase());
+                                textArea.selectRange(inter[0], inter[1]);
+                            }
+                        }
+                    });
+
+                    textArea.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (!textArea.getSelectedText().isEmpty()) {
+                                textArea.deselect();
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        for (String palabraIngresada : array) {
+                                            int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                            textArea.selectRange(inter[0], inter[1]);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                    textArea.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (textArea.getSelectedText().isEmpty()) {
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        for (String palabraIngresada : array) {
+                                            int[] inter = Archivo.find(extractor.getText(), area.getText().toLowerCase());
+                                            textArea.selectRange(inter[0], inter[1]);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            } else {
+                textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
+                Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                tooltip2.setFont(Font.font("Cambria", 18));
+                textArea.setTooltip(tooltip2);
+                textArea.setEditable(false);
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (String palabraIngresada : array) {
+                            int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                            textArea.selectRange(inter[0], inter[1]);
+                        }
+                    }
+                });
+
+                textArea.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (!textArea.getSelectedText().isEmpty()) {
+                            textArea.deselect();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    for (String palabraIngresada : array) {
+                                        int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                        textArea.selectRange(inter[0], inter[1]);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                textArea.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (textArea.getSelectedText().isEmpty()) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    for (String palabraIngresada : array) {
+                                        int[] inter = Archivo.find(x.listaLineas.Obtener(nodo.getFila()), area.getText().toLowerCase());
+                                        textArea.selectRange(inter[0], inter[1]);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        } else {
+            textArea.setText(null);
+        }
+    }
+
+    /**
      * Método para abrir el archivo seleccionado desde la computadora
      * @param file Archivo a abrir
      */
@@ -608,7 +753,13 @@ public class Eventos {
         thread.start();
     }
 
-
+    /**
+     * Método para visualizar el documento completo
+     * @param lista Lista de archivos
+     * @param primaryStage Escena principal
+     * @param primaryStage2 Escena secundaria
+     * @param nombreArchivo Nombre del archivo buscado
+     */
     public static void verArchivoCompleto(ListaEnlazada<Archivo> lista,
                                           Stage primaryStage,
                                           Stage primaryStage2,

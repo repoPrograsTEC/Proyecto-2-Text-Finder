@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cb390b23-dd7d-4fe1-a6f9-ce1f42d81998" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Proyecto #2.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto #2.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlgoritmosOrdenamiento/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacionMain/Busqueda.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Eventos/Eventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Eventos/Eventos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Objetos/Archivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Objetos/Archivo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,9 +22,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="XSLT Stylesheet" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -92,9 +90,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="prueba" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AplicacionMain.prueba" />
+      <module name="Proyecto #2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AplicacionMain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.prueba" />
         <item itemvalue="Application.QuickSort" />
       </list>
     </recent_temporary>
@@ -397,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572672321571</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Búsqueda por frase">
+      <created>1572674828386</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1572674828386</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -417,7 +436,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Ventana de ocurrencias creada" />
     <MESSAGE value="Mejora en ventana de ocurrencias" />
     <MESSAGE value="Dirección de foto de archivo comentada" />
     <MESSAGE value="Selección múltiple de archivos agregada" />
@@ -442,7 +460,8 @@
     <MESSAGE value="Cambios en apertura de archivo" />
     <MESSAGE value="Apertura de archivo en coincidencia terminado" />
     <MESSAGE value="Quick" />
-    <option name="LAST_COMMIT_MESSAGE" value="Quick" />
+    <MESSAGE value="Búsqueda por frase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Búsqueda por frase" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
