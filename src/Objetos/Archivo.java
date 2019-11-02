@@ -451,6 +451,14 @@ public class Archivo {
     }
 
     /**
+     * Método para obtener la fecha de un archivo
+     * @return Fecha de incorporación del archivo a la biblioteca
+     */
+    public LocalDateTime getDate() {
+        return Date;
+    }
+
+    /**
      * Método que retorna el árbol binario del archivo deseado
      * @return Árbol binario del archivo
      */

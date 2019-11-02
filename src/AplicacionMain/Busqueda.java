@@ -37,7 +37,7 @@ public class Busqueda {
                 primaryStage.setIconified(true);
 
                 Stage stage1 = new Stage();
-                
+
                 ToolBar toolBar2 = new ToolBar();
                 toolBar2.setCursor(Cursor.HAND);
                 toolBar2.setMaxSize(120d, 20d);
@@ -151,14 +151,18 @@ public class Busqueda {
                                 "-fx-border-radius: 30; " +
                                 "-fx-border-width:5;" +
                                 "-fx-border-color: #000000;");
+
                 Label label = new Label(" Ordenar por : ");
                 label.setFont(Font.font("Cambria", 21));
                 Label separador = new Label("    ");
+
                 Button button = new Button("   Nombre   ");
+                button.setCursor(Cursor.HAND);
+                button.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button.setOnAction(event -> {
                     QuickSort.quickSort(lista);
                     for (int x = 0; x < lista.getLargo(); x++) {
-                        System.out.println(lista.Obtener(x).Nombre);
+                        //System.out.println(lista.Obtener(x).Nombre);
                     }
                     try {
                         stage1.close();
@@ -168,6 +172,8 @@ public class Busqueda {
                     }
                 });
                 Button button1 = new Button("     Fecha     ");
+                button1.setCursor(Cursor.HAND);
+                button1.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button1.setOnAction(event -> {
                     BubbleSort.bubbleSort(lista);
                     try {
@@ -178,6 +184,8 @@ public class Busqueda {
                     }
                 });
                 Button button2 = new Button("   Tamaño   ");
+                button2.setCursor(Cursor.HAND);
+                button2.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button2.setOnAction(event -> {
                     RadixSort.radixsort(lista);
                     try {
@@ -230,19 +238,33 @@ public class Busqueda {
 
                 Stage stage1 = new Stage();
 
-                Button atras = new Button(" Atrás ");
-                atras.setOnAction(e -> {
+                ToolBar toolBar2 = new ToolBar();
+                toolBar2.setCursor(Cursor.HAND);
+                toolBar2.setMaxSize(120d, 20d);
+                toolBar2.setPrefSize(120d, 20d);
+                toolBar2.setStyle("-fx-background-color: white;" +
+                        "-fx-background-radius: 30;" +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width:5;" +
+                        "-fx-border-color: #000000;");
+                Label label2 = new Label("     Atrás ");
+                label2.setFont(Font.font("Cambria", 21));
+
+                label2.setOnMousePressed(event -> {
                     primaryStage.setIconified(false);
                     stage1.close();
                     input.clear();
                 });
 
+                toolBar2.getItems().addAll(label2);
+
+
                 int columna = 0;
                 int fila = 0;
                 GridPane gridPane = new GridPane();
                 gridPane.setHgap(18);
-                GridPane.setMargin(atras, new Insets(20d, 20d, 20d, 40d));
-                gridPane.add(atras, columna, fila);
+                GridPane.setMargin(toolBar2, new Insets(20d, 20d, 20d, 40d));
+                gridPane.add(toolBar2, columna, fila);
                 fila++;
                 fila++;
 
@@ -331,10 +353,14 @@ public class Busqueda {
                         "-fx-border-radius: 30; " +
                         "-fx-border-width:5;" +
                         "-fx-border-color: #000000;");
+
                 Label label = new Label(" Ordenar por : ");
                 label.setFont(Font.font("Cambria", 21));
                 Label separador = new Label("    ");
+
                 Button button = new Button("   Nombre   ");
+                button.setCursor(Cursor.HAND);
+                button.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button.setOnAction(event -> {
                     QuickSort.quickSort(lista);
                     for (int x = 0; x < lista.getLargo(); x++) {
@@ -348,6 +374,8 @@ public class Busqueda {
                     }
                 });
                 Button button1 = new Button("     Fecha     ");
+                button1.setCursor(Cursor.HAND);
+                button1.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button1.setOnAction(event -> {
                     BubbleSort.bubbleSort(lista);
                     try {
@@ -358,6 +386,8 @@ public class Busqueda {
                     }
                 });
                 Button button2 = new Button("   Tamaño   ");
+                button2.setCursor(Cursor.HAND);
+                button2.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
                 button2.setOnAction(event -> {
                     RadixSort.radixsort(lista);
                     try {
@@ -372,7 +402,7 @@ public class Busqueda {
                 GridPane.setMargin(toolBar, new Insets(20d, 20d, 20d, 920d));
                 gridPane.add(toolBar, 0, 0);
                 gridPane.setStyle("-fx-background-color: #ffe4b3");
-                Scene scene = new Scene(gridPane, 1200, 500);
+                Scene scene = new Scene(gridPane, 1250, 500);
 
                 stage1.setScene(scene);
                 stage1.setTitle(" Ocurrencias encontradas ");

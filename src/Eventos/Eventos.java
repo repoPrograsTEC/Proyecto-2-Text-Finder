@@ -480,13 +480,20 @@ public class Eventos {
             // CASO EN QUE EL ARCHIVO ES .DOCX
             if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
                 try {
-
                     FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
                     XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
                     XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
                     textArea.appendText(extractor.getText());
-                    Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                    Tooltip tooltip2 = new Tooltip(" Archivo :    " + x.getURL().getName() + "\n"
+                                                        + " Fecha :    " + x.getDate() + "\n"
+                                                        + " Tamaño :    " + x.getPalabras());
                     tooltip2.setFont(Font.font("Cambria", 18));
+                    tooltip2.setStyle("-fx-background-color: white;" +
+                            "-fx-background-radius: 30;" +
+                            "-fx-border-radius: 30; " +
+                            "-fx-border-width:5;" +
+                            "-fx-border-color: #000000;" +
+                            "-fx-text-fill: black;");
                     textArea.setTooltip(tooltip2);
                     textArea.setEditable(false);
 
@@ -536,8 +543,17 @@ public class Eventos {
 
             }else {
                 textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
-                Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+
+                Tooltip tooltip2 = new Tooltip(" Archivo :    " + x.getURL().getName()+ "\n"
+                                                    + " Fecha :    " + x.getDate() + "\n"
+                                                    + " Tamaño :    " + x.getPalabras());
                 tooltip2.setFont(Font.font("Cambria", 18));
+                tooltip2.setStyle("-fx-background-color: white;" +
+                        "-fx-background-radius: 30;" +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width:5;" +
+                        "-fx-border-color: #000000;" +
+                        "-fx-text-fill: black;");
                 textArea.setTooltip(tooltip2);
                 textArea.setEditable(false);
 
@@ -604,13 +620,20 @@ public class Eventos {
             // CASO EN QUE EL ARCHIVO ES .DOCX
             if (x.getURL().getName().charAt(x.getURL().getName().length() - 1) == 'x') {
                 try {
-
                     FileInputStream fis = new FileInputStream(x.getURL().getAbsolutePath());
                     XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
                     XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
                     textArea.appendText(extractor.getText());
-                    Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+                    Tooltip tooltip2 = new Tooltip(" Archivo :    " + x.getURL().getName() + "\n"
+                                                        + " Fecha :    " + x.getDate() + "\n"
+                                                        + " Tamaño :    " + x.getPalabras());
                     tooltip2.setFont(Font.font("Cambria", 18));
+                    tooltip2.setStyle("-fx-background-color: white;" +
+                            "-fx-background-radius: 30;" +
+                            "-fx-border-radius: 30; " +
+                            "-fx-border-width:5;" +
+                            "-fx-border-color: #000000;" +
+                            "-fx-text-fill: black;");
                     textArea.setTooltip(tooltip2);
                     textArea.setEditable(false);
 
@@ -666,8 +689,17 @@ public class Eventos {
 
             } else {
                 textArea.appendText(x.listaLineas.Obtener(nodo.getFila()));
-                Tooltip tooltip2 = new Tooltip("    Archivo :    " + x.getURL().getName());
+
+                Tooltip tooltip2 = new Tooltip(" Archivo :    " + x.getURL().getName() + "\n"
+                                                    + " Fecha :    " + x.getDate() + "\n"
+                                                    + " Tamaño :    " + x.getPalabras());
                 tooltip2.setFont(Font.font("Cambria", 18));
+                tooltip2.setStyle("-fx-background-color: white;" +
+                        "-fx-background-radius: 30;" +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width:5;" +
+                        "-fx-border-color: #000000;" +
+                        "-fx-text-fill: black;");
                 textArea.setTooltip(tooltip2);
                 textArea.setEditable(false);
 
@@ -881,7 +913,6 @@ public class Eventos {
             */
         }
     }
-
 
     /**
      * Método para resaltar la ocurrencia en el texto a buscar

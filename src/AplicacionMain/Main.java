@@ -76,14 +76,20 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter(" Todos ", "*.txt", "*.docx","*.pdf"));
 
         Button abrirArchivo = new Button("       Agregar       ");
+        abrirArchivo.setCursor(Cursor.HAND);
+        abrirArchivo.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
         abrirArchivo.setOnAction(e -> {
                 Eventos.agregarEnBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
         });
         Button actualizar = new Button("      Actualizar     ");
+        actualizar.setCursor(Cursor.HAND);
+        actualizar.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
         actualizar.setOnAction(e -> {
                     Eventos.actualizarBiblioteca(escogerArchivo, ListaArchivo, areaDeTexto, primaryStage, numero);
                 });
         Button eliminar = new Button("       Eliminar       ");
+        eliminar.setCursor(Cursor.HAND);
+        eliminar.setStyle("-fx-font-size: 18; -fx-font-family: Cambria;");
         eliminar.setOnAction(e -> {
                 Eventos.eliminarDeBiblioteca(ListaArchivo);
         });
@@ -202,6 +208,12 @@ public class Main extends Application {
         BorderPane.setMargin(root, new Insets(30d,20d,20d,20d));
         borderPane.setCenter(root);
         borderPane.setStyle("-fx-background-color: #ffe4b3");
+
+        /*
+        Color color = Color.color(Math.random(), Math.random(), Math.random());
+        borderPane.setStyle("-fx-background-color: #" + color.toString().substring(2));
+        */
+
         root.getChildren().add(grupo);
 
         Scene escena = new Scene(borderPane, 1500, 800);
